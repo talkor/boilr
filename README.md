@@ -1,5 +1,7 @@
 # Boilr
 
+![Build](https://github.com/talkor/boilr/workflows/Build/badge.svg)
+
 ## Project setup
 
 ```
