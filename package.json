@@ -9,7 +9,9 @@
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",
     "test:watch": "vue-cli-service test:unit --watch",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "husky": {
     "hooks": {
@@ -40,6 +42,7 @@
     "husky": "4.2.1",
     "prettier": "^1.19.1",
     "pretty-quick": "2.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "1.3.1"
   }
 }
