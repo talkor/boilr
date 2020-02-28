@@ -49,7 +49,7 @@ jobs:
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
-        SLACK_ICON_EMOJI: ':droplet:'
+        SLACK_ICON_EMOJI: ":droplet:"
         SLACK_TITLE: Changes
         SLACK_USERNAME: Boilr
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
