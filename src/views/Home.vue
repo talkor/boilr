@@ -6,11 +6,10 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld/HelloWorld";
+import HelloWorld from '@/components/HelloWorld/HelloWorld';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HelloWorld
   }
