@@ -9,12 +9,13 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
   data() {
     return {
       msg: 'Welcome to Boilr'
     };
-  }
+  },
+  methods: {},
+  components: {}
 };
 </script>
 

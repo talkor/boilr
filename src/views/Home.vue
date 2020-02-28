@@ -8,7 +8,6 @@
 import HelloWorld from '@/components/HelloWorld/HelloWorld';
 
 export default {
-  name: 'Home',
   components: {
     HelloWorld
   }
