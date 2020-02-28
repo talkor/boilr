@@ -3,17 +3,23 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ["plugin:vue/essential", "eslint:recommended", "@vue/prettier"],
+  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
   parserOptions: {
-    parser: "babel-eslint"
+    parser: 'babel-eslint'
   },
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true
+      }
+    ]
   },
   overrides: [
     {
-      files: ["**/__tests__/*.{j,t}s?(x)", "*.spec.{j,t}s?(x)"],
+      files: ['**/__tests__/*.{j,t}s?(x)', '*.spec.{j,t}s?(x)'],
       env: {
         jest: true
       }
