@@ -66,7 +66,7 @@ export default {
     padding-left: 0;
     padding-top: 15px;
     border-top: 1px solid #c2c2c26c;
-    margin: 15px 0;
+    margin: 15px 0 25px 0;
   }
 }
 </style>
