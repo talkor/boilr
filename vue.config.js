@@ -8,6 +8,6 @@ module.exports = {
   },
   pwa: {
     name: 'Boilr',
-    themeColor: '#4DBA87'
+    themeColor: '#ffffff'
   }
 };
