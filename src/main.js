@@ -4,8 +4,17 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import VueCompositionApi from '@vue/composition-api';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faShower, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.use(VueCompositionApi);
+
+library.add(faShower);
+library.add(faChartBar);
+library.add(faCog);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 
