@@ -20,12 +20,10 @@ export default {
 html,
 body {
   height: 100%;
-  max-height: 100%;
   width: auto;
   padding: 0;
   margin: 0;
   overflow: hidden;
-  position: static;
 }
 
 #app {
@@ -35,7 +33,7 @@ body {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
-  -webkit-overflow-scrolling: touch;
+
   text-align: center;
   color: #2c3e50;
 }
