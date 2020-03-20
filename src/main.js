@@ -5,14 +5,14 @@ import router from './router';
 import store from './store';
 import VueCompositionApi from '@vue/composition-api';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faShower, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueMobileDetection from 'vue-mobile-detection';
 
 Vue.use(VueMobileDetection);
 Vue.use(VueCompositionApi);
 
-library.add(faShower);
+library.add(faHome);
 library.add(faChartBar);
 library.add(faCog);
 

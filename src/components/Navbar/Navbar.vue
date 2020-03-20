@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <nav>
     <ul v-if="$isMobile()" class="navbar">
       <NavbarItem
         v-for="(navbarItem, index) in navbarData"
@@ -22,7 +22,7 @@
         :icon="navbarItem.icon"
       />
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -32,7 +32,7 @@ import { ref, computed } from '@vue/composition-api';
 export default {
   name: 'Navbar',
   setup() {
-    const activeItem = ref('shower');
+    const activeItem = ref('home');
 
     const setActive = item => {
       activeItem.value = item;
@@ -57,7 +57,7 @@ export default {
         path: '/',
         name: 'home',
         label: 'Home',
-        icon: 'shower',
+        icon: 'home',
         mobileOnly: true
       },
       {
@@ -104,13 +104,14 @@ export default {
 
 @media only screen and (max-width: 486px) {
   .navbar {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     border-top: 1px solid #c2c2c26c;
     border-bottom: 0;
     padding: 20px 0 25px 0;
+    background-color: #ffffff;
 
     .home-item {
       display: initial;
