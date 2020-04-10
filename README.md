@@ -4,14 +4,14 @@
 
 ## Getting Started
 
-1. Install [Vue CLI](https://cli.vuejs.org/guide/installation.html).
-2. Make sure you have [yarn](https://classic.yarnpkg.com/en/docs/install) or [npm](https://nodejs.org/en/) installed.
-3. Make sure you have [git](https://git-scm.com/downloads) installed.
+1. Make sure you have [yarn](https://classic.yarnpkg.com/en/docs/install) or [npm](https://nodejs.org/en/) installed.
+2. Make sure you have [git](https://git-scm.com/downloads) installed.
+3. Install [Vue CLI](https://cli.vuejs.org/guide/installation.html).
 4. Clone this repo - run from command-line: `git clone https://github.com/talkor/boilr.git`.
 5. Enter the directory: `cd boilr`
 6. Install dependencies: `yarn install` or `npm install` 
 7. Start development: `yarn serve` or `npm run serve`
-8. Open localhost:8080
+8. Open `localhost:8080`
 
 ## Development
 
@@ -21,7 +21,7 @@
 4. If your'e working on front-end changes, focus on mobile first.
 5. On every push we have a git-hook that runs tests and pushes only if tests pass. After the code is pushed we run a CI/CD pipeline that automatically deployes the new code if tests pass to `boilr.surge.sh`. You can [download it also as PWA](https://medium.com/progressivewebapps/how-to-install-a-pwa-to-your-device-68a8d37fadc1).
 6. Write unit tests if you want to be thorough. Running tests: `yarn test` or `npm run test`
-7. The project is built with [Vue]() and [Vue Composition API](https://composition-api.vuejs.org/). Vue is really easy to learn and get started, you can be very proficient in about ~2hrs of learning. You can watch these two videos and it's pretty much enough:
+7. The project is built with [Vue]() and [Vue Composition API](https://composition-api.vuejs.org/). Vue is really easy to learn and get started, you can be very proficient in about ~1hr of learning. You can watch these two videos and it's pretty much enough:
   - https://www.youtube.com/watch?v=Wy9q22isx3U
   - https://www.youtube.com/watch?v=V-xK3sbc7xI
   
