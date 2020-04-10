@@ -11,7 +11,7 @@
 5. Enter the directory: `cd boilr`
 6. Install dependencies: `yarn install` or `npm install` 
 7. Start development: `yarn serve` or `npm run serve`
-8. Open localhost:3000
+8. Open localhost:8080
 
 ## Development
 
