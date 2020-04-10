@@ -18,9 +18,10 @@
 1. Link issues from the project board to your commit/s (e.g. `fix home screen icons #23` where 23 is the issue number).
 2. Work on branches, open a pull request for one of us to review. Don't work directly on master.
 3. Use git as much as possible, divide your code changes to reasonable commits, give an appropriate name to each commit. It will be easier for the rest of us to understand code changes.
-4. On every push we have a git-hook that runs tests and pushes only if tests pass. After the code is pushed we run a CI/CD pipeline that automatically deployes the new code if tests pass to `boilr.surge.sh`. You can [download it also as PWA](https://medium.com/progressivewebapps/how-to-install-a-pwa-to-your-device-68a8d37fadc1).
-5. Write unit tests if you want to be thorough. Running tests: `yarn test` or `npm run test`
-6. The project is built with [Vue]() and [Vue Composition API](https://composition-api.vuejs.org/). Vue is really easy to learn and get started, you can be very proficient in about ~2hrs of learning. You can watch these two videos and it's pretty much enough:
+4. If your'e working on front-end changes, focus on mobile first.
+5. On every push we have a git-hook that runs tests and pushes only if tests pass. After the code is pushed we run a CI/CD pipeline that automatically deployes the new code if tests pass to `boilr.surge.sh`. You can [download it also as PWA](https://medium.com/progressivewebapps/how-to-install-a-pwa-to-your-device-68a8d37fadc1).
+6. Write unit tests if you want to be thorough. Running tests: `yarn test` or `npm run test`
+7. The project is built with [Vue]() and [Vue Composition API](https://composition-api.vuejs.org/). Vue is really easy to learn and get started, you can be very proficient in about ~2hrs of learning. You can watch these two videos and it's pretty much enough:
   - https://www.youtube.com/watch?v=Wy9q22isx3U
   - https://www.youtube.com/watch?v=V-xK3sbc7xI
   
