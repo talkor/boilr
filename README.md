@@ -17,6 +17,7 @@
 ```
 git config --global pull.rebase true
 ```
+Read this if you want, for more details: https://coderwall.com/p/7aymfa/please-oh-please-use-git-pull-rebase
 
 ## Development
 
