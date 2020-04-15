@@ -13,6 +13,11 @@
 7. Start development: `yarn serve` or `npm run serve`
 8. Open `localhost:8080`
 
+> Important: Make sure you use rebase instead of merge on pull by running this: 
+```
+git config --global pull.rebase true
+```
+
 ## Development
 
 1. Link issues from the project board to your commit/s (e.g. `fix home screen icons #23` where 23 is the issue number).
