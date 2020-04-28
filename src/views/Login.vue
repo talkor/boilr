@@ -9,24 +9,26 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 
 export default {
   setup() {
     const message = ref('');
 
-    const login = () => {
-      var provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('profile');
-      provider.addScope('email');
+    onMounted(() => {
       firebase
         .auth()
-        .signInWithPopup(provider)
+        .getRedirectResult()
         .then(function(result) {
-          // const token = result.credential.accessToken;
-          const user = result.user;
-          message.value = user;
+          if (result.credential) {
+            message.value = result.user.email;
+          }
         });
+    });
+
+    const login = () => {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithRedirect(provider);
     };
 
     const logout = () => {
