@@ -2,16 +2,20 @@
   <div class="login">
     <button @click="login">Login</button>
     <button @click="logout">Logout</button>
+    <span>{{ message }}</span>
   </div>
 </template>
 
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { ref } from '@vue/composition-api';
 
 export default {
-  methods: {
-    async login() {
+  setup() {
+    const message = ref('');
+
+    const login = () => {
       var provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('profile');
       provider.addScope('email');
@@ -19,19 +23,27 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then(function(result) {
-          const token = result.credential.accessToken;
+          // const token = result.credential.accessToken;
           const user = result.user;
-          console.log(token, user);
+          message.value = user;
         });
-    },
-    logout() {
+    };
+
+    const logout = () => {
       firebase
         .auth()
         .signOut()
         .then(() => {
-          console.log('Logged out');
+          message.value = 'Logged Out';
         });
-    }
-  }
+    };
+
+    return {
+      login,
+      logout,
+      message
+    };
+  },
+  methods: {}
 };
 </script>
