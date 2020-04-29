@@ -8,6 +8,13 @@ module.exports = {
   },
   pwa: {
     name: 'Boilr',
-    themeColor: '#ffffff'
+    themeColor: '#4DBA87',
+    msTileColor: '#000000',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black-translucent',
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'dev/sw.js'
+    }
   }
 };
