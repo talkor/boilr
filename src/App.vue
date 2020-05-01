@@ -53,7 +53,7 @@ body {
   height: 100%;
   max-height: 100%;
   width: 80%;
-  margin: 0 auto;
+  margin: 1.5em auto;
   position: static;
 }
 </style>
