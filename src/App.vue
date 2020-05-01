@@ -40,7 +40,7 @@ body {
   color: #2c3e50;
   flex-direction: column;
   display: flex;
-  position: staticl;
+  position: static;
 }
 
 .content {
