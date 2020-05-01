@@ -8,8 +8,12 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHome, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueMobileDetection from 'vue-mobile-detection';
-import firebase from 'firebase/app';
+import Buefy from 'buefy';
+import 'buefy/dist/buefy.css';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
+Vue.use(Buefy);
 Vue.use(VueMobileDetection);
 Vue.use(VueCompositionApi);
 
@@ -33,8 +37,14 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app');
+let app;
+
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount('#app');
+  }
+});

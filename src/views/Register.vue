@@ -1,6 +1,6 @@
 <template>
-  <div class="login">
-    <h1>Log In</h1>
+  <div class="register">
+    <h1>Register</h1>
     <TextBox
       type="email"
       label="Email"
@@ -13,11 +13,7 @@
       placeholder="Password"
       @onInput="onPasswordChange"
     />
-    <Button @onClick="onLogIn" text="Login" />
-    <!-- <h2>Sign In With Google</h2>
-    <Button @onClick="onLogin" text="Log In" />
-    <Button @onClick="onLogout" text="Log Out" />
-    <div>{{ message }}</div> -->
+    <Button @onClick="onRegister" text="Register" />
   </div>
 </template>
 
@@ -29,6 +25,7 @@ import TextBox from '@/components/core/TextBox/TextBox';
 import Button from '@/components/core/Button/Button';
 
 export default {
+  name: 'Register',
   setup(props, { root }) {
     const router = root.$router;
 
@@ -45,41 +42,19 @@ export default {
       form.password = value;
     };
 
-    // onMounted(() => {
-    //   firebase
-    //     .auth()
-    //     .getRedirectResult()
-    //     .then(function(result) {
-    //       if (result.credential) {
-    //         message.value = result.user.email;
-    //       }
-    //     });
-    // });
-
-    const onLogIn = async () => {
+    const onRegister = async () => {
       try {
-        await firebase
+        firebase
           .auth()
-          .signInWithEmailAndPassword(form.email, form.password);
+          .createUserWithEmailAndPassword(form.email, form.password);
         router.replace({ name: 'Home' });
       } catch (error) {
         throw new Error(error);
       }
-      // var provider = new firebase.auth.GoogleAuthProvider();
-      // firebase.auth().signInWithRedirect(provider);
     };
 
-    // const onLogout = () => {
-    // firebase
-    //   .auth()
-    //   .signOut()
-    //   .then(() => {
-    //     message.value = 'Logged Out';
-    //   });
-    // };
-
     return {
-      onLogIn,
+      onRegister,
       onEmailChange,
       onPasswordChange
     };
