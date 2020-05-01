@@ -18,7 +18,7 @@ export default {
         await firebase.auth().signOut();
         router.replace({ name: 'Login' });
       } catch (error) {
-        console.error(error);
+        throw new Error(error);
       }
     };
     return {
