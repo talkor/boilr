@@ -5,7 +5,13 @@ import router from './router';
 import store from './store';
 import VueCompositionApi from '@vue/composition-api';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome,
+  faChartBar,
+  faCog,
+  faClock,
+  faEnvelope
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VueMobileDetection from 'vue-mobile-detection';
 import Buefy from 'buefy';
@@ -20,6 +26,8 @@ Vue.use(VueCompositionApi);
 library.add(faHome);
 library.add(faChartBar);
 library.add(faCog);
+library.add(faClock);
+library.add(faEnvelope);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
