@@ -1,5 +1,10 @@
 <template>
-  <b-button rounded @click="onClick">{{ text }}</b-button>
+  <b-button rounded @click="onClick" :size="size">
+    <span class="button-content">
+      <slot></slot>
+      <span>{{ text }}</span>
+    </span>
+  </b-button>
 </template>
 
 <script>
@@ -7,6 +12,12 @@ export default {
   name: 'Button',
   props: {
     text: {
+      type: String
+    },
+    size: {
+      type: String
+    },
+    icon: {
       type: String
     }
   },
@@ -20,4 +31,9 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.button-content {
+  display: flex;
+  align-items: center;
+}
+</style>
