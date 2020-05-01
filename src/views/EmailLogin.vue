@@ -1,5 +1,6 @@
 <template>
   <div class="sign-in">
+    <BackButton />
     <h1>Sign In</h1>
     <TextBox
       type="email"
@@ -23,6 +24,7 @@ import 'firebase/auth';
 import { reactive } from '@vue/composition-api';
 import TextBox from '@/components/core/TextBox/TextBox';
 import Button from '@/components/core/Button/Button';
+import BackButton from '@/components/core/BackButton/BackButton';
 
 export default {
   setup(props, { root }) {
@@ -60,7 +62,8 @@ export default {
   },
   components: {
     TextBox,
-    Button
+    Button,
+    BackButton
   }
 };
 </script>
