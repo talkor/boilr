@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <ul class="navbar">
+    <ul class="navbar" v-if="loggedIn">
       <NavbarItem
         v-for="(navbarItem, index) in navbarData"
         :key="index"
@@ -15,13 +15,26 @@
 </template>
 
 <script>
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import NavbarItem from './NavbarItem';
-import { ref, computed } from '@vue/composition-api';
+import { ref, computed, onMounted } from '@vue/composition-api';
 
 export default {
   name: 'Navbar',
   setup() {
     const activeItem = ref('home');
+    const loggedIn = ref(false);
+
+    onMounted(() => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          loggedIn.value = true;
+        } else {
+          loggedIn.value = false;
+        }
+      });
+    });
 
     const setActive = item => {
       activeItem.value = item;
@@ -61,7 +74,8 @@ export default {
       setActive,
       isActive,
       navbarItems,
-      navbarData
+      navbarData,
+      loggedIn
     };
   },
   components: {
