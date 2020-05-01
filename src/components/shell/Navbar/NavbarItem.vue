@@ -36,9 +36,10 @@ export default {
   color: #c2c2c2;
   text-decoration: none;
 
-  .active {
-    transform: scale(1.2);
+  .active,
+  &:hover {
     color: #444444;
+    background-color: #ffffff;
   }
 
   .label {
