@@ -4,7 +4,9 @@ import Home from '../views/Home.vue';
 import Statistics from '../views/Statistics.vue';
 import Settings from '../views/Settings.vue';
 import Login from '../views/Login.vue';
+import EmailLogin from '../views/EmailLogin.vue';
 import Register from '../views/Register.vue';
+import Schedule from '../views/Schedule.vue';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -25,6 +27,11 @@ const routes = [
     component: Login
   },
   {
+    path: '/login/email',
+    name: 'Email Login',
+    component: EmailLogin
+  },
+  {
     path: '/register',
     name: 'Register',
     component: Register
@@ -33,6 +40,14 @@ const routes = [
     path: '/statistics',
     name: 'Statistics',
     component: Statistics,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/schedule',
+    name: 'Schedule',
+    component: Schedule,
     meta: {
       requiresAuth: true
     }
