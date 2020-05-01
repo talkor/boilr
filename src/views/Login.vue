@@ -63,7 +63,7 @@ export default {
           .signInWithEmailAndPassword(form.email, form.password);
         router.replace({ name: 'Home' });
       } catch (error) {
-        console.error(error);
+        throw new Error(error);
       }
       // var provider = new firebase.auth.GoogleAuthProvider();
       // firebase.auth().signInWithRedirect(provider);
