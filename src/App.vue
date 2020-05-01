@@ -46,7 +46,9 @@ body {
 .content {
   flex: 1;
   height: 100%;
+  max-height: 100%;
   width: 80%;
   margin: 0 auto;
+  position: static;
 }
 </style>
