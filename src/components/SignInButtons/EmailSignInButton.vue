@@ -3,13 +3,10 @@
     <Button
       class="email-button"
       rounded
-      size="is-medium"
+      size="medium"
       text="Sign In With Email"
-    >
-      <span class="email-icon">
-        <font-awesome-icon icon="envelope" />
-      </span>
-    </Button>
+      icon="envelope"
+    />
   </router-link>
 </template>
 
@@ -26,10 +23,5 @@ export default {
 <style scoped lang="scss">
 .email-button {
   width: 250px;
-
-  .email-icon {
-    margin-right: 10px;
-    font-size: 18px;
-  }
 }
 </style>

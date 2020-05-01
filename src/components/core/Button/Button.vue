@@ -1,5 +1,5 @@
 <template>
-  <b-button rounded @click="onClick" :size="size">
+  <b-button rounded @click="onClick" :size="`is-${size}`" :icon-left="icon">
     <span class="button-content">
       <slot></slot>
       <span>{{ text }}</span>

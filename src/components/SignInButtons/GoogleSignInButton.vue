@@ -3,7 +3,7 @@
     class="google-button"
     rounded
     @onClick="onLogin"
-    size="is-medium"
+    size="medium"
     text="Sign In With Google"
   >
     <img src="../../assets/google.svg" class="google-icon" />
