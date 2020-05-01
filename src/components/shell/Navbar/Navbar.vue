@@ -50,18 +50,25 @@ export default {
 
     const navbarData = [
       {
-        path: '/statistics',
-        name: 'statistics',
-        label: 'Statistics',
-        icon: 'chart-bar'
-      },
-      {
         path: '/',
         name: 'home',
         label: 'Home',
         icon: 'home',
         mobileOnly: true
       },
+      {
+        path: '/schedule',
+        name: 'schedule',
+        label: 'Schedule',
+        icon: 'clock'
+      },
+      {
+        path: '/statistics',
+        name: 'statistics',
+        label: 'Statistics',
+        icon: 'chart-bar'
+      },
+
       {
         path: '/settings',
         name: 'settings',
