@@ -31,7 +31,6 @@ export default {
 .navbar-item {
   flex-basis: 120px;
   cursor: pointer;
-  transition: 0.2s all;
   font-size: 20px;
   color: #c2c2c2;
   text-decoration: none;
