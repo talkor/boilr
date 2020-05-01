@@ -11,6 +11,9 @@ module.exports = {
     themeColor: '#4DBA87',
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black-translucent'
+    appleMobileWebAppStatusBarStyle: 'black-translucent',
+    workboxOptions: {
+      exclude: [/_redirects/]
+    }
   }
 };
