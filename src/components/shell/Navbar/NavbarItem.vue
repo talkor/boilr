@@ -2,7 +2,7 @@
   <router-link class="navbar-item" :to="path">
     <li :class="[{ active }]">
       <span v-if="label" class="label">{{ label }}</span>
-      <font-awesome-icon v-if="icon" :icon="icon" />
+      <b-icon v-if="icon" :icon="icon" />
     </li>
   </router-link>
 </template>
@@ -31,7 +31,7 @@ export default {
 .navbar-item {
   flex-basis: 120px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
   color: #c2c2c2;
   text-decoration: none;
 

@@ -1,6 +1,11 @@
 <template>
   <b-field class="textbox" :label="label" :message="error">
-    <b-input :type="type" :placeholder="placeholder" @input="onInput"></b-input>
+    <b-input
+      :type="type"
+      :placeholder="placeholder"
+      @input="onInput"
+      :password-reveal="type === 'password'"
+    ></b-input>
   </b-field>
 </template>
 
