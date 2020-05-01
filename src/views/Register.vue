@@ -44,13 +44,12 @@ export default {
 
     const onRegister = async () => {
       try {
-        const user = firebase
+        firebase
           .auth()
           .createUserWithEmailAndPassword(form.email, form.password);
-        console.log(user);
         router.replace({ name: 'Home' });
       } catch (error) {
-        console.error(error);
+        throw new Error(error);
       }
     };
 
