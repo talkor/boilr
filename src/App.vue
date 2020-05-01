@@ -33,11 +33,14 @@ body {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
   height: 100%;
+  max-height: 100%;
   text-align: center;
   color: #2c3e50;
   flex-direction: column;
   display: flex;
+  position: staticl;
 }
 
 .content {
