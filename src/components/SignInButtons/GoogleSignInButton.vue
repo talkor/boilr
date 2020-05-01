@@ -6,7 +6,7 @@
     size="is-medium"
     text="Sign In With Google"
   >
-    <img src="../../assets/google.webp" class="google-icon" />
+    <img src="../../assets/google.png" class="google-icon" />
   </Button>
 </template>
 
