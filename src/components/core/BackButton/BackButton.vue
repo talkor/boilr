@@ -1,6 +1,12 @@
 <template>
   <div class="back-button">
-    <Button text="Back" icon="arrow-left" @onClick="onBack" size="small" />
+    <Button
+      text="Back"
+      icon="arrow-left"
+      @onClick="onBack"
+      size="small"
+      :noBorder="true"
+    />
   </div>
 </template>
 

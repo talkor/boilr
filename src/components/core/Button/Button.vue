@@ -1,5 +1,11 @@
 <template>
-  <b-button rounded @click="onClick" :size="`is-${size}`" :icon-left="icon">
+  <b-button
+    rounded
+    @click="onClick"
+    :size="`is-${size}`"
+    :icon-left="icon"
+    :class="{ 'no-border': noBorder }"
+  >
     <span class="button-content">
       <slot></slot>
       <span>{{ text }}</span>
@@ -19,6 +25,9 @@ export default {
     },
     icon: {
       type: String
+    },
+    noBorder: {
+      type: Boolean
     }
   },
   setup(props, { emit }) {
@@ -32,6 +41,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.no-border {
+  border: none;
+}
+
 .button-content {
   display: flex;
   align-items: center;
