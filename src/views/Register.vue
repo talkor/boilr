@@ -1,6 +1,13 @@
 <template>
   <div class="register">
-    <h1>Register</h1>
+    <BackButton />
+    <Title text="Register" />
+    <TextBox
+      type="text"
+      label="Name"
+      placeholder="Name"
+      @onInput="onNameChange"
+    />
     <TextBox
       type="email"
       label="Email"
@@ -13,7 +20,11 @@
       placeholder="Password"
       @onInput="onPasswordChange"
     />
-    <Button @onClick="onRegister" text="Register" />
+    <Button
+      @onClick="onRegister"
+      text="Register"
+      class="register-button"
+    />
   </div>
 </template>
 
@@ -23,6 +34,8 @@ import 'firebase/auth';
 import { reactive } from '@vue/composition-api';
 import TextBox from '@/components/core/TextBox/TextBox';
 import Button from '@/components/core/Button/Button';
+import BackButton from '@/components/core/BackButton/BackButton';
+import Title from '@/components/core/Title/Title';
 
 export default {
   name: 'Register',
@@ -30,9 +43,14 @@ export default {
     const router = root.$router;
 
     const form = reactive({
+      name: '',
       email: '',
       password: ''
     });
+
+    const onNameChange = value => {
+      form.name = value;
+    };
 
     const onEmailChange = value => {
       form.email = value;
@@ -55,13 +73,22 @@ export default {
 
     return {
       onRegister,
+      onNameChange,
       onEmailChange,
       onPasswordChange
     };
   },
   components: {
     TextBox,
-    Button
+    Button,
+    BackButton,
+    Title
   }
 };
 </script>
+
+<style scoped lang="scss">
+.register-button {
+  width: 150px;
+}
+</style>

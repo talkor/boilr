@@ -4,7 +4,7 @@
     @click="onClick"
     :size="`is-${size}`"
     :icon-left="icon"
-    :class="{ 'no-border': noBorder }"
+    :class="{ main: true, 'no-border': noBorder }"
   >
     <span class="button-content">
       <slot></slot>
@@ -41,6 +41,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.main {
+  margin: 10px 0;
+}
+
 .no-border {
   border: none;
 }

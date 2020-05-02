@@ -1,7 +1,7 @@
 <template>
   <div class="sign-in">
     <BackButton />
-    <h1>Sign In</h1>
+    <Title text="Sign In" />
     <TextBox
       type="email"
       label="Email"
@@ -25,6 +25,7 @@ import { reactive } from '@vue/composition-api';
 import TextBox from '@/components/core/TextBox/TextBox';
 import Button from '@/components/core/Button/Button';
 import BackButton from '@/components/core/BackButton/BackButton';
+import Title from '@/components/core/Title/Title';
 
 export default {
   setup(props, { root }) {
@@ -63,7 +64,8 @@ export default {
   components: {
     TextBox,
     Button,
-    BackButton
+    BackButton,
+    Title
   }
 };
 </script>

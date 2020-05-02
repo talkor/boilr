@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view class="content" />
+    <router-view class="app-content" />
     <Navbar />
   </div>
 </template>
@@ -48,7 +48,7 @@ body {
   position: static;
 }
 
-.content {
+.app-content {
   flex: 1;
   height: 100%;
   max-height: 100%;

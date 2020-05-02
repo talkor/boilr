@@ -1,5 +1,15 @@
 <template>
   <div class="home">
-    <h1>Welcome!</h1>
+    <Title text="Welcome" />
   </div>
 </template>
+
+<script>
+import Title from '@/components/core/Title/Title';
+
+export default {
+  components: {
+    Title
+  }
+};
+</script>

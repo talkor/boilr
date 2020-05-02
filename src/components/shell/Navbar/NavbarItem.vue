@@ -2,12 +2,14 @@
   <router-link class="navbar-item" :to="path">
     <li :class="[{ active }]">
       <span v-if="label" class="label">{{ label }}</span>
-      <b-icon v-if="icon" :icon="icon" />
+      <Icon v-if="icon" :icon="icon" />
     </li>
   </router-link>
 </template>
 
 <script>
+import Icon from '@/components/core/Icon/Icon';
+
 export default {
   name: 'NavbarItem',
   props: {
@@ -23,6 +25,9 @@ export default {
     label: {
       type: String
     }
+  },
+  components: {
+    Icon
   }
 };
 </script>
