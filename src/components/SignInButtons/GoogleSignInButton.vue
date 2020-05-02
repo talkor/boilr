@@ -39,7 +39,6 @@ export default {
 <style scoped lang="scss">
 .google-button {
   width: 250px;
-  margin: 10px 0;
 
   .google-icon {
     width: 20px;

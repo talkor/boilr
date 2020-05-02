@@ -30,10 +30,11 @@ export default {
   },
   setup(props, { emit }) {
     const error = ref('');
-    // const value = ref('');
+
     const onInput = value => {
       emit('onInput', value);
     };
+
     return { error, onInput };
   }
 };
