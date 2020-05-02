@@ -1,19 +1,74 @@
 <template>
   <div class="settings">
     <Title text="Settings" />
-    <Button @onClick="onLogOut" text="Log Out" />
+    <List :data="list.data" />
   </div>
 </template>
 
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import Button from '@/components/core/Button/Button';
 import Title from '@/components/core/Title/Title';
+import List from '@/components/List/List';
+import { reactive } from '@vue/composition-api';
 
 export default {
   setup(props, { root }) {
     const router = root.$router;
+    const list = reactive({
+      data: [
+        {
+          label: 'Profile',
+          items: [
+            {
+              label: 'My Profile',
+              icon: 'user',
+              action: () => {}
+            },
+            {
+              label: 'Energy Points',
+              icon: 'lightbulb',
+              action: () => {}
+            }
+          ]
+        },
+        {
+          label: 'Device',
+          items: [
+            {
+              label: 'My Device',
+              icon: 'temperature-high',
+              action: () => {}
+            },
+            {
+              label: 'Power Consumption',
+              icon: 'plug',
+              action: () => {}
+            }
+          ]
+        },
+        {
+          label: 'Preferences',
+          items: [
+            {
+              label: 'Preferences',
+              icon: 'cogs',
+              action: () => {}
+            }
+          ]
+        },
+        {
+          label: 'Account',
+          items: [
+            {
+              label: 'Logout',
+              icon: 'sign-out-alt',
+              action: () => onLogOut()
+            }
+          ]
+        }
+      ]
+    });
 
     const onLogOut = async () => {
       try {
@@ -23,13 +78,15 @@ export default {
         throw new Error(error);
       }
     };
+
     return {
-      onLogOut
+      onLogOut,
+      list
     };
   },
   components: {
-    Button,
-    Title
+    Title,
+    List
   }
 };
 </script>
