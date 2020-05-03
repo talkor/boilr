@@ -38,7 +38,9 @@ export default {
             {
               label: 'My Device',
               icon: 'temperature-high',
-              action: () => {}
+              action: () => {
+                router.replace({ name: 'Device' });
+              }
             },
             {
               label: 'Power Consumption',
