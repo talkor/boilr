@@ -33,6 +33,7 @@ export default {
 <style scoped lang="scss">
 .list-item {
   padding: 10px 0;
+  border: none;
 }
 </style>
 
