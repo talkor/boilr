@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.list-item {
+li.list-item {
   padding: 10px 0;
   border: none;
 }
