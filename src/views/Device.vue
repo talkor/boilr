@@ -19,9 +19,9 @@ export default {
     const showDecode = ref(true);
 
     const onDecode = decodedString => {
-      window.navigator.vibrate(200);
       message.value = decodedString;
       showDecode.value = false;
+      window.navigator.vibrate(200);
     };
 
     return {
