@@ -1,10 +1,10 @@
 <template>
   <div class="back-button">
     <Button
-      text="Back"
+      text=""
       icon="arrow-left"
       @onClick="onBack"
-      size="small"
+      size="medium"
       :noBorder="true"
     />
   </div>
@@ -34,5 +34,12 @@ export default {
 .back-button {
   display: flex;
   align-items: flex-start;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+
+  > button {
+    font-size: 1em !important;
+  }
 }
 </style>
