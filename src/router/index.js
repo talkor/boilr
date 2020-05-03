@@ -7,6 +7,7 @@ import Login from '../views/Login.vue';
 import EmailLogin from '../views/EmailLogin.vue';
 import Register from '../views/Register.vue';
 import Schedule from '../views/Schedule.vue';
+import Device from '../views/Device.vue';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -44,6 +45,7 @@ const routes = [
       requiresAuth: true
     }
   },
+
   {
     path: '/schedule',
     name: 'Schedule',
@@ -56,6 +58,14 @@ const routes = [
     path: '/settings',
     name: 'Settings',
     component: Settings,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/settings/device',
+    name: 'Device',
+    component: Device,
     meta: {
       requiresAuth: true
     }
