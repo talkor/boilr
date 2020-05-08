@@ -52,7 +52,7 @@ body {
   flex: 1;
   height: 100%;
   max-height: 100%;
-  width: 80%;
+  width: 90%;
   margin: 1.5em auto;
   position: static;
 }
