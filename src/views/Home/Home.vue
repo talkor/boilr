@@ -47,10 +47,10 @@ export default {
       firebase
         .firestore()
         .collection('users')
-        .get()
-        .then(snapshot => {
-          snapshot.forEach(doc => console.log(doc.data()));
-        });
+        .get();
+      // .then(snapshot => {
+      //   snapshot.forEach(doc => console.log(doc.data()));
+      // });
     });
   },
   components: {
