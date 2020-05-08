@@ -31,6 +31,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 import { reactive } from '@vue/composition-api';
 import TextBox from '@/components/core/TextBox/TextBox';
 import Button from '@/components/core/Button/Button';
@@ -64,7 +65,18 @@ export default {
       try {
         firebase
           .auth()
-          .createUserWithEmailAndPassword(form.email, form.password);
+          .createUserWithEmailAndPassword(form.email, form.password)
+          .then(data => {
+            firebase
+              .firestore()
+              .collection('users')
+              .doc(data.user.uid)
+              .set({
+                name: 'talkor',
+                email: data.user.email,
+                uid: data.user.uid
+              });
+          });
         router.replace({ name: 'Home' });
       } catch (error) {
         throw new Error(error);

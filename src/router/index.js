@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-import Statistics from '../views/Statistics.vue';
-import Settings from '../views/Settings.vue';
-import Login from '../views/Login.vue';
-import EmailLogin from '../views/EmailLogin.vue';
-import Register from '../views/Register.vue';
-import Schedule from '../views/Schedule.vue';
-import Device from '../views/Device.vue';
+import Login from '../views/Auth/Login.vue';
+import EmailLogin from '../views/Auth/EmailLogin.vue';
+import Register from '../views/Auth/Register.vue';
+import Home from '../views/Home/Home.vue';
+import Statistics from '../views/Statistics/Statistics.vue';
+import Schedule from '../views/Schedule/Schedule.vue';
+import Settings from '../views/Settings/Settings.vue';
+import Device from '../views/Settings/Device.vue';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -45,7 +45,6 @@ const routes = [
       requiresAuth: true
     }
   },
-
   {
     path: '/schedule',
     name: 'Schedule',

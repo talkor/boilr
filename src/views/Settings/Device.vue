@@ -1,17 +1,18 @@
 <template>
   <div class="device">
-    <qrcode-stream
-      class="qr-code"
-      v-if="showDecode"
-      @decode="onDecode"
-    ></qrcode-stream>
+    <BackButton />
+    <Title text="My Device" />
+
+    <QRScanner v-if="showDecode" @onDecode="onDecode" />
     <div>{{ message }}</div>
   </div>
 </template>
 
 <script>
 import { ref } from '@vue/composition-api';
-import { QrcodeStream } from 'vue-qrcode-reader';
+import QRScanner from '@/components/QRScanner/QRScanner';
+import BackButton from '@/components/core/BackButton/BackButton';
+import Title from '@/components/core/Title/Title';
 
 export default {
   setup() {
@@ -21,7 +22,6 @@ export default {
     const onDecode = decodedString => {
       message.value = decodedString;
       showDecode.value = false;
-      window.navigator.vibrate(200);
     };
 
     return {
@@ -31,15 +31,11 @@ export default {
     };
   },
   components: {
-    QrcodeStream
+    QRScanner,
+    BackButton,
+    Title
   }
 };
 </script>
 
-<style scoped lang="scss">
-.qr-code {
-  width: 300px;
-  height: 300px;
-  border: 4px dashed black;
-}
-</style>
+<style scoped lang="scss"></style>

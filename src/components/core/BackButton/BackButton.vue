@@ -2,7 +2,7 @@
   <div class="back-button">
     <Button
       text=""
-      icon="arrow-left"
+      icon="chevron-left"
       @onClick="onBack"
       size="medium"
       :noBorder="true"
