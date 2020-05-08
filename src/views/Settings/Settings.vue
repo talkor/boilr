@@ -39,7 +39,7 @@ export default {
               label: 'My Device',
               icon: 'temperature-high',
               action: () => {
-                router.replace({ name: 'Device' });
+                router.push({ name: 'Device' });
               }
             },
             {
