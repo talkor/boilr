@@ -91,7 +91,7 @@ export default {
 
       .card-number {
         margin-left: 10px;
-        font-size: 30px;
+        font-size: 28px;
       }
     }
   }
