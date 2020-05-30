@@ -6,15 +6,15 @@
       type="email"
       label="Email"
       placeholder="Email"
-      @onInput="onEmailChange"
+      @input="onEmailChange"
     />
     <TextBox
       type="password"
       label="Password"
       placeholder="Password"
-      @onInput="onPasswordChange"
+      @input="onPasswordChange"
     />
-    <Button @onClick="onSignIn" text="Sign In" />
+    <Button @click="onSignIn" text="Sign In" />
   </div>
 </template>
 

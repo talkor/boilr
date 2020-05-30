@@ -3,7 +3,7 @@
     <Button
       text=""
       icon="chevron-left"
-      @onClick="onBack"
+      @click="onBack"
       size="medium"
       :noBorder="true"
     />

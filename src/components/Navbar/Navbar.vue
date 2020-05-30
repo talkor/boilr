@@ -4,7 +4,7 @@
       <NavbarItem
         v-for="(navbarItem, index) in navbarData"
         :key="index"
-        @click.native="setActive(navbarItem.name)"
+        @click="setActive(navbarItem.name)"
         :active="isActive(navbarItem.name)"
         :path="navbarItem.path"
         :label="navbarItem.label"

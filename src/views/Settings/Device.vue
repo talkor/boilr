@@ -3,7 +3,7 @@
     <BackButton />
     <Title text="My Device" />
 
-    <QRScanner v-if="showDecode" @onDecode="onDecode" />
+    <QRScanner v-if="showDecode" @decode="onDecode" />
     <div>{{ message }}</div>
   </div>
 </template>

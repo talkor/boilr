@@ -6,25 +6,21 @@
       type="text"
       label="Name"
       placeholder="Name"
-      @onInput="onNameChange"
+      @input="onNameChange"
     />
     <TextBox
       type="email"
       label="Email"
       placeholder="Email"
-      @onInput="onEmailChange"
+      @input="onEmailChange"
     />
     <TextBox
       type="password"
       label="Password"
       placeholder="Password"
-      @onInput="onPasswordChange"
+      @input="onPasswordChange"
     />
-    <Button
-      @onClick="onRegister"
-      text="Register"
-      class="register-button"
-    />
+    <Button @click="onRegister" text="Register" class="register-button" />
   </div>
 </template>
 
