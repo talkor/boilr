@@ -2,7 +2,7 @@
   <Button
     class="google-button"
     rounded
-    @onClick="onLogin"
+    @click="onLogin"
     size="medium"
     text="Sign In With Google"
   >

@@ -32,7 +32,7 @@ export default {
     const error = ref('');
 
     const onInput = value => {
-      emit('onInput', value);
+      emit('input', value);
     };
 
     return { error, onInput };

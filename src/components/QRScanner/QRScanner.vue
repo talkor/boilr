@@ -12,7 +12,7 @@ import { QrcodeStream } from 'vue-qrcode-reader';
 export default {
   setup(props, { emit }) {
     const onDecode = decodedString => {
-      emit('onDecode', decodedString);
+      emit('decode', decodedString);
       window.navigator.vibrate(100);
     };
 
