@@ -37,7 +37,7 @@ export default {
   flex-basis: 120px;
   cursor: pointer;
   font-size: 15px;
-  color: #d1040446;
+  color: #000000;
   text-decoration: none;
 
   .active,
