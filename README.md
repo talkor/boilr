@@ -31,3 +31,14 @@ Read this if you want, for more details: https://coderwall.com/p/7aymfa/please-o
   - https://www.youtube.com/watch?v=Wy9q22isx3U
   - https://www.youtube.com/watch?v=V-xK3sbc7xI
   
+## Recommanded Plugins/Extensions
+
+### VS Code
+
+- Prettier - automatic code formatting - https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+
+- Vetur - Helps a lot with writing Vue code - https://marketplace.visualstudio.com/items?itemName=octref.vetur
+
+### Chrome
+
+- Vue Dev Tools - https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en
