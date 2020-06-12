@@ -6,7 +6,7 @@
     :icon-left="icon"
     :class="{ main: true, 'no-border': noBorder }"
   >
-    <span class="button-content">
+    <span v-if="text" class="button-content">
       <slot></slot>
       <span>{{ text }}</span>
     </span>
