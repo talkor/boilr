@@ -1,9 +1,5 @@
 <template>
-  <qrcode-stream
-    class="qr-code"
-    @decode="onDecode"
-    @init="onInit"
-  ></qrcode-stream>
+  <qrcode-stream class="qr-code" @decode="onDecode" @init="onInit"></qrcode-stream>
 </template>
 
 <script>
@@ -28,8 +24,8 @@ export default {
 
 <style scoped lang="scss">
 .qr-code {
-  width: 300px;
+  width: 100%;
   height: 300px;
-  border: 4px dashed black;
+  border: 2px dashed black;
 }
 </style>
