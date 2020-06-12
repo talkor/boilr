@@ -1,12 +1,6 @@
 <template>
   <div class="back-button">
-    <Button
-      text=""
-      icon="chevron-left"
-      @click="onBack"
-      size="medium"
-      :noBorder="true"
-    />
+    <Button class="button" icon="chevron-left" @click="onBack" size="medium" :noBorder="true" />
   </div>
 </template>
 
@@ -34,12 +28,10 @@ export default {
 .back-button {
   display: flex;
   align-items: flex-start;
-  position: fixed;
-  top: 10px;
-  left: 10px;
 
-  > button {
-    font-size: 1em !important;
+  .button {
+    padding: 0;
+    margin: 0;
   }
 }
 </style>
