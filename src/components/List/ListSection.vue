@@ -32,4 +32,15 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+:global(.menu-label) {
+  margin-bottom: 0 !important;
+  background-color: black;
+}
+</style>
+
+<style lang="scss">
+.menu-label:not(:last-child).menu-label:not(:last-child) {
+  margin-bottom: 0;
+}
+</style>

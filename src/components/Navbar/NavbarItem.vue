@@ -1,8 +1,8 @@
 <template>
   <router-link class="navbar-item" :to="path">
     <li :class="[{ active }]" @click="onClick">
-      <span v-if="label" class="label">{{ label }}</span>
       <Icon v-if="icon" :icon="icon" />
+      <span v-if="label" class="label">{{ label }}</span>
     </li>
   </router-link>
 </template>
@@ -44,10 +44,10 @@ export default {
 
 <style scoped lang="scss">
 .navbar-item {
-  flex-basis: 120px;
+  flex: 1;
   cursor: pointer;
   font-size: 15px;
-  color: #c2c2c2;
+  color: #a2a2a2;
   text-decoration: none;
 
   .active,
@@ -58,18 +58,14 @@ export default {
   }
 
   .label {
-    font-size: 20px;
-    color: #000000;
-    margin-right: 10px;
-  }
-}
+    font-size: 11px;
+    margin-top: 0;
+    font-weight: 400;
 
-@media only screen and (max-width: 486px) {
-  .navbar-item {
-    flex: 1;
-
-    .label {
-      display: none;
+    .active,
+    &:hover,
+    &:focus {
+      color: #444444;
     }
   }
 }
