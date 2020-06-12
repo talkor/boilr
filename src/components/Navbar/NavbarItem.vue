@@ -1,6 +1,6 @@
 <template>
   <router-link class="navbar-item" :to="path">
-    <li :class="[{ active }]">
+    <li :class="[{ active }]" @click="onClick">
       <span v-if="label" class="label">{{ label }}</span>
       <Icon v-if="icon" :icon="icon" />
     </li>
@@ -24,10 +24,20 @@ export default {
     },
     label: {
       type: String
+    },
+    click: {
+      type: Function
     }
   },
   components: {
     Icon
+  },
+  setup(props, { emit }) {
+    const onClick = event => {
+      emit('click', event);
+    };
+
+    return { onClick };
   }
 };
 </script>
@@ -41,7 +51,8 @@ export default {
   text-decoration: none;
 
   .active,
-  &:hover {
+  &:hover,
+  &:focus {
     color: #444444;
     background-color: #ffffff;
   }
