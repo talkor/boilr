@@ -100,7 +100,7 @@ export default {
   align-items: center;
   width: 100%;
   border-top: 1px solid #c2c2c26c;
-  padding: 20px 0 25px 0;
+  padding-bottom: 35px;
   background-color: #ffffff;
 }
 </style>
