@@ -3,32 +3,37 @@
     <Title text="Boilr" />
     <section class="cards">
       <div class="card">
-        <h2 class="card-title">Temperatue</h2>
+        <h3 class="card-title">Temperatue</h3>
         <div class="card-container">
           <span class="card-number">59°C</span>
-          <Icon class="card-icon" icon="thermometer-empty" size="medium" />
+          <Icon class="card-icon temperature" name="thermometer-empty" />
         </div>
       </div>
       <div class="card">
-        <h2 class="card-title">Weather</h2>
+        <h3 class="card-title">Weather</h3>
         <div class="card-container">
           <span class="card-number">23°C</span>
-          <Icon class="card-icon" icon="sun" size="medium" />
+          <Icon class="card-icon" name="sun" />
         </div>
       </div>
       <div class="card">
-        <h2 class="card-title">Energy Points</h2>
+        <h3 class="card-title">Energy Points</h3>
         <div class="card-container">
           <span class="card-number">5K</span>
-          <Icon class="card-icon" icon="lightbulb" size="medium" />
+          <Icon class="card-icon" name="lightbulb" />
         </div>
       </div>
       <div class="card">
-        <h2 class="card-title">Avg. Water</h2>
+        <h3 class="card-title">Avg. Water</h3>
         <div class="card-container">
           <span class="card-number">20L</span>
-          <Icon class="card-icon" icon="tint" size="medium" />
+          <Icon class="card-icon" name="tint" />
         </div>
+      </div>
+    </section>
+    <section class="switch-container">
+      <div class="switch">
+        <Icon class="switch-icon" name="power-off" />
       </div>
     </section>
   </div>
@@ -60,6 +65,27 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+
+  .switch {
+    border: 1px solid #c2c2c2;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .switch-icon {
+      font-size: 24px;
+    }
+  }
+}
+
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -68,16 +94,18 @@ export default {
 
   .card {
     width: 100%;
-    height: 100px;
+    height: 80px;
     border-radius: 10px;
-    border: 0.2px solid rgba(0, 0, 0, 0.11);
+    border: 1px solid rgba(0, 0, 0, 0.11);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: none;
 
     .card-title {
       align-self: flex-start;
       margin: 10px 0 0 10px;
+      font-size: 14px;
     }
 
     .card-container {
@@ -87,11 +115,12 @@ export default {
 
       .card-icon {
         margin: 10px;
+        font-size: 15px;
       }
 
       .card-number {
         margin-left: 10px;
-        font-size: 30px;
+        font-size: 22px;
       }
     }
   }
