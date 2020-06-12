@@ -1,7 +1,7 @@
 <template>
   <router-link class="navbar-item" :to="path">
     <li :class="[{ active }]" @click="onClick">
-      <Icon v-if="icon" :icon="icon" />
+      <Icon v-if="icon" :name="icon" />
       <span v-if="label" class="label">{{ label }}</span>
     </li>
   </router-link>

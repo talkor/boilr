@@ -1,15 +1,12 @@
 <template>
-  <b-icon pack="fas" :icon="icon" :size="`is-${size}`" />
+  <b-icon pack="fas" :icon="name" />
 </template>
 
 <script>
 export default {
   name: 'Icon',
   props: {
-    icon: {
-      type: String
-    },
-    size: {
+    name: {
       type: String
     }
   },
