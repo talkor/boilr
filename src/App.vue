@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 html,
 body {
   height: 100%;
@@ -46,14 +46,15 @@ body {
   flex-direction: column;
   display: flex;
   position: static;
-}
 
-.app-content {
-  flex: 1;
-  height: 100%;
-  max-height: 100%;
-  width: 90%;
-  margin: 1.5em auto;
-  position: static;
+  .app-content {
+    flex: 1;
+    height: 100%;
+    max-height: 100%;
+    width: 90%;
+    margin: 1.5em auto;
+    position: static;
+    overflow: auto;
+  }
 }
 </style>
