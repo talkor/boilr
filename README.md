@@ -41,4 +41,4 @@ Read this if you want, for more details: https://coderwall.com/p/7aymfa/please-o
 
 ### Chrome
 
-- Vue Dev Tools - https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en
+- Vue DevTools - https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en
