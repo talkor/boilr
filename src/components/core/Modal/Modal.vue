@@ -1,5 +1,10 @@
 <template>
-  <b-modal aria-role="dialog" aria-modal :active.sync="isActive">
+  <b-modal
+    aria-role="dialog"
+    aria-modal
+    :active.sync="isActive"
+    :full-screen="false"
+  >
     <div class="modal-card" style="width: auto">
       <header class="modal-card-head">
         <p class="modal-card-title">Edit time</p>

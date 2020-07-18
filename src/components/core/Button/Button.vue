@@ -1,10 +1,10 @@
 <template>
   <b-button
-    rounded
     @click="onClick"
     :size="`is-${size}`"
     :icon-left="icon"
     :class="{ main: true, 'no-border': noBorder }"
+    :rounded="rounded"
   >
     <span v-if="text" class="button-content">
       <slot></slot>
@@ -28,6 +28,10 @@ export default {
     },
     noBorder: {
       type: Boolean
+    },
+    rounded: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props, { emit }) {
