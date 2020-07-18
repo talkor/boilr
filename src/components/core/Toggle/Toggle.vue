@@ -15,7 +15,7 @@ export default {
   setup({ active }, { emit }) {
     const isActive = ref(active);
 
-    watch(isActive, (isActive, prevIsActive) => {
+    watch(isActive, isActive => {
       emit('toggle', isActive);
     });
 
