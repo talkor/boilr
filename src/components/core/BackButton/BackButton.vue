@@ -1,6 +1,12 @@
 <template>
   <div class="back-button">
-    <Button class="button" icon="chevron-left" @click="onBack" size="medium" :noBorder="true" />
+    <Button
+      class="button"
+      icon="chevron-left"
+      @click="onBack"
+      size="medium"
+      :noBorder="true"
+    />
   </div>
 </template>
 
