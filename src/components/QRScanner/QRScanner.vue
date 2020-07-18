@@ -1,5 +1,9 @@
 <template>
-  <qrcode-stream class="qr-code" @decode="onDecode" @init="onInit"></qrcode-stream>
+  <qrcode-stream
+    class="qr-code"
+    @decode="onDecode"
+    @init="onInit"
+  ></qrcode-stream>
 </template>
 
 <script>

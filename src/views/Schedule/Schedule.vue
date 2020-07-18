@@ -16,7 +16,7 @@
     </div>
     <Modal :isActive="showTimePicker">
       <TimePicker />
-      {{editedTime}}
+      {{ editedTime }}
     </Modal>
   </div>
 </template>

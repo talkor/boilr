@@ -6,7 +6,9 @@
         <span>{{ end }}</span>
       </div>
       <div class="days">
-        <span v-if="isEveryDay()">{{ dayString({ isEveryday: true }) }}</span>
+        <span v-if="isEveryDay()">{{
+          dayString({ isEveryday: true })
+        }}</span>
         <span v-else v-for="(day, index) in days" :key="index" class="day">
           <span>{{ dayString({ day }) }}</span>
           <span v-if="showComma(index)">,&nbsp;</span>
@@ -19,7 +21,6 @@
 
 <script>
 import Toggle from '@/components/core/Toggle/Toggle';
-import { computed } from '@vue/composition-api';
 
 export default {
   props: {
