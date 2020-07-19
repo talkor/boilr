@@ -2,34 +2,13 @@
   <div class="home">
     <Title text="Boilr" />
     <section class="cards">
-      <div class="card">
-        <h3 class="card-title">Temperatue</h3>
-        <div class="card-container">
-          <span class="card-number">59°C</span>
-          <Icon class="card-icon temperature" name="thermometer-empty" />
-        </div>
-      </div>
-      <div class="card">
-        <h3 class="card-title">Weather</h3>
-        <div class="card-container">
-          <span class="card-number">23°C</span>
-          <Icon class="card-icon" name="sun" />
-        </div>
-      </div>
-      <div class="card">
-        <h3 class="card-title">Energy Points</h3>
-        <div class="card-container">
-          <span class="card-number">5K</span>
-          <Icon class="card-icon" name="lightbulb" />
-        </div>
-      </div>
-      <div class="card">
-        <h3 class="card-title">Avg. Water</h3>
-        <div class="card-container">
-          <span class="card-number">20L</span>
-          <Icon class="card-icon" name="tint" />
-        </div>
-      </div>
+      <HomeItem
+        v-for="(homeItem, index) in homeData"
+        :key="index"
+        :label="homeItem.label"
+        :dataLabel="homeItem.dataLabel"
+        :icon="homeItem.icon"
+      />
     </section>
     <section class="switch-container">
       <div class="switch">
@@ -41,6 +20,7 @@
 
 <script>
 import * as firebase from 'firebase/app';
+import HomeItem from './HomeItem';
 import 'firebase/firestore';
 import Title from '@/components/core/Title/Title';
 import Icon from '@/components/core/Icon/Icon';
@@ -57,10 +37,36 @@ export default {
       //   snapshot.forEach(doc => console.log(doc.data()));
       // });
     });
+    const homeData = [
+      {
+        label: 'Temperatue',
+        dataLabel: '59°C',
+        icon: 'thermometer-empty'
+      },
+      {
+        label: 'Weather',
+        dataLabel: '23°C',
+        icon: 'sun'
+      },
+      {
+        label: 'Energy Points',
+        dataLabel: '5K',
+        icon: 'lightbulb'
+      },
+      {
+        label: 'Avg. Water',
+        dataLabel: '20L',
+        icon: 'tint'
+      }
+    ];
+    return {
+      homeData
+    };
   },
   components: {
     Title,
-    Icon
+    Icon,
+    HomeItem
   }
 };
 </script>
@@ -91,38 +97,5 @@ export default {
   grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
   margin-top: 30px;
-
-  .card {
-    width: 100%;
-    height: 80px;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.11);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: none;
-
-    .card-title {
-      align-self: flex-start;
-      margin: 10px 0 0 10px;
-      font-size: 14px;
-    }
-
-    .card-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-
-      .card-icon {
-        margin: 10px;
-        font-size: 15px;
-      }
-
-      .card-number {
-        margin-left: 10px;
-        font-size: 22px;
-      }
-    }
-  }
 }
 </style>
