@@ -3,7 +3,7 @@
     @click="onClick"
     :size="`is-${size}`"
     :icon-left="icon"
-    :class="{ main: true, 'no-border': noBorder }"
+    :class="{ main: true, 'no-border': noBorder, 'no-padding': noPadding }"
     :rounded="rounded"
   >
     <span v-if="text" class="button-content">
@@ -32,6 +32,9 @@ export default {
     rounded: {
       type: Boolean,
       default: true
+    },
+    noPadding: {
+      type: Boolean
     }
   },
   setup(props, { emit }) {
@@ -47,14 +50,18 @@ export default {
 <style scoped lang="scss">
 .main {
   margin: 10px 0;
-}
 
-.no-border {
-  border: none;
-}
+  &.no-border {
+    border: none;
+  }
 
-.button-content {
-  display: flex;
-  align-items: center;
+  &.no-padding {
+    padding: 0;
+  }
+
+  .button-content {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>
