@@ -1,12 +1,13 @@
 <template>
-  <b-timepicker
-    class="time-picker"
-    rounded
-    :placeholder="placeholder"
-    editable
-    icon="clock"
-    v-model="value"
-  />
+  <b-field :label="label">
+    <b-timepicker
+      class="time-picker"
+      :placeholder="placeholder"
+      editable
+      icon="clock"
+      v-model="value"
+    />
+  </b-field>
 </template>
 
 <script>
@@ -18,6 +19,9 @@ export default {
       type: String
     },
     placeholder: {
+      type: String
+    },
+    label: {
       type: String
     }
   },

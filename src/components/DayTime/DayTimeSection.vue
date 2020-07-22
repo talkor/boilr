@@ -10,18 +10,9 @@
           <span>{{ end }}</span>
         </div>
         <div class="days">
-          <span v-if="isEveryDay()">
-            {{ dayString({ isEveryday: true }) }}
-          </span>
-          <span
-            v-else
-            v-for="(day, index) in days"
-            :key="index"
-            class="day"
-          >
+          <span v-for="(day, index) in days" :key="index" class="day">
             <template v-if="days[index]">
-              <span>{{ dayString({ index }) }}</span>
-              <span v-if="showComma(index)">,&nbsp;</span>
+              <span>{{ dayString(index) }}&nbsp;</span>
             </template>
           </span>
         </div>
@@ -33,14 +24,16 @@
         <DayPicker :days="days" @dayChange="onDayChange" />
         <div class="time-pickers">
           <TimePicker
+            label="Start"
             :time="start"
             @timeChange="onStartTimeChange"
-            class="start-time"
+            class="time-picker"
           />
           <TimePicker
+            label="End"
             :time="end"
             @timeChange="onEndTimeChange"
-            class="end-time"
+            class="time-picker"
           />
         </div>
       </div>
@@ -72,7 +65,7 @@ export default {
       type: Number
     }
   },
-  setup({ days, id }, { emit }) {
+  setup({ id }, { emit }) {
     const showEdit = ref(false);
 
     const dayStrings = {
@@ -90,16 +83,8 @@ export default {
       showEdit.value = !showEdit.value;
     };
 
-    const isEveryDay = () => {
-      return days.every(day => day);
-    };
-
-    const dayString = ({ index, isEveryday = false }) => {
-      return isEveryday ? dayStrings['all'] : dayStrings[index];
-    };
-
-    const showComma = index => {
-      return index !== days.length - 1;
+    const dayString = index => {
+      return dayStrings[index];
     };
 
     const onDayChange = index => {
@@ -114,7 +99,10 @@ export default {
       emit('endTimeChange', id, value);
     };
 
-    const onToggle = () => {
+    const onToggle = value => {
+      if (!value) {
+        showEdit.value = false;
+      }
       emit('activeToggle', id);
     };
 
@@ -122,8 +110,6 @@ export default {
       onToggle,
       onClick,
       dayString,
-      showComma,
-      isEveryDay,
       showEdit,
       onDayChange,
       onStartTimeChange,
@@ -164,13 +150,11 @@ export default {
     .time-pickers {
       display: flex;
       justify-content: space-between;
+      margin-block-end: 20px;
 
-      .start-time {
-        margin-inline-end: 5px;
-      }
-
-      .start-end {
-        margin-inline-start: 5px;
+      .time-picker {
+        flex: 3;
+        margin: 5px;
       }
     }
   }
