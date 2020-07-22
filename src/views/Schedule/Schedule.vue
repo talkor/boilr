@@ -26,70 +26,77 @@ import Title from '@/components/core/Title/Title';
 import Button from '@/components/core/Button/Button';
 import Divider from '@/components/core/Divider/Divider';
 import DayTimeSection from '@/components/DayTime/DayTimeSection';
+import { ref } from '@vue/composition-api';
 
 export default {
-  data() {
-    return {
-      times: [
-        {
-          start: '10:10',
-          end: '11:00',
-          days: [true, true, true, true, true, true, true],
-          active: true
-        },
-        {
-          start: '20:00',
-          end: '21:00',
-          days: [true, true, false, true, true, true, true],
-          active: false
-        },
-        {
-          start: '6:00',
-          end: '7:00',
-          days: [true, true, true, true, false, true, true],
-          active: true
-        }
-      ]
-    };
-  },
-  methods: {
-    addTime() {},
+  setup(_, { root: { $set } }) {
+    const times = ref([
+      {
+        start: '10:10',
+        end: '11:00',
+        days: [true, true, true, true, true, true, true],
+        active: true
+      },
+      {
+        start: '20:00',
+        end: '21:00',
+        days: [true, true, false, true, true, true, true],
+        active: false
+      },
+      {
+        start: '6:00',
+        end: '7:00',
+        days: [true, true, true, true, false, true, true],
+        active: true
+      }
+    ]);
 
-    onDayChange(index, id) {
-      const time = this.times[id];
+    const addTime = () => {};
+
+    const onDayChange = (index, id) => {
+      const time = times.value[id];
       let days = time.days;
       days[index] = !days[index];
       const newTime = {
         ...time,
         days: [...days]
       };
-      this.$set(this.times, id, newTime);
-    },
+      $set(times.value, id, newTime);
+    };
 
-    onStartTimeChange(id, start) {
+    const onStartTimeChange = (id, start) => {
       const newTime = {
-        ...this.times[id],
+        ...times.value[id],
         start
       };
-      this.$set(this.times, id, newTime);
-    },
+      $set(times.value, id, newTime);
+    };
 
-    onEndTimeChange(id, end) {
+    const onEndTimeChange = (id, end) => {
       const newTime = {
-        ...this.times[id],
+        ...times.value[id],
         end
       };
-      this.$set(this.times, id, newTime);
-    },
+      $set(times.value, id, newTime);
+    };
 
-    onActiveToggle(id) {
-      const active = this.times[id].active;
+    const onActiveToggle = id => {
+      const active = times.value[id].active;
       const newTime = {
-        ...this.times[id],
+        ...times.value[id],
         active: !active
       };
-      this.$set(this.times, id, newTime);
-    }
+      $set(times.value, id, newTime);
+    };
+
+    return {
+      onEndTimeChange,
+      onActiveToggle,
+      onStartTimeChange,
+      onDayChange,
+      addTime,
+      times
+    };
   },
   components: {
     Title,
