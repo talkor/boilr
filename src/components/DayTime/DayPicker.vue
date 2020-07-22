@@ -4,9 +4,10 @@
       v-for="(day, index) in 7"
       :key="index"
       :noBorder="!days[index]"
-      class="day"
-      :rounded="false"
+      :noPadding="true"
+      :rounded="true"
       :text="dayStrings[index]"
+      class="day"
       @click="onDayChange(index)"
     />
   </div>
