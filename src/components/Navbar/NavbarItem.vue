@@ -13,21 +13,11 @@ import Icon from '@/components/core/Icon/Icon';
 export default {
   name: 'NavbarItem',
   props: {
-    path: {
-      type: String
-    },
-    icon: {
-      type: String
-    },
-    active: {
-      type: Boolean
-    },
-    label: {
-      type: String
-    },
-    click: {
-      type: Function
-    }
+    path: String,
+    icon: String,
+    active: Boolean,
+    label: String,
+    click: Function
   },
   components: {
     Icon

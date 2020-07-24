@@ -15,18 +15,10 @@ import { ref } from '@vue/composition-api';
 export default {
   name: 'TextBox',
   props: {
-    placeholder: {
-      type: String
-    },
-    type: {
-      type: String
-    },
-    label: {
-      type: String
-    },
-    value: {
-      type: String
-    }
+    placeholder: String,
+    type: String,
+    label: String,
+    value: String
   },
   setup(props, { emit }) {
     const error = ref('');

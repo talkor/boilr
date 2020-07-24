@@ -18,9 +18,7 @@ import Button from '@/components/core/Button/Button';
 
 export default {
   props: {
-    days: {
-      type: Array
-    }
+    days: Array
   },
   setup(props, { emit }) {
     const NUM_DAYS_OF_WEEK = 7; // TODO: move to consts

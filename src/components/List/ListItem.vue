@@ -1,11 +1,6 @@
 <template>
   <Fragment>
-    <b-menu-item
-      class="list-item"
-      :label="label"
-      :icon="icon"
-      @click="action"
-    />
+    <b-menu-item class="list-item" :label="label" :icon="icon" @click="action" />
   </Fragment>
 </template>
 
@@ -14,15 +9,9 @@ import { Fragment } from 'vue-fragment';
 
 export default {
   props: {
-    label: {
-      type: String
-    },
-    icon: {
-      type: String
-    },
-    action: {
-      type: Function
-    }
+    label: String,
+    icon: String,
+    action: Function
   },
   components: {
     Fragment
