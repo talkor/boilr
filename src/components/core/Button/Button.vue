@@ -17,24 +17,14 @@
 export default {
   name: 'Button',
   props: {
-    text: {
-      type: String
-    },
-    size: {
-      type: String
-    },
-    icon: {
-      type: String
-    },
-    noBorder: {
-      type: Boolean
-    },
+    text: String,
+    size: String,
+    icon: String,
+    noBorder: Boolean,
+    noPadding: Boolean,
     rounded: {
       type: Boolean,
       default: true
-    },
-    noPadding: {
-      type: Boolean
     }
   },
   setup(props, { emit }) {

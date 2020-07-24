@@ -8,9 +8,7 @@ import { watch, ref } from '@vue/composition-api';
 export default {
   name: 'Icon',
   props: {
-    active: {
-      type: Boolean
-    }
+    active: Boolean
   },
   setup({ active }, { emit }) {
     const isActive = ref(active);

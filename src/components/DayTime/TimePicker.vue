@@ -15,15 +15,9 @@ import { ref, watch } from '@vue/composition-api';
 
 export default {
   props: {
-    time: {
-      type: String
-    },
-    placeholder: {
-      type: String
-    },
-    label: {
-      type: String
-    }
+    time: String,
+    placeholder: String,
+    label: String
   },
   setup({ time }, { emit }) {
     const newTime = new Date();

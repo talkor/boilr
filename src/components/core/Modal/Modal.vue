@@ -1,10 +1,5 @@
 <template>
-  <b-modal
-    aria-role="dialog"
-    aria-modal
-    :active.sync="isActive"
-    :full-screen="false"
-  >
+  <b-modal aria-role="dialog" aria-modal :active.sync="isActive" :full-screen="false">
     <div class="modal-card" style="width: auto">
       <header class="modal-card-head">
         <p class="modal-card-title">Edit time</p>
@@ -25,9 +20,7 @@ import Button from '@/components/core/Button/Button';
 
 export default {
   props: {
-    isActive: {
-      type: Boolean
-    }
+    isActive: Boolean
   },
   components: {
     Button

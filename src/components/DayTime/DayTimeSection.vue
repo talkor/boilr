@@ -1,10 +1,7 @@
 <template>
   <div class="container">
     <div class="view-container">
-      <div
-        :class="{ 'time-container': true, disabled: !active }"
-        @click="onClick"
-      >
+      <div :class="{ 'time-container': true, disabled: !active }" @click="onClick">
         <div class="time">
           <span>{{ start }}</span> -
           <span>{{ end }}</span>
@@ -29,12 +26,7 @@
             @timeChange="onStartTimeChange"
             class="time-picker"
           />
-          <TimePicker
-            label="End"
-            :time="end"
-            @timeChange="onEndTimeChange"
-            class="time-picker"
-          />
+          <TimePicker label="End" :time="end" @timeChange="onEndTimeChange" class="time-picker" />
         </div>
       </div>
     </transition>
@@ -49,21 +41,11 @@ import { ref } from '@vue/composition-api';
 
 export default {
   props: {
-    start: {
-      type: String
-    },
-    end: {
-      type: String
-    },
-    days: {
-      type: Array
-    },
-    active: {
-      type: Boolean
-    },
-    id: {
-      type: Number
-    }
+    start: String,
+    end: String,
+    days: Array,
+    active: Boolean,
+    id: Number
   },
   setup({ id }, { emit }) {
     const showEdit = ref(false);

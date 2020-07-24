@@ -14,15 +14,9 @@ import Icon from '@/components/core/Icon/Icon';
 export default {
   name: 'HomeItem',
   props: {
-    icon: {
-      type: String
-    },
-    label: {
-      type: String
-    },
-    dataLabel: {
-      type: String
-    }
+    icon: String,
+    label: String,
+    dataLabel: String
   },
   components: {
     Icon

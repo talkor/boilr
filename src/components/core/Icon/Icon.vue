@@ -6,9 +6,7 @@
 export default {
   name: 'Icon',
   props: {
-    name: {
-      type: String
-    }
+    name: String
   },
   setup() {}
 };

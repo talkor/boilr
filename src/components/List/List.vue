@@ -16,9 +16,7 @@ import ListSection from './ListSection';
 
 export default {
   props: {
-    data: {
-      type: Array
-    }
+    data: Array
   },
   components: {
     ListSection

@@ -18,12 +18,8 @@ import ListItem from './ListItem';
 
 export default {
   props: {
-    items: {
-      type: Array
-    },
-    label: {
-      type: String
-    }
+    items: Array,
+    label: String
   },
   components: {
     ListItem,
