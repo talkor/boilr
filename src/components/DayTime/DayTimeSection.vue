@@ -14,11 +14,11 @@
           </span>
         </div>
       </div>
-      <Toggle :active="active" @toggle="onToggle" />
+      <Button v-if="showEdit" icon="trash" size="small" @click="onDelete" />
+      <Toggle v-else vi :active="active" @toggle="onToggle" />
     </div>
     <transition name="slide">
       <div v-if="showEdit" class="edit-container">
-        <DayPicker :days="days" @dayChange="onDayChange" />
         <div class="time-pickers">
           <TimePicker
             label="Start"
@@ -28,6 +28,7 @@
           />
           <TimePicker label="End" :time="end" @timeChange="onEndTimeChange" class="time-picker" />
         </div>
+        <DayPicker :days="days" @dayChange="onDayChange" />
       </div>
     </transition>
   </div>
@@ -35,6 +36,7 @@
 
 <script>
 import Toggle from '@/components/core/Toggle/Toggle';
+import Button from '@/components/core/Button/Button';
 import TimePicker from '@/components/DayTime/TimePicker';
 import DayPicker from '@/components/DayTime/DayPicker';
 import { ref } from '@vue/composition-api';
@@ -45,10 +47,11 @@ export default {
     end: String,
     days: Array,
     active: Boolean,
-    id: Number
+    id: Number,
+    isNewTime: Boolean
   },
-  setup({ id }, { emit }) {
-    const showEdit = ref(false);
+  setup({ id, isNewTime }, { emit }) {
+    const showEdit = ref(isNewTime);
 
     const dayStrings = {
       0: 'Sun',
@@ -88,6 +91,10 @@ export default {
       emit('activeToggle', id);
     };
 
+    const onDelete = () => {
+      emit('delete', id);
+    };
+
     return {
       onToggle,
       onClick,
@@ -95,13 +102,15 @@ export default {
       showEdit,
       onDayChange,
       onStartTimeChange,
-      onEndTimeChange
+      onEndTimeChange,
+      onDelete
     };
   },
   components: {
     Toggle,
     TimePicker,
-    DayPicker
+    DayPicker,
+    Button
   }
 };
 </script>
@@ -110,8 +119,6 @@ export default {
   .view-container {
     text-align: start;
     display: flex;
-    margin-block-start: 20px;
-    margin-block-end: 20px;
 
     .time-container {
       flex: 1;
@@ -132,11 +139,12 @@ export default {
     .time-pickers {
       display: flex;
       justify-content: space-between;
-      margin-block-end: 20px;
 
       .time-picker {
         flex: 3;
-        margin: 5px;
+        margin-block-start: 10px;
+        margin-block-end: 5px;
+        margin-inline-end: 10px;
       }
     }
   }

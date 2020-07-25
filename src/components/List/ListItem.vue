@@ -1,6 +1,11 @@
 <template>
   <Fragment>
-    <b-menu-item class="list-item" :label="label" :icon="icon" @click="action" />
+    <b-menu-item
+      class="list-item"
+      :label="label"
+      :icon="icon"
+      @click="action"
+    />
   </Fragment>
 </template>
 
