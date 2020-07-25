@@ -15,6 +15,8 @@
         @startTimeChange="onStartTimeChange"
         @endTimeChange="onEndTimeChange"
         @activeToggle="onActiveToggle"
+        :isNewTime="isNewTime"
+        @delete="onDeleteTime"
       />
       <Divider v-if="index !== times.length - 1" />
     </div>
@@ -26,32 +28,58 @@ import Title from '@/components/core/Title/Title';
 import Button from '@/components/core/Button/Button';
 import Divider from '@/components/core/Divider/Divider';
 import DayTimeSection from '@/components/DayTime/DayTimeSection';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export default {
-  setup(_, { root: { $set } }) {
-    const times = ref([
-      {
-        start: '10:10',
-        end: '11:00',
-        days: [true, true, true, true, true, true, true],
-        active: true
-      },
-      {
-        start: '20:00',
-        end: '21:00',
-        days: [true, true, false, true, true, true, true],
-        active: false
-      },
-      {
-        start: '6:00',
-        end: '7:00',
-        days: [true, true, true, true, false, true, true],
-        active: true
-      }
-    ]);
+  setup(_, { root: { $set, $delete } }) {
+    const isNewTime = ref(false);
+    const times = ref([]);
 
-    const addTime = () => {};
+    const newTime = {
+      start: '6:00',
+      end: '7:00',
+      days: [true, true, true, true, true, false, false],
+      active: true
+    };
+
+    onMounted(() => {
+      return firebase
+        .firestore()
+        .collection('users')
+        .doc(window.uid)
+        .get()
+        .then(snapshot => {
+          const userData = { ...snapshot.data() };
+          times.value = [...userData.times];
+        });
+    });
+
+    const addTime = () => {
+      times.value.push(newTime);
+      isNewTime.value = true;
+      updateServer();
+    };
+
+    const updateServer = () => {
+      return firebase
+        .firestore()
+        .collection('users')
+        .doc(window.uid)
+        .set(
+          {
+            times: [...times.value]
+          },
+          { merge: true }
+        );
+    };
+
+    const onDeleteTime = id => {
+      const time = times.value[id];
+      $delete(times.value, id);
+      updateServer();
+    };
 
     const onDayChange = (index, id) => {
       const time = times.value[id];
@@ -62,6 +90,7 @@ export default {
         days: [...days]
       };
       $set(times.value, id, newTime);
+      updateServer();
     };
 
     const onStartTimeChange = (id, start) => {
@@ -70,6 +99,7 @@ export default {
         start
       };
       $set(times.value, id, newTime);
+      updateServer();
     };
 
     const onEndTimeChange = (id, end) => {
@@ -78,6 +108,7 @@ export default {
         end
       };
       $set(times.value, id, newTime);
+      updateServer();
     };
 
     const onActiveToggle = id => {
@@ -87,6 +118,7 @@ export default {
         active: !active
       };
       $set(times.value, id, newTime);
+      updateServer();
     };
 
     return {
@@ -95,7 +127,9 @@ export default {
       onStartTimeChange,
       onDayChange,
       addTime,
-      times
+      times,
+      isNewTime,
+      onDeleteTime
     };
   },
   components: {
