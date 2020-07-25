@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Button from '@/components/core/Button/Button';
+import Button from '@/components/core/Button';
 
 export default {
   name: 'BackButton',

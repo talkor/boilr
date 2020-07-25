@@ -11,8 +11,8 @@
 <script>
 import { ref } from '@vue/composition-api';
 import QRScanner from '@/components/QRScanner/QRScanner';
-import BackButton from '@/components/core/BackButton/BackButton';
-import Title from '@/components/core/Title/Title';
+import BackButton from '@/components/core/BackButton';
+import Title from '@/components/core/Title';
 
 export default {
   setup() {

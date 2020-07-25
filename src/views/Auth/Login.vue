@@ -11,7 +11,7 @@
 import GoogleSignInButton from '@/components/SignInButtons/GoogleSignInButton';
 import EmailSignInButton from '@/components/SignInButtons/EmailSignInButton';
 import RegisterButton from '@/components/SignInButtons/RegisterButton';
-import Title from '@/components/core/Title/Title';
+import Title from '@/components/core/Title';
 
 export default {
   components: {

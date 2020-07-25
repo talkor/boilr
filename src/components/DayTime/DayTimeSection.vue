@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import Toggle from '@/components/core/Toggle/Toggle';
-import Button from '@/components/core/Button/Button';
+import Toggle from '@/components/core/Toggle';
+import Button from '@/components/core/Button';
 import TimePicker from '@/components/DayTime/TimePicker';
 import DayPicker from '@/components/DayTime/DayPicker';
 import { ref } from '@vue/composition-api';
