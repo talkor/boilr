@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div class="view-container">
-      <div :class="{ 'time-container': true, disabled: !active }" @click="onClick">
+      <div
+        :class="{ 'time-container': true, disabled: !active }"
+        @click="onClick"
+      >
         <div class="time">
           <span>{{ start }}</span> -
           <span>{{ end }}</span>
@@ -26,7 +29,12 @@
             @timeChange="onStartTimeChange"
             class="time-picker"
           />
-          <TimePicker label="End" :time="end" @timeChange="onEndTimeChange" class="time-picker" />
+          <TimePicker
+            label="End"
+            :time="end"
+            @timeChange="onEndTimeChange"
+            class="time-picker"
+          />
         </div>
         <DayPicker :days="days" @dayChange="onDayChange" />
       </div>
