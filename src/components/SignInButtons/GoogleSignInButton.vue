@@ -13,7 +13,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import Button from '@/components/core/Button/Button';
+import Button from '@/components/core/Button';
 
 export default {
   setup(props, { root }) {

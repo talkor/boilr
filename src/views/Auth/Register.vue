@@ -29,10 +29,10 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import { reactive } from '@vue/composition-api';
-import TextBox from '@/components/core/TextBox/TextBox';
-import Button from '@/components/core/Button/Button';
-import BackButton from '@/components/core/BackButton/BackButton';
-import Title from '@/components/core/Title/Title';
+import TextBox from '@/components/core/TextBox';
+import Button from '@/components/core/Button';
+import BackButton from '@/components/core/BackButton';
+import Title from '@/components/core/Title';
 
 export default {
   name: 'Register',

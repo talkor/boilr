@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Title from '@/components/core/Title/Title';
+import Title from '@/components/core/Title';
 
 export default {
   components: {

@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import Title from '@/components/core/Title/Title';
-import Button from '@/components/core/Button/Button';
-import Divider from '@/components/core/Divider/Divider';
+import Title from '@/components/core/Title';
+import Button from '@/components/core/Button';
+import Divider from '@/components/core/Divider';
 import DayTimeSection from '@/components/DayTime/DayTimeSection';
 import { ref, onMounted } from '@vue/composition-api';
 import * as firebase from 'firebase/app';

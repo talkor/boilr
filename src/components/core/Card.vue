@@ -3,16 +3,15 @@
     <h3 class="card-title">{{ label }}</h3>
     <div class="card-container">
       <span class="card-number">{{ dataLabel }}</span>
-      <Icon v-if="icon" :name="icon" />
+      <Icon class="card-icon" v-if="icon" :name="icon" />
     </div>
   </div>
 </template>
 
 <script>
-import Icon from '@/components/core/Icon/Icon';
+import Icon from '@/components/core/Icon';
 
 export default {
-  name: 'HomeItem',
   props: {
     icon: String,
     label: String,

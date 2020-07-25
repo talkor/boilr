@@ -2,7 +2,7 @@
   <div class="home">
     <Title text="Boilr" />
     <section class="cards">
-      <HomeItem
+      <Card
         v-for="(homeItem, index) in homeData"
         :key="index"
         :label="homeItem.label"
@@ -10,20 +10,24 @@
         :icon="homeItem.icon"
       />
     </section>
-    <section class="switch-container">
-      <div class="switch">
+    <section class="switch">
+      <div class="switch-button">
         <Icon class="switch-icon" name="power-off" />
       </div>
+    </section>
+    <section class="shower">
+      <Button icon="shower" text="Start Shower" />
     </section>
   </div>
 </template>
 
 <script>
 import * as firebase from 'firebase/app';
-import HomeItem from './HomeItem';
+import Card from '@/components/core/Card';
 import 'firebase/firestore';
-import Title from '@/components/core/Title/Title';
-import Icon from '@/components/core/Icon/Icon';
+import Title from '@/components/core/Title';
+import Icon from '@/components/core/Icon';
+import Button from '@/components/core/Button';
 import { onMounted } from '@vue/composition-api';
 
 export default {
@@ -66,21 +70,22 @@ export default {
   components: {
     Title,
     Icon,
-    HomeItem
+    Card,
+    Button
   }
 };
 </script>
 <style scoped lang="scss">
-.switch-container {
+.switch {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 30px;
 
-  .switch {
+  .switch-button {
     border: 1px solid #c2c2c2;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -90,6 +95,10 @@ export default {
       font-size: 24px;
     }
   }
+}
+
+.shower {
+  margin-top: 20px;
 }
 
 .cards {

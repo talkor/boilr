@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Icon from '@/components/core/Icon/Icon';
+import Icon from '@/components/core/Icon';
 
 export default {
   name: 'NavbarItem',

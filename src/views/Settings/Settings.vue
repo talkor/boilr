@@ -8,7 +8,7 @@
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import Title from '@/components/core/Title/Title';
+import Title from '@/components/core/Title';
 import List from '@/components/List/List';
 import { reactive } from '@vue/composition-api';
 
