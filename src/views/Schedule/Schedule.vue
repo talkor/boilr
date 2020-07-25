@@ -76,7 +76,6 @@ export default {
     };
 
     const onDeleteTime = id => {
-      const time = times.value[id];
       $delete(times.value, id);
       updateServer();
     };
