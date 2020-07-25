@@ -2,7 +2,7 @@
   <div class="schedule">
     <div class="title-container">
       <Title text="Schedule" />
-      <Button @click="addTime" text="Add Time" />
+      <Button @click="addTime" icon="plus" size="small" />
     </div>
     <div class="time" v-for="(time, index) in times" :key="index">
       <DayTimeSection
