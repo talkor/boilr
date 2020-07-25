@@ -16,7 +16,8 @@
       </div>
     </section>
     <section class="shower">
-      <Button icon="shower" text="Start Shower" />
+      <Button icon="shower" size="medium" text="Start Shower" />
+      <ConnectToSpotify />
     </section>
   </div>
 </template>
@@ -28,6 +29,7 @@ import 'firebase/firestore';
 import Title from '@/components/core/Title';
 import Icon from '@/components/core/Icon';
 import Button from '@/components/core/Button';
+import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
 import { onMounted } from '@vue/composition-api';
 
 export default {
@@ -71,7 +73,8 @@ export default {
     Title,
     Icon,
     Card,
-    Button
+    Button,
+    ConnectToSpotify
   }
 };
 </script>
