@@ -39,4 +39,9 @@ export default {
   }
 };
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss">
+.field.time-picker .label {
+  text-align: start;
+  font-size: 14px;
+}
+</style>

@@ -15,7 +15,7 @@ export default {
 <style scoped lang="scss">
 h1.title {
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-size: 24px;
   text-align: left;
 }

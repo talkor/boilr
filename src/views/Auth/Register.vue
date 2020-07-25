@@ -63,14 +63,15 @@ export default {
           .auth()
           .createUserWithEmailAndPassword(form.email, form.password)
           .then(data => {
+            const { email, name, uid } = data.user;
             firebase
               .firestore()
               .collection('users')
-              .doc(data.user.uid)
+              .doc(uid)
               .set({
-                name: 'talkor',
-                email: data.user.email,
-                uid: data.user.uid
+                name,
+                email,
+                uid
               });
           });
         router.replace({ name: 'Home' });
