@@ -100,6 +100,7 @@ export default {
     };
 
     const onDelete = () => {
+      showEdit.value = false;
       emit('delete', id);
     };
 
@@ -142,7 +143,7 @@ export default {
   }
 
   .edit-container {
-    transition: 0.2s ease-in;
+    transition: all 0.2s ease-in;
 
     .time-pickers {
       display: flex;
