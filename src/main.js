@@ -33,6 +33,9 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+// Temp uid for testing
+window.uid = '0UfcIqqRdwfWYF6AbrM7BsUkXBK2';
+
 let app;
 
 firebase.auth().onAuthStateChanged(() => {
