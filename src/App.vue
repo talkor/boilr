@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view :userData="userData" class="app-content" />
+    <router-view class="app-content" />
     <Navbar />
   </div>
 </template>
