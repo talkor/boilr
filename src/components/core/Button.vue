@@ -5,6 +5,7 @@
     :icon-left="icon"
     :class="{ main: true, 'no-border': noBorder, 'no-padding': noPadding }"
     :rounded="rounded"
+    :icon-pack="iconPack"
   >
     <span v-if="text" class="button-content">
       <slot></slot>
@@ -25,6 +26,10 @@ export default {
     rounded: {
       type: Boolean,
       default: true
+    },
+    iconPack: {
+      type: String,
+      default: 'fa'
     }
   },
   setup(props, { emit }) {

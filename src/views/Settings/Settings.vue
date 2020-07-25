@@ -26,6 +26,11 @@ export default {
               action: () => {}
             },
             {
+              label: 'Shower settings',
+              icon: 'shower',
+              action: () => {}
+            },
+            {
               label: 'Energy Points',
               icon: 'lightbulb',
               action: () => {}
