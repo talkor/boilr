@@ -6,7 +6,6 @@ import store from './store';
 import VueCompositionApi from '@vue/composition-api';
 import VueMobileDetection from 'vue-mobile-detection';
 import Buefy from 'buefy';
-import 'buefy/dist/buefy.css';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import '@fortawesome/fontawesome-free/css/all.css';

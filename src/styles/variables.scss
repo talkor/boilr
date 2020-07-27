@@ -1,1 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400');
+@import '~bulma/sass/utilities/_all';
+
+$primary: #ef6767;
+$primary-invert: findColorInvert($primary);
+
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+$link-visited: $primary;
+
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
