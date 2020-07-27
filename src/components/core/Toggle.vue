@@ -25,10 +25,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/variables.scss';
+
 .toggle {
   &.switch:hover input[type='checkbox']:checked + .check,
   &.switch input[type='checkbox']:checked + .check {
-    background: #1b9cf1;
+    background: $primary;
   }
 }
 </style>
