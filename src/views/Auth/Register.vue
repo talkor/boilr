@@ -63,7 +63,7 @@ export default {
           .auth()
           .createUserWithEmailAndPassword(form.email, form.password)
           .then(data => {
-            const { email, name, uid } = data.user;
+            const { email, uid } = data.user;
             return firebase
               .firestore()
               .collection('users')
