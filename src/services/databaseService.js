@@ -2,8 +2,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 
 export const getData = ({ collection, doc }) => {
-  return firebase
-    .firestore()
+  return db()
     .collection(collection)
     .doc(doc)
     .get()
@@ -13,14 +12,12 @@ export const getData = ({ collection, doc }) => {
 };
 
 export const postData = ({ collection, doc, data, merge = true }) => {
-  return firebase
-    .firestore()
+  return db()
     .collection(collection)
     .doc(doc)
-    .set(
-      {
-        ...data
-      },
-      { merge }
-    );
+    .set({ ...data }, { merge });
+};
+
+const db = () => {
+  return firebase.firestore();
 };
