@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Login from '../views/Auth/Login.vue';
-import EmailLogin from '../views/Auth/EmailLogin.vue';
-import Register from '../views/Auth/Register.vue';
-import Home from '../views/Home/Home.vue';
-import Statistics from '../views/Statistics/Statistics.vue';
-import Schedule from '../views/Schedule/Schedule.vue';
-import Settings from '../views/Settings/Settings.vue';
-import Device from '../views/Settings/Device.vue';
+import Login from '@/views/Auth/Login';
+import EmailLogin from '@/views/Auth/EmailLogin';
+import Register from '@/views/Auth/Register';
+import Home from '@/views/Home/Home';
+import Statistics from '@/views/Statistics/Statistics';
+import Schedule from '@/views/Schedule/Schedule';
+import Settings from '@/views/Settings/Settings';
+import Device from '@/views/Settings/Device';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
