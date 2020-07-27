@@ -7,25 +7,25 @@
 
 <script>
 import Navbar from '@/components/Navbar/Navbar';
-import { onMounted, ref } from '@vue/composition-api';
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
+import { ref } from '@vue/composition-api';
+// import * as firebase from 'firebase/app';
+// import 'firebase/firestore';
 
 export default {
   name: 'Home',
   setup() {
     const userData = ref({});
 
-    onMounted(() => {
-      return firebase
-        .firestore()
-        .collection('users')
-        .doc('0UfcIqqRdwfWYF6AbrM7BsUkXBK2')
-        .get()
-        .then(snapshot => {
-          userData.value = { ...snapshot.data() };
-        });
-    });
+    // onMounted(() => {
+    //   return firebase
+    //     .firestore()
+    //     .collection('users')
+    //     .doc('0UfcIqqRdwfWYF6AbrM7BsUkXBK2')
+    //     .get()
+    //     .then(snapshot => {
+    //       userData.value = { ...snapshot.data() };
+    //     });
+    // });
 
     return { userData };
   },
