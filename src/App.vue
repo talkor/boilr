@@ -36,6 +36,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/variables.scss';
+
 html,
 body {
   height: 100%;
