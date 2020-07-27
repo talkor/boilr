@@ -29,8 +29,7 @@ import Button from '@/components/core/Button';
 import Divider from '@/components/core/Divider';
 import DayTimeSection from '@/components/DayTime/DayTimeSection';
 import { ref, onMounted } from '@vue/composition-api';
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
+import { getDeviceData, postDeviceData } from '@/services/deviceService';
 
 export default {
   setup(_, { root: { $set, $delete } }) {
@@ -44,16 +43,9 @@ export default {
       active: true
     };
 
-    onMounted(() => {
-      return firebase
-        .firestore()
-        .collection('users')
-        .doc(window.uid)
-        .get()
-        .then(snapshot => {
-          const userData = { ...snapshot.data() };
-          times.value = [...userData.times];
-        });
+    onMounted(async () => {
+      const deviceData = await getDeviceData();
+      times.value = [...deviceData.times];
     });
 
     const addTime = () => {
@@ -63,16 +55,7 @@ export default {
     };
 
     const updateServer = () => {
-      return firebase
-        .firestore()
-        .collection('users')
-        .doc(window.uid)
-        .set(
-          {
-            times: [...times.value]
-          },
-          { merge: true }
-        );
+      postDeviceData({ times: [...times.value] });
     };
 
     const onDeleteTime = id => {

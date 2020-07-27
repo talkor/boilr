@@ -59,19 +59,20 @@ export default {
 
     const onRegister = async () => {
       try {
-        firebase
+        await firebase
           .auth()
           .createUserWithEmailAndPassword(form.email, form.password)
           .then(data => {
             const { email, name, uid } = data.user;
-            firebase
+            return firebase
               .firestore()
               .collection('users')
               .doc(uid)
               .set({
-                name,
+                name: form.name,
                 email,
-                uid
+                uid,
+                device: 'mhXWbGB4UxIdOPqeoOJz'
               });
           });
         router.replace({ name: 'Home' });

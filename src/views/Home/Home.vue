@@ -33,6 +33,7 @@ import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
 import { onMounted } from '@vue/composition-api';
 
 export default {
+  name: 'Home',
   setup() {
     onMounted(() => {
       firebase
