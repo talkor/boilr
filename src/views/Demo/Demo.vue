@@ -29,8 +29,6 @@ export default {
       waveOffset: 0.25,
       textVertPosition: 0.5,
       textSize: 0.6,
-      valueCountUp: true,
-      displayPercent: true,
       textColor: '#045681',
       waveTextColor: '#A4DBf8'
     });
@@ -54,38 +52,14 @@ export default {
         .domain([0, 50, 100]);
 
       const textPixels = (config.textSize * radius) / 2;
-      const textFinalValue = parseFloat(value).toFixed(2);
-      const textStartValue = config.valueCountUp
-        ? config.minValue
-        : textFinalValue;
-      const percentText = config.displayPercent ? '%' : '';
       const circleThickness = config.circleThickness * radius;
       const circleFillGap = config.circleFillGap * radius;
       const fillCircleMargin = circleThickness + circleFillGap;
       const fillCircleRadius = radius - fillCircleMargin;
       const waveHeight = fillCircleRadius * waveHeightScale(fillPercent * 100);
-
       const waveLength = (fillCircleRadius * 2) / config.waveCount;
       const waveClipCount = 1 + config.waveCount;
       const waveClipWidth = waveLength * waveClipCount;
-
-      let textRounder = function(value) {
-        return Math.round(value);
-      };
-      if (
-        parseFloat(textFinalValue) != parseFloat(textRounder(textFinalValue))
-      ) {
-        textRounder = function(value) {
-          return parseFloat(value).toFixed(1);
-        };
-      }
-      if (
-        parseFloat(textFinalValue) != parseFloat(textRounder(textFinalValue))
-      ) {
-        textRounder = function(value) {
-          return parseFloat(value).toFixed(2);
-        };
-      }
 
       const data = [];
       for (let i = 0; i <= 40 * waveClipCount; i++) {
@@ -149,22 +123,6 @@ export default {
         .style('fill', config.circleColor)
         .attr('transform', 'translate(' + radius + ',' + radius + ')');
 
-      const text1 = gaugeGroup
-        .append('text')
-        .text(textRounder(textStartValue) + percentText)
-        .attr('class', 'liquidFillGaugeText')
-        .attr('text-anchor', 'middle')
-        .attr('font-size', textPixels + 'px')
-        .style('fill', config.textColor)
-        .attr(
-          'transform',
-          'translate(' +
-            radius +
-            ',' +
-            textRiseScaleY(config.textVertPosition) +
-            ')'
-        );
-
       const clipArea = d3.svg
         .area()
         .x(function(d) {
@@ -201,9 +159,9 @@ export default {
         .attr('r', fillCircleRadius)
         .style('fill', config.waveColor);
 
-      const text2 = fillCircleGroup
+      fillCircleGroup
         .append('text')
-        .text(textRounder(textStartValue) + percentText)
+        .text('50' + '°C')
         .attr('class', 'liquidFillGaugeText')
         .attr('text-anchor', 'middle')
         .attr('font-size', textPixels + 'px')
@@ -216,23 +174,6 @@ export default {
             textRiseScaleY(config.textVertPosition) +
             ')'
         );
-
-      if (config.valueCountUp) {
-        const textTween = function() {
-          const i = d3.interpolate(this.textContent, textFinalValue);
-          return function(t) {
-            this.textContent = textRounder(i(t)) + percentText;
-          };
-        };
-        text1
-          .transition()
-          .duration(config.waveRiseTime)
-          .tween('text', textTween);
-        text2
-          .transition()
-          .duration(config.waveRiseTime)
-          .tween('text', textTween);
-      }
 
       const waveGroupXPosition =
         fillCircleMargin + fillCircleRadius * 2 - waveClipWidth;
