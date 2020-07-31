@@ -31,10 +31,11 @@ export default {
     const showScanner = ref(false);
 
     const onDecode = decodedString => {
-      message.value = decodedString;
-      deviceId.value = decodedString;
+      const newDeviceId = `${decodedString}`;
+      message.value = newDeviceId;
+      deviceId.value = newDeviceId;
       showScanner.value = false;
-      postUserData({ device: deviceId });
+      postUserData({ device: newDeviceId });
     };
 
     const onError = errorStr => {
