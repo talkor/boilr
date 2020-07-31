@@ -4,6 +4,7 @@ import Login from '@/views/Auth/Login';
 import EmailLogin from '@/views/Auth/EmailLogin';
 import Register from '@/views/Auth/Register';
 import Home from '@/views/Home/Home';
+import Shower from '@/views/Home/Shower';
 import Statistics from '@/views/Statistics/Statistics';
 import Schedule from '@/views/Schedule/Schedule';
 import Settings from '@/views/Settings/Settings';
@@ -19,6 +20,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/shower',
+    name: 'Shower',
+    component: Shower,
     meta: {
       requiresAuth: true
     }
