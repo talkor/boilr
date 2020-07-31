@@ -1,31 +1,34 @@
 <template>
   <div id="app">
-    <router-view class="app-content" />
+    <transition mode="out-in">
+      <router-view :userData="userData" class="app-content" />
+    </transition>
     <Navbar />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar/Navbar';
-import { ref } from '@vue/composition-api';
-// import * as firebase from 'firebase/app';
-// import 'firebase/firestore';
+import { ref, onMounted } from '@vue/composition-api';
+import { getUserData } from '@/services/userService';
 
 export default {
   name: 'Home',
-  setup() {
+  setup(_, { root }) {
+    const router = root.$router;
     const userData = ref({});
 
-    // onMounted(() => {
-    //   return firebase
-    //     .firestore()
-    //     .collection('users')
-    //     .doc('0UfcIqqRdwfWYF6AbrM7BsUkXBK2')
-    //     .get()
-    //     .then(snapshot => {
-    //       userData.value = { ...snapshot.data() };
-    //     });
-    // });
+    router.beforeEach = (to, from, next) => {
+      const toDepth = to.path.split('/').length;
+      const fromDepth = from.path.split('/').length;
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+      next();
+    };
+
+    onMounted(async () => {
+      const data = await getUserData();
+      userData.value = { ...data };
+    });
 
     return { userData };
   },
@@ -81,5 +84,16 @@ body {
   input {
     box-shadow: none;
   }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 2s, transform 1s;
+}
+
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-10%);
 }
 </style>
