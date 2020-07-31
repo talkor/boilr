@@ -19,7 +19,7 @@ export default {
     const message = ref('Scanning...');
     const showDecode = ref(true);
 
-    const onDecode = decodedString => {
+    const onDecode = (decodedString) => {
       message.value = decodedString;
       showDecode.value = false;
     };

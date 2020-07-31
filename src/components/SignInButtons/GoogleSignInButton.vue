@@ -1,5 +1,11 @@
 <template>
-  <Button class="google-button" rounded @click="onLogin" size="medium" text="Sign In With Google">
+  <Button
+    class="google-button"
+    rounded
+    @click="onLogin"
+    size="medium"
+    text="Sign In With Google"
+  >
     <img src="../../assets/google.svg" class="google-icon" />
   </Button>
 </template>
@@ -20,7 +26,7 @@ export default {
         await firebase
           .auth()
           .signInWithPopup(googleProvider)
-          .then(async data => {
+          .then(async (data) => {
             const { email, uid, displayName } = data.user;
             const newUser = await isNewUser(uid);
 
@@ -43,7 +49,7 @@ export default {
       }
     };
 
-    const isNewUser = async uid => {
+    const isNewUser = async (uid) => {
       const userData = await getData({ collection: 'users', doc: uid });
       if (userData.uid) {
         return false;
