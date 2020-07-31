@@ -272,7 +272,7 @@ export default {
 
     onMounted(async () => {
       loadLiquidFillGauge('gauge', 80);
-      watchDevice(data => {
+      watchDevice({ device: 'mhXWbGB4UxIdOPqeoOJz' }, data => {
         active.value = data.active;
       });
     });

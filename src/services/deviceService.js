@@ -11,7 +11,11 @@ export const postDeviceData = async data => {
   return postData({ collection: 'devices', doc: device, data });
 };
 
-export const watchDevice = async (callback = () => {}) => {
-  const { device } = await getUserData();
-  return watchData({ collection: 'devices', doc: device }, callback);
+export const watchDevice = async ({ device }, callback = () => {}) => {
+  let deviceId = device;
+  if (!deviceId) {
+    const { device } = await getUserData();
+    deviceId = device;
+  }
+  return watchData({ collection: 'devices', doc: deviceId }, callback);
 };
