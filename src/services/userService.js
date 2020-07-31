@@ -1,5 +1,5 @@
 import { getUserUid } from '@/services/authService';
-import { getData } from '@/services/databaseService';
+import { getData, postData } from '@/services/databaseService';
 
 export const getUserData = async () => {
   const userUid = await getUserUid();
@@ -7,4 +7,12 @@ export const getUserData = async () => {
     return;
   }
   return getData({ collection: 'users', doc: userUid });
+};
+
+export const postUserData = async data => {
+  const userUid = await getUserUid();
+  if (!userUid) {
+    return;
+  }
+  return postData({ collection: 'users', doc: userUid, data });
 };
