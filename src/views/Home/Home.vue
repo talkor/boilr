@@ -31,7 +31,7 @@ import 'firebase/firestore';
 import Title from '@/components/core/Title';
 import Button from '@/components/core/Button';
 import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
-import { ref, onMounted } from '@vue/composition-api';
+import { ref } from '@vue/composition-api';
 import { watchDevice, postDeviceData } from '@/services/deviceService';
 
 export default {
