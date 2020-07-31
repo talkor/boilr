@@ -11,14 +11,12 @@
       />
     </section>
     <section class="switch-container">
-      <div :class="{ switch: true, active: active }">
-        <Button
-          @click="onClick"
-          class="switch-button"
-          icon="power-off"
-          :noBorder="true"
-        />
-      </div>
+      <Button
+        @click="onSwitchClick"
+        :class="{ 'switch-button': true, active: active }"
+        icon="power-off"
+        :noBorder="true"
+      />
     </section>
     <section class="shower">
       <Button icon="shower" size="medium" text="Start Shower" />
@@ -33,7 +31,7 @@ import 'firebase/firestore';
 import Title from '@/components/core/Title';
 import Button from '@/components/core/Button';
 import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import { watchDevice, postDeviceData } from '@/services/deviceService';
 
 export default {
@@ -67,16 +65,17 @@ export default {
       }
     ];
 
-    watchDevice(data => {
+    watchDevice({}, data => {
       active.value = data.active;
     });
 
-    const onClick = () => {
+    const onSwitchClick = () => {
       postDeviceData({ active: !active.value });
+      active.value = !active.value;
     };
 
     return {
-      onClick,
+      onSwitchClick,
       homeData,
       active
     };
@@ -96,26 +95,16 @@ export default {
   justify-content: center;
   margin-top: 30px;
 
-  .switch {
-    border: 1px solid #c2c2c2;
+  .switch-button {
+    font-size: 24px;
+    background: none;
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     &.active {
+      color: #ffffff;
       background-color: rgb(247, 117, 117);
-
-      .switch-button {
-        color: #ffffff;
-      }
-    }
-
-    .switch-button {
-      font-size: 24px;
-      background: none;
     }
   }
 }
