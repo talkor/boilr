@@ -33,7 +33,7 @@ export default {
     }
   },
   setup(props, { emit }) {
-    const onClick = event => {
+    const onClick = (event) => {
       emit('click', event);
     };
 

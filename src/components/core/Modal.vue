@@ -5,7 +5,7 @@
     :active.sync="isActive"
     :full-screen="false"
   >
-    <div class="modal-card" style="width: auto">
+    <div class="modal-card" style="width: auto;">
       <header class="modal-card-head">
         <p class="modal-card-title">Edit time</p>
       </header>

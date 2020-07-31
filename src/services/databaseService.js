@@ -6,7 +6,7 @@ export const getData = ({ collection, doc }) => {
     .collection(collection)
     .doc(doc)
     .get()
-    .then(snapshot => {
+    .then((snapshot) => {
       return { ...snapshot.data() };
     });
 };

@@ -36,11 +36,11 @@ export default {
       password: ''
     });
 
-    const onEmailChange = value => {
+    const onEmailChange = (value) => {
       form.email = value;
     };
 
-    const onPasswordChange = value => {
+    const onPasswordChange = (value) => {
       form.password = value;
     };
 

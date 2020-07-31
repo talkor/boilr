@@ -13,7 +13,7 @@ export default {
   setup({ active }, { emit }) {
     const isActive = ref(active);
 
-    watch(isActive, isActive => {
+    watch(isActive, (isActive) => {
       emit('toggle', isActive);
     });
 
