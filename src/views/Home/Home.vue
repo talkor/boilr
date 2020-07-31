@@ -15,7 +15,6 @@
         @click="onSwitchClick"
         :class="{ 'switch-button': true, active: active }"
         icon="power-off"
-        :noBorder="true"
       />
     </section>
     <section class="shower">
