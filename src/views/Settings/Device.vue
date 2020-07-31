@@ -2,9 +2,11 @@
   <div class="device">
     <BackButton />
     <Title text="My Device" />
-    <div v-if="device">Connected to {{ device }}</div>
-    <Button text="Change device" />
-    <!-- <TextBox type="text" label="Connected device" /> -->
+    <div v-if="deviceId">Connected to {{ deviceId }}</div>
+    <Button
+      @click="onChangeDevice"
+      :text="showScanner ? 'Cancel' : 'Change device'"
+    />
     <QRScanner v-if="showScanner" @decode="onDecode" @error="onError" />
     <div v-if="showScanner" class="message">{{ message }}</div>
   </div>
@@ -16,30 +18,40 @@ import QRScanner from '@/components/QRScanner/QRScanner';
 import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
 import Button from '@/components/core/Button';
+import { postDeviceData } from '@/services/deviceService';
 
 export default {
   props: {
     device: String
   },
   setup({ device }) {
+    const deviceId = ref(device);
+
     const message = ref('Scanning...');
     const showScanner = ref(false);
 
     const onDecode = decodedString => {
       message.value = decodedString;
+      deviceId.value = decodedString;
       showScanner.value = false;
+      postDeviceData({ device: deviceId });
     };
 
     const onError = errorStr => {
       message.value = errorStr;
     };
 
-    console.log(device);
+    const onChangeDevice = () => {
+      showScanner.value = !showScanner.value;
+    };
+
     return {
       onDecode,
       onError,
       message,
-      showScanner
+      showScanner,
+      onChangeDevice,
+      deviceId
     };
   },
   components: {
