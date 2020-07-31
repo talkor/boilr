@@ -13,7 +13,10 @@ import List from '@/components/List/List';
 import { reactive } from '@vue/composition-api';
 
 export default {
-  setup(props, { root }) {
+  props: {
+    userData: Object
+  },
+  setup({ userData }, { root }) {
     const router = root.$router;
     const list = reactive({
       data: [
@@ -44,7 +47,10 @@ export default {
               label: 'My Device',
               icon: 'temperature-high',
               action: () => {
-                router.push({ name: 'Device' });
+                router.push({
+                  name: 'Device',
+                  params: { device: userData.device }
+                });
               }
             },
             {

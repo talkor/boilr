@@ -8,6 +8,7 @@ import Statistics from '@/views/Statistics/Statistics';
 import Schedule from '@/views/Schedule/Schedule';
 import Settings from '@/views/Settings/Settings';
 import Device from '@/views/Settings/Device';
+import Demo from '@/views/Demo/Demo';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -59,7 +60,8 @@ const routes = [
     component: Settings,
     meta: {
       requiresAuth: true
-    }
+    },
+    props: true
   },
   {
     path: '/settings/device',
@@ -67,7 +69,13 @@ const routes = [
     component: Device,
     meta: {
       requiresAuth: true
-    }
+    },
+    props: true
+  },
+  {
+    path: '/demo',
+    name: 'Demo',
+    component: Demo
   }
 ];
 

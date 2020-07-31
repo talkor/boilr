@@ -6,7 +6,7 @@ export const getData = ({ collection, doc }) => {
     .collection(collection)
     .doc(doc)
     .get()
-    .then((snapshot) => {
+    .then(snapshot => {
       return { ...snapshot.data() };
     });
 };
@@ -16,6 +16,15 @@ export const postData = ({ collection, doc, data, merge = true }) => {
     .collection(collection)
     .doc(doc)
     .set({ ...data }, { merge });
+};
+
+export const watchData = ({ collection, doc }, callback) => {
+  return db()
+    .collection(collection)
+    .doc(doc)
+    .onSnapshot(snapshot => {
+      return callback({ ...snapshot.data() });
+    });
 };
 
 const db = () => {

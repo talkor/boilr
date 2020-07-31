@@ -26,7 +26,7 @@ export default {
     newTime.setHours(hours, minutes);
     const value = ref(newTime);
 
-    watch(value, (value) => {
+    watch(value, value => {
       const hours = `${value.getHours()}`.padStart(2, '0');
       const minutes = `${value.getMinutes()}`.padStart(2, '0');
       const newTime = `${hours}:${minutes}`;

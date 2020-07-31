@@ -27,7 +27,7 @@ export default {
     const loggedIn = ref(false);
 
     onMounted(() => {
-      firebase.auth().onAuthStateChanged((user) => {
+      firebase.auth().onAuthStateChanged(user => {
         if (user) {
           loggedIn.value = true;
         } else {
@@ -36,16 +36,16 @@ export default {
       });
     });
 
-    const setActive = (item) => {
+    const setActive = item => {
       activeItem.value = item;
     };
 
-    const isActive = (item) => {
+    const isActive = item => {
       return activeItem.value === item;
     };
 
     const navbarItems = computed(() => {
-      return navbarData.filter((item) => item.mobileOnly !== true);
+      return navbarData.filter(item => item.mobileOnly !== true);
     });
 
     const navbarData = [

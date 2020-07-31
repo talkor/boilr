@@ -26,7 +26,7 @@ export default {
         await firebase
           .auth()
           .signInWithPopup(googleProvider)
-          .then(async (data) => {
+          .then(async data => {
             const { email, uid, displayName } = data.user;
             const newUser = await isNewUser(uid);
 
@@ -49,7 +49,7 @@ export default {
       }
     };
 
-    const isNewUser = async (uid) => {
+    const isNewUser = async uid => {
       const userData = await getData({ collection: 'users', doc: uid });
       if (userData.uid) {
         return false;

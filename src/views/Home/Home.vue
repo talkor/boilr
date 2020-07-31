@@ -10,9 +10,14 @@
         :icon="homeItem.icon"
       />
     </section>
-    <section class="switch">
-      <div class="switch-button">
-        <Icon class="switch-icon" name="power-off" />
+    <section class="switch-container">
+      <div :class="{ switch: true, active: active }">
+        <Button
+          @click="onClick"
+          class="switch-button"
+          icon="power-off"
+          :noBorder="true"
+        />
       </div>
     </section>
     <section class="shower">
@@ -23,24 +28,22 @@
 </template>
 
 <script>
-import * as firebase from 'firebase/app';
 import Card from '@/components/core/Card';
 import 'firebase/firestore';
 import Title from '@/components/core/Title';
-import Icon from '@/components/core/Icon';
 import Button from '@/components/core/Button';
 import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
-import { onMounted } from '@vue/composition-api';
+import { ref } from '@vue/composition-api';
+import { watchDevice, postDeviceData } from '@/services/deviceService';
 
 export default {
   name: 'Home',
+  props: {
+    userData: Object
+  },
   setup() {
-    onMounted(() => {
-      firebase.firestore().collection('users').get();
-      // .then(snapshot => {
-      //   snapshot.forEach(doc => console.log(doc.data()));
-      // });
-    });
+    const active = ref(false);
+
     const homeData = [
       {
         label: 'Temperatue',
@@ -63,13 +66,23 @@ export default {
         icon: 'tint'
       }
     ];
+
+    watchDevice(data => {
+      active.value = data.active;
+    });
+
+    const onClick = () => {
+      postDeviceData({ active: !active.value });
+    };
+
     return {
-      homeData
+      onClick,
+      homeData,
+      active
     };
   },
   components: {
     Title,
-    Icon,
     Card,
     Button,
     ConnectToSpotify
@@ -77,13 +90,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.switch {
+.switch-container {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 30px;
 
-  .switch-button {
+  .switch {
     border: 1px solid #c2c2c2;
     width: 100px;
     height: 100px;
@@ -92,8 +105,17 @@ export default {
     justify-content: center;
     align-items: center;
 
-    .switch-icon {
+    &.active {
+      background-color: rgb(247, 117, 117);
+
+      .switch-button {
+        color: #ffffff;
+      }
+    }
+
+    .switch-button {
       font-size: 24px;
+      background: none;
     }
   }
 }

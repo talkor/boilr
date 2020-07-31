@@ -2,9 +2,11 @@
   <div class="device">
     <BackButton />
     <Title text="My Device" />
-
-    <QRScanner v-if="showDecode" @decode="onDecode" />
-    <div>{{ message }}</div>
+    <div v-if="device">Connected to {{ device }}</div>
+    <Button text="Change device" />
+    <!-- <TextBox type="text" label="Connected device" /> -->
+    <QRScanner v-if="showScanner" @decode="onDecode" @error="onError" />
+    <div v-if="showScanner" class="message">{{ message }}</div>
   </div>
 </template>
 
@@ -13,29 +15,44 @@ import { ref } from '@vue/composition-api';
 import QRScanner from '@/components/QRScanner/QRScanner';
 import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
+import Button from '@/components/core/Button';
 
 export default {
-  setup() {
+  props: {
+    device: String
+  },
+  setup({ device }) {
     const message = ref('Scanning...');
-    const showDecode = ref(true);
+    const showScanner = ref(false);
 
-    const onDecode = (decodedString) => {
+    const onDecode = decodedString => {
       message.value = decodedString;
-      showDecode.value = false;
+      showScanner.value = false;
     };
 
+    const onError = errorStr => {
+      message.value = errorStr;
+    };
+
+    console.log(device);
     return {
       onDecode,
+      onError,
       message,
-      showDecode
+      showScanner
     };
   },
   components: {
     QRScanner,
     BackButton,
-    Title
+    Title,
+    Button
   }
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.message {
+  margin-block-start: 20px;
+}
+</style>
