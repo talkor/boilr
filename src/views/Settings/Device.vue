@@ -18,7 +18,7 @@ import QRScanner from '@/components/QRScanner/QRScanner';
 import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
 import Button from '@/components/core/Button';
-import { postDeviceData } from '@/services/deviceService';
+import { postUserData } from '@/services/userService';
 
 export default {
   props: {
@@ -34,7 +34,7 @@ export default {
       message.value = decodedString;
       deviceId.value = decodedString;
       showScanner.value = false;
-      postDeviceData({ device: deviceId });
+      postUserData({ device: deviceId });
     };
 
     const onError = errorStr => {
