@@ -1,7 +1,13 @@
 <template>
   <div class="demo">
-    <svg id="gauge" width="97%" height="400px"></svg>
-    <img src="../../assets/qr.png" />
+    <div class="demo-container">
+      <svg id="gauge" width="97%" height="400px"></svg>
+      <div class="power">
+        <span :class="{ led: true, active: active }" />Power
+        {{ active ? 'ON' : 'OFF' }}
+      </div>
+    </div>
+    <img class="barcode" src="../../assets/qr.png" />
   </div>
 </template>
 
@@ -19,18 +25,18 @@ export default {
       maxValue: 100,
       circleThickness: 0.05,
       circleFillGap: 0.05,
-      circleColor: '#178BCA',
+      circleColor: '#FF7777',
       waveHeight: 0.1,
       waveCount: 3,
       waveRiseTime: 1000,
-      waveAnimateTime: 1000,
+      waveAnimateTime: 2000,
       waveAnimate: true,
-      waveColor: '#178BCA',
+      waveColor: '#FFDDDD',
       waveOffset: 0.25,
       textVertPosition: 0.5,
       textSize: 0.6,
-      textColor: '#045681',
-      waveTextColor: '#A4DBf8'
+      textColor: '#553300',
+      waveTextColor: '#FF7777'
     });
 
     const loadLiquidFillGauge = (elementId, value) => {
@@ -218,9 +224,7 @@ export default {
       });
     });
 
-    const onMove = () => {};
     return {
-      onMove,
       active
     };
   }
@@ -232,5 +236,36 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .demo-container {
+    width: 50%;
+  }
+
+  .barcode {
+    position: relative;
+    top: -50px;
+  }
+
+  .led {
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgb(92, 92, 92);
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 10px;
+
+    &.active {
+      background-color: #ff5c5c;
+      border: none;
+      box-shadow: 0px 0px 3px 3px rgba(255, 119, 119, 0.5);
+    }
+  }
+
+  .power {
+    font-size: 20px;
+    width: 200px;
+    margin: 20px auto;
+    padding: 15px;
+  }
 }
 </style>
