@@ -18,13 +18,13 @@ exports.handler = async (event, context, callback) => {
     .doc('mhXWbGB4UxIdOPqeoOJz')
     .set({ active: true }, { merge: true });
 
-  runTimer();
+  runTimer(time);
   console.log('timer finished');
 
   await db
-  .collection('devices')
-  .doc('mhXWbGB4UxIdOPqeoOJz')
-  .set({ active: false }, { merge: true });
+    .collection('devices')
+    .doc('mhXWbGB4UxIdOPqeoOJz')
+    .set({ active: false }, { merge: true });
 
   return callback(null, {
     statusCode: 200,
@@ -34,12 +34,12 @@ exports.handler = async (event, context, callback) => {
   });
 };
 
-function runTimer() {
+function runTimer(time) {
   time = time - 1;
 
   console.log('tick', time);
 
   if (time) {
-    setTimeout(runTimer, 60 * 1000);
+    setTimeout(runTimer, time 60 * 1000);
   }
 }
