@@ -40,6 +40,6 @@ function runTimer(time) {
   console.log('tick', time);
 
   if (time) {
-    setTimeout(runTimer, time 60 * 1000);
+    setTimeout(runTimer, time, 60 * 1000);
   }
 }
