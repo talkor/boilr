@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
     "test:watch": "vue-cli-service test:unit --watchAll",
-    "functions": "cd functions && yarn install"
+    "functions": "cd functions && npm ci"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.13.0",
