@@ -4,21 +4,21 @@
       <Title text="Schedule" />
       <Button @click="addTime" icon="plus" size="small" />
     </div>
-    <div class="time" v-for="(time, index) in times" :key="index">
+    <div class="time" v-for="(item, index) in schedule" :key="index">
       <DayTimeSection
         :id="index"
-        :start="time.start"
-        :end="time.end"
-        :days="time.days"
-        :active="time.active"
+        :time="item.time"
+        :days="item.days"
+        :name="item.name"
+        :active="item.active"
         @dayChange="onDayChange"
-        @startTimeChange="onStartTimeChange"
-        @endTimeChange="onEndTimeChange"
+        @timeChange="onTimeChange"
         @activeToggle="onActiveToggle"
-        :isNewTime="isNewTime"
+        :isNewItem="isNewSchedule"
         @delete="onDeleteTime"
+        :allowEdit="allowEdit(item)"
       />
-      <Divider v-if="index !== times.length - 1" />
+      <Divider v-if="index !== schedule.length - 1" />
     </div>
   </div>
 </template>
@@ -30,88 +30,91 @@ import Divider from '@/components/core/Divider';
 import DayTimeSection from '@/components/DayTime/DayTimeSection';
 import { ref, onMounted } from '@vue/composition-api';
 import { getDeviceData, postDeviceData } from '@/services/deviceService';
+import { getUserData } from '@/services/userService';
 
 export default {
   setup(_, { root: { $set, $delete } }) {
-    const isNewTime = ref(false);
-    const times = ref([]);
-
-    const newTime = {
-      start: '6:00',
-      end: '7:00',
-      days: [true, true, true, true, true, false, false],
-      active: true
+    const isNewSchedule = ref(false);
+    const schedule = ref([]);
+    let userData;
+    let newSchedule = {
+      time: '6:00',
+      days: [true, true, true, true, true, true, true],
+      active: true,
+      name: '',
+      userId: ''
     };
 
     onMounted(async () => {
       const deviceData = await getDeviceData();
-      times.value = [...deviceData.times];
+      userData = await getUserData();
+      schedule.value = [...deviceData.schedule];
+      newSchedule = {
+        ...newSchedule,
+        name: userData.name,
+        userId: userData.uid
+      };
     });
 
     const addTime = () => {
-      times.value.push(newTime);
-      isNewTime.value = true;
+      schedule.value.push(newSchedule);
+      isNewSchedule.value = true;
       updateServer();
     };
 
     const updateServer = () => {
-      postDeviceData({ times: [...times.value] });
+      postDeviceData({ schedule: [...schedule.value] });
     };
 
     const onDeleteTime = id => {
-      $delete(times.value, id);
+      $delete(schedule.value, id);
       updateServer();
     };
 
     const onDayChange = (index, id) => {
-      const time = times.value[id];
+      const time = schedule.value[id];
       let days = time.days;
       days[index] = !days[index];
-      const newTime = {
+      const newSchedule = {
         ...time,
         days: [...days]
       };
-      $set(times.value, id, newTime);
+      $set(schedule.value, id, newSchedule);
       updateServer();
     };
 
-    const onStartTimeChange = (id, start) => {
-      const newTime = {
-        ...times.value[id],
-        start
+    const onTimeChange = (id, time) => {
+      const newSchedule = {
+        ...schedule.value[id],
+        time
       };
-      $set(times.value, id, newTime);
-      updateServer();
-    };
-
-    const onEndTimeChange = (id, end) => {
-      const newTime = {
-        ...times.value[id],
-        end
-      };
-      $set(times.value, id, newTime);
+      $set(schedule.value, id, newSchedule);
       updateServer();
     };
 
     const onActiveToggle = id => {
-      const active = times.value[id].active;
-      const newTime = {
-        ...times.value[id],
+      const active = schedule.value[id].active;
+      const newSchedule = {
+        ...schedule.value[id],
         active: !active
       };
-      $set(times.value, id, newTime);
+      $set(schedule.value, id, newSchedule);
       updateServer();
     };
 
+    const allowEdit = item => {
+      return item.userId === userData.uid;
+    };
+
     return {
-      onEndTimeChange,
       onActiveToggle,
-      onStartTimeChange,
+      onTimeChange,
       onDayChange,
       addTime,
-      times,
-      isNewTime,
-      onDeleteTime
+      schedule,
+      isNewSchedule,
+      onDeleteTime,
+      allowEdit
     };
   },
   components: {

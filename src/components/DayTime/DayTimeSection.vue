@@ -1,14 +1,9 @@
 <template>
   <div class="container">
     <div class="view-container">
-      <div
-        :class="{ 'time-container': true, disabled: !active }"
-        @click="onClick"
-      >
-        <div class="time">
-          <span>{{ start }}</span> -
-          <span>{{ end }}</span>
-        </div>
+      <div :class="{ 'time-container': true, disabled: !active }" @click="onClick">
+        <div class="name">{{ name }}</div>
+        <div class="time">{{ time }}</div>
         <div class="days">
           <span v-for="(day, index) in days" :key="index" class="day">
             <template v-if="days[index]">
@@ -18,23 +13,12 @@
         </div>
       </div>
       <Button v-if="showEdit" icon="trash" size="small" @click="onDelete" />
-      <Toggle v-else vi :active="active" @toggle="onToggle" />
+      <Toggle v-if="allowEdit && !showEdit" :active="active" @toggle="onToggle" />
     </div>
     <transition name="slide">
       <div v-if="showEdit" class="edit-container">
         <div class="time-pickers">
-          <TimePicker
-            label="Start"
-            :time="start"
-            @timeChange="onStartTimeChange"
-            class="time-picker"
-          />
-          <TimePicker
-            label="End"
-            :time="end"
-            @timeChange="onEndTimeChange"
-            class="time-picker"
-          />
+          <TimePicker label="Time" :time="time" @timeChange="onTimeChange" class="time-picker" />
         </div>
         <DayPicker :days="days" @dayChange="onDayChange" />
       </div>
@@ -51,15 +35,16 @@ import { ref } from '@vue/composition-api';
 
 export default {
   props: {
-    start: String,
-    end: String,
+    time: String,
     days: Array,
     active: Boolean,
     id: Number,
-    isNewTime: Boolean
+    isNewSchedule: Boolean,
+    name: String,
+    allowEdit: Boolean
   },
-  setup({ id, isNewTime }, { emit }) {
-    const showEdit = ref(isNewTime);
+  setup({ id, isNewSchedule, allowEdit }, { emit }) {
+    const showEdit = ref(isNewSchedule);
 
     const dayStrings = {
       0: 'Sun',
@@ -73,6 +58,9 @@ export default {
     };
 
     const onClick = () => {
+      if (!allowEdit) {
+        return;
+      }
       showEdit.value = !showEdit.value;
     };
 
@@ -84,12 +72,8 @@ export default {
       emit('dayChange', index, id);
     };
 
-    const onStartTimeChange = value => {
-      emit('startTimeChange', id, value);
-    };
-
-    const onEndTimeChange = value => {
-      emit('endTimeChange', id, value);
+    const onTimeChange = value => {
+      emit('timeChange', id, value);
     };
 
     const onToggle = value => {
@@ -110,8 +94,7 @@ export default {
       dayString,
       showEdit,
       onDayChange,
-      onStartTimeChange,
-      onEndTimeChange,
+      onTimeChange,
       onDelete
     };
   },
@@ -139,6 +122,10 @@ export default {
 
     .time {
       font-size: 24px;
+    }
+
+    .name {
+      font-size: 14px;
     }
   }
 

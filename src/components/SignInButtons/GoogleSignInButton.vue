@@ -1,11 +1,5 @@
 <template>
-  <Button
-    class="google-button"
-    rounded
-    @click="onLogin"
-    size="medium"
-    text="Sign In With Google"
-  >
+  <Button class="google-button" rounded @click="onLogin" size="medium" text="Sign In With Google">
     <img src="../../assets/google.svg" class="google-icon" />
   </Button>
 </template>
