@@ -9,7 +9,7 @@ export const getUserData = async () => {
   return getData({ collection: 'users', doc: userUid });
 };
 
-export const postUserData = async data => {
+export const postUserData = async (data) => {
   const userUid = await getUserUid();
   if (!userUid) {
     return;

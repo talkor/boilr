@@ -6,7 +6,7 @@ export const getDeviceData = async () => {
   return getData({ collection: 'devices', doc: device });
 };
 
-export const postDeviceData = async data => {
+export const postDeviceData = async (data) => {
   const { device } = await getUserData();
   return postData({ collection: 'devices', doc: device, data });
 };

@@ -131,10 +131,10 @@ export default {
 
       const clipArea = d3.svg
         .area()
-        .x(function(d) {
+        .x(function (d) {
           return waveScaleX(d.x);
         })
-        .y0(function(d) {
+        .y0(function (d) {
           return waveScaleY(
             Math.sin(
               Math.PI * 2 * config.waveOffset * -1 +
@@ -143,17 +143,14 @@ export default {
             )
           );
         })
-        .y1(function() {
+        .y1(function () {
           return fillCircleRadius * 2 + waveHeight;
         });
       const waveGroup = gaugeGroup
         .append('defs')
         .append('clipPath')
         .attr('id', 'clipWave' + elementId);
-      const wave = waveGroup
-        .append('path')
-        .datum(data)
-        .attr('d', clipArea);
+      const wave = waveGroup.append('path').datum(data).attr('d', clipArea);
 
       const fillCircleGroup = gaugeGroup
         .append('g')
@@ -219,7 +216,7 @@ export default {
 
     onMounted(async () => {
       loadLiquidFillGauge('gauge', 80);
-      watchDevice({ device: 'mhXWbGB4UxIdOPqeoOJz' }, data => {
+      watchDevice({ device: 'mhXWbGB4UxIdOPqeoOJz' }, (data) => {
         active.value = data.active;
       });
     });

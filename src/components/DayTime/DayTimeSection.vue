@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div class="view-container">
-      <div :class="{ 'time-container': true, disabled: !active }" @click="onClick">
+      <div
+        :class="{ 'time-container': true, disabled: !active }"
+        @click="onClick"
+      >
         <div class="name">{{ name }}</div>
         <div class="time">{{ time }}</div>
         <div class="days">
@@ -13,12 +16,21 @@
         </div>
       </div>
       <Button v-if="showEdit" icon="trash" size="small" @click="onDelete" />
-      <Toggle v-if="allowEdit && !showEdit" :active="active" @toggle="onToggle" />
+      <Toggle
+        v-if="allowEdit && !showEdit"
+        :active="active"
+        @toggle="onToggle"
+      />
     </div>
     <transition name="slide">
       <div v-if="showEdit" class="edit-container">
         <div class="time-pickers">
-          <TimePicker label="Time" :time="time" @timeChange="onTimeChange" class="time-picker" />
+          <TimePicker
+            label="Time"
+            :time="time"
+            @timeChange="onTimeChange"
+            class="time-picker"
+          />
         </div>
         <DayPicker :days="days" @dayChange="onDayChange" />
       </div>
@@ -64,19 +76,19 @@ export default {
       showEdit.value = !showEdit.value;
     };
 
-    const dayString = index => {
+    const dayString = (index) => {
       return dayStrings[index];
     };
 
-    const onDayChange = index => {
+    const onDayChange = (index) => {
       emit('dayChange', index, id);
     };
 
-    const onTimeChange = value => {
+    const onTimeChange = (value) => {
       emit('timeChange', id, value);
     };
 
-    const onToggle = value => {
+    const onToggle = (value) => {
       if (!value) {
         showEdit.value = false;
       }
