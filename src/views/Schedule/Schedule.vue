@@ -38,8 +38,8 @@ export default {
     const schedule = ref([]);
     let userData;
     let newSchedule = {
-      time: '6:00',
-      days: [true, true, true, true, true, true, true],
+      time: '7:00',
+      days: [true, true, true, true, true, false, false],
       active: true,
       name: '',
       userId: ''
@@ -66,7 +66,7 @@ export default {
       postDeviceData({ schedule: [...schedule.value] });
     };
 
-    const onDeleteTime = id => {
+    const onDeleteTime = (id) => {
       $delete(schedule.value, id);
       updateServer();
     };
@@ -92,7 +92,7 @@ export default {
       updateServer();
     };
 
-    const onActiveToggle = id => {
+    const onActiveToggle = (id) => {
       const active = schedule.value[id].active;
       const newSchedule = {
         ...schedule.value[id],
@@ -102,7 +102,7 @@ export default {
       updateServer();
     };
 
-    const allowEdit = item => {
+    const allowEdit = (item) => {
       return item.userId === userData.uid;
     };
 
