@@ -9,9 +9,22 @@ admin.initializeApp({
 const db = admin.firestore();
 
 exports.handler = async (event, context, callback) => {
-  await db.collection('users').add({
-    name: 'Test'
-  });
+  console.log(event, context);
+
+  let time = 3; // mins
+
+  await db
+    .collection('devices')
+    .doc('mhXWbGB4UxIdOPqeoOJz')
+    .set({ active: true }, { merge: true });
+
+  runTimer();
+  console.log('timer finished');
+
+  await db
+  .collection('devices')
+  .doc('mhXWbGB4UxIdOPqeoOJz')
+  .set({ active: false }, { merge: true });
 
   return callback(null, {
     statusCode: 200,
@@ -20,3 +33,13 @@ exports.handler = async (event, context, callback) => {
     })
   });
 };
+
+function runTimer() {
+  time = time - 1;
+
+  console.log('tick', time);
+
+  if (time) {
+    setTimeout(runTimer, 60 * 1000);
+  }
+}
