@@ -24,14 +24,11 @@
     </div>
     <transition name="slide">
       <div v-if="showEdit" class="edit-container">
-        <div class="time-pickers">
-          <TimePicker
-            label="Time"
-            :time="time"
-            @timeChange="onTimeChange"
-            class="time-picker"
-          />
-        </div>
+        <TimePicker
+          :time="time"
+          @timeChange="onTimeChange"
+          class="time-picker"
+        />
         <DayPicker :days="days" @dayChange="onDayChange" />
       </div>
     </transition>
@@ -144,16 +141,10 @@ export default {
   .edit-container {
     transition: all 0.2s ease-in;
 
-    .time-pickers {
-      display: flex;
-      justify-content: space-between;
-
-      .time-picker {
-        flex: 3;
-        margin-block-start: 10px;
-        margin-block-end: 5px;
-        margin-inline-end: 10px;
-      }
+    .time-picker {
+      flex: 1;
+      margin-block-start: 20px;
+      margin-block-end: 5px;
     }
   }
 }
