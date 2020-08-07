@@ -131,9 +131,9 @@ export default {
       homeData,
       timeData,
       active,
+      TIME_LIMIT,
       timerActive,
-      timeClicked,
-      TIME_LIMIT
+      timeClicked
     };
   },
   components: {
