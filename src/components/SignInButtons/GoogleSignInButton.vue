@@ -27,7 +27,7 @@ export default {
           .auth()
           .signInWithPopup(googleProvider)
           .then(async (data) => {
-            const { email, uid, displayName } = data.user;
+            const { email, uid, displayName, photoURL } = data.user;
             const newUser = await isNewUser(uid);
 
             if (newUser) {
@@ -38,7 +38,8 @@ export default {
                   name: displayName,
                   email,
                   uid,
-                  device: 'mhXWbGB4UxIdOPqeoOJz'
+                  device: 'mhXWbGB4UxIdOPqeoOJz',
+                  photo: photoURL
                 }
               });
             }

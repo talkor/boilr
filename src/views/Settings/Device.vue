@@ -26,7 +26,6 @@ export default {
   },
   setup({ device }) {
     const deviceId = ref(device);
-
     const message = ref('Scanning...');
     const showScanner = ref(false);
 

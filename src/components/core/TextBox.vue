@@ -5,6 +5,7 @@
       :placeholder="placeholder"
       @input="onInput"
       :password-reveal="type === 'password'"
+      :value="value"
     ></b-input>
   </b-field>
 </template>
