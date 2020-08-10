@@ -1,6 +1,16 @@
 <template>
   <div class="settings">
     <Title text="Settings" />
+    <img v-bind:src="userData.photo" class="profile-photo" />
+    <div>
+    <Button
+      class="name-button"
+      :noBorder="true"
+      :noPadding="true"
+      :rounded="false"
+      :text="username"
+      @click="changeName"
+    /></div>
     <List :data="list.data" />
   </div>
 </template>
@@ -11,6 +21,9 @@ import 'firebase/auth';
 import Title from '@/components/core/Title';
 import List from '@/components/List/List';
 import { reactive } from '@vue/composition-api';
+import { getUserData } from '@/services/userService';
+import { onMounted } from '@vue/composition-api';
+import Button from '@/components/core/Button';
 
 export default {
   props: {
@@ -18,28 +31,20 @@ export default {
   },
   setup({ userData }, { root }) {
     const router = root.$router;
+    const username = userData.name;
+
+    const changeName = () => {
+      router.push({ name: 'Profile', 
+        params: { name: userData.name }})
+    };
+    
     const list = reactive({
       data: [
-        {
-          label: 'Profile',
-          items: [
-            {
-              label: 'My Profile',
-              icon: 'user',
-              action: () => {}
-            },
-            {
-              label: 'Shower settings',
-              icon: 'shower',
-              action: () => {}
-            },
-            {
-              label: 'Energy Points',
-              icon: 'lightbulb',
-              action: () => {}
-            }
-          ]
-        },
+            // {
+            //   label: 'Shower settings',
+            //   icon: 'shower',
+            //   action: () => {}
+            // }
         {
           label: 'Device',
           items: [
@@ -52,11 +57,6 @@ export default {
                   params: { device: userData.device }
                 });
               }
-            },
-            {
-              label: 'Power Consumption',
-              icon: 'plug',
-              action: () => {}
             }
           ]
         },
@@ -94,12 +94,37 @@ export default {
 
     return {
       onLogOut,
-      list
+      list,
+      changeName,
+      username
     };
   },
   components: {
     Title,
-    List
+    List,
+    Button
   }
 };
 </script>
+
+<style scoped lang="scss">
+  .profile-photo {
+  margin-right: 10px;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-content: left;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  }
+  .name-button {
+	color:#000000;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-shadow:0px 1px 0px #528ecc;
+  }
+</style>
