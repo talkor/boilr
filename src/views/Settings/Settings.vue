@@ -2,14 +2,14 @@
   <div class="settings">
     <Title text="Settings" />
     <div class="container">
-    <img v-bind:src="theuser.userphoto" class="profile-photo" />
+    <img v-bind:src="user.photo" class="profile-photo" />
     
     <Button
       class="name-button"
       :noBorder="true"
       :noPadding="true"
       :rounded="false"
-      :text="theuser.username"
+      :text="user.name"
       @click="changeName"
     /></div>
     <List :data="list.data" />
@@ -23,6 +23,8 @@ import Title from '@/components/core/Title';
 import List from '@/components/List/List';
 import { reactive } from '@vue/composition-api';
 import Button from '@/components/core/Button';
+import { onMounted } from '@vue/composition-api';
+import { getUserData } from '@/services/userService';
 
 export default {
   props: {
@@ -31,9 +33,9 @@ export default {
   setup({ userData }, { root }) {
     const router = root.$router;
 
-    const theuser = reactive({
-        username: '',
-        userphoto: ''
+    const user = reactive({
+        name: '',
+        photo: ''
       });
     
     const changeName = () => {
@@ -41,9 +43,9 @@ export default {
     };
     
     onMounted(async () => {
-      const userDatat = await getUserData();
-      theuser.username = userDatat.name;
-      theuser.userphoto = userDatat.photo;
+      const newUserData = await getUserData();
+      user.name = newUserData.name;
+      user.photo = newUserData.photo;
     });
 
     const list = reactive({
@@ -107,7 +109,7 @@ export default {
       onLogOut,
       list,
       changeName,
-      theuser
+      user
     };
   },
   components: {
@@ -131,8 +133,6 @@ export default {
   border-radius: 50%;
   }
   .name-button {
-	color:#000000;
-	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
 	text-shadow:0px 1px 0px #528ecc;

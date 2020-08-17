@@ -93,7 +93,7 @@ const routes = [
     props: true
   },
   {
-    path: '/settings/showerSettings',
+    path: '/settings/shower',
     name: 'ShowerSettings',
     component: ShowerSettings,
     meta: {

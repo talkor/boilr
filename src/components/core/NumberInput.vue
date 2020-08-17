@@ -2,7 +2,7 @@
   <b-field :label="label" :message="error">
     <b-numberinput 
       @input="onInput"
-      v-model="time.default"
+      v-model="time.showerTime"
     ></b-numberinput>
   </b-field>
 </template>
@@ -22,12 +22,12 @@ export default {
     let userData;
 
     const time = reactive({
-      default: ''
+      showerTime: ''
     });
 
     onMounted(async () => {
       userData = await getUserData();
-      time.default = userData.defaultShowerTime;
+      time.showerTime = userData.defaultShowerTime;
     });
 
     const onInput = (value) => {

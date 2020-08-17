@@ -4,7 +4,7 @@
     <Title text="Shower Settings" />
     <NumberInput
       label="Default shower time"
-      :defTime="time.defaultShowerTime"
+      :defaultTime="time.defaultShowerTime"
       @input="onDefaultChange"
     />
     <Button
@@ -54,8 +54,7 @@ export default {
 
     const onSave = () => {
       postUserData({ defaultShowerTime: newDefaultTime });
-      router.push({ name: 'Settings',
-                params: {  }
+      router.push({ name: 'Settings'
                  });
     }
 
