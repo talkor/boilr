@@ -1,14 +1,15 @@
 <template>
   <div class="settings">
     <Title text="Settings" />
-    <img v-bind:src="userData.photo" class="profile-photo" />
-    <div>
+    <div class="container">
+    <img v-bind:src="theuser.userphoto" class="profile-photo" />
+    
     <Button
       class="name-button"
       :noBorder="true"
       :noPadding="true"
       :rounded="false"
-      :text="username"
+      :text="theuser.username"
       @click="changeName"
     /></div>
     <List :data="list.data" />
@@ -31,20 +32,25 @@ export default {
   },
   setup({ userData }, { root }) {
     const router = root.$router;
-    const username = userData.name;
 
+    const theuser = reactive({
+        username: '',
+        userphoto: ''
+      });
+    
     const changeName = () => {
       router.push({ name: 'Profile', 
         params: { name: userData.name }})
     };
     
+    onMounted(async () => {
+      const userDatat = await getUserData();
+      theuser.username = userDatat.name;
+      theuser.userphoto = userDatat.photo;
+    });
+
     const list = reactive({
       data: [
-            // {
-            //   label: 'Shower settings',
-            //   icon: 'shower',
-            //   action: () => {}
-            // }
         {
           label: 'Device',
           items: [
@@ -63,6 +69,14 @@ export default {
         {
           label: 'Preferences',
           items: [
+                       {
+              label: 'Shower settings',
+              icon: 'shower',
+              action: () => {
+                router.push({ name: 'ShowerSettings', 
+                params: { defaultShowerTime: userData.defaultShowerTime }})
+              }
+            },
             {
               label: 'Preferences',
               icon: 'cogs',
@@ -96,7 +110,7 @@ export default {
       onLogOut,
       list,
       changeName,
-      username
+      theuser
     };
   },
   components: {
@@ -108,23 +122,23 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.container {
+    display: inline-block;
+    text-align: center;
+}
   .profile-photo {
   margin-right: 10px;
-  display: inline-block;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  align-content: left;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
   }
   .name-button {
 	color:#000000;
 	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
-	padding:6px 24px;
 	text-shadow:0px 1px 0px #528ecc;
+  display: block;
   }
 </style>
