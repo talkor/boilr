@@ -76,23 +76,23 @@ export default {
       showEdit.value = !showEdit.value;
     };
 
-    const dayString = (index) => {
+    const dayString = index => {
       return dayStrings[index];
     };
 
-    const onDayChange = (index) => {
+    const onDayChange = index => {
       emit('dayChange', index, id);
     };
 
-    const onStartTimeChange = (value) => {
+    const onStartTimeChange = value => {
       emit('startTimeChange', id, value);
     };
 
-    const onEndTimeChange = (value) => {
+    const onEndTimeChange = value => {
       emit('endTimeChange', id, value);
     };
 
-    const onToggle = (value) => {
+    const onToggle = value => {
       if (!value) {
         showEdit.value = false;
       }

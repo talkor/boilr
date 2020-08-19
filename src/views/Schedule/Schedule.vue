@@ -58,7 +58,7 @@ export default {
       postDeviceData({ times: [...times.value] });
     };
 
-    const onDeleteTime = (id) => {
+    const onDeleteTime = id => {
       $delete(times.value, id);
       updateServer();
     };
@@ -93,7 +93,7 @@ export default {
       updateServer();
     };
 
-    const onActiveToggle = (id) => {
+    const onActiveToggle = id => {
       const active = times.value[id].active;
       const newTime = {
         ...times.value[id],

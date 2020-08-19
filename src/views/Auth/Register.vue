@@ -45,15 +45,15 @@ export default {
       password: ''
     });
 
-    const onNameChange = (value) => {
+    const onNameChange = value => {
       form.name = value;
     };
 
-    const onEmailChange = (value) => {
+    const onEmailChange = value => {
       form.email = value;
     };
 
-    const onPasswordChange = (value) => {
+    const onPasswordChange = value => {
       form.password = value;
     };
 
@@ -62,14 +62,18 @@ export default {
         await firebase
           .auth()
           .createUserWithEmailAndPassword(form.email, form.password)
-          .then((data) => {
+          .then(data => {
             const { email, uid } = data.user;
-            return firebase.firestore().collection('users').doc(uid).set({
-              name: form.name,
-              email,
-              uid,
-              device: 'mhXWbGB4UxIdOPqeoOJz'
-            });
+            return firebase
+              .firestore()
+              .collection('users')
+              .doc(uid)
+              .set({
+                name: form.name,
+                email,
+                uid,
+                device: 'mhXWbGB4UxIdOPqeoOJz'
+              });
           });
         router.replace({ name: 'Home' });
       } catch (error) {

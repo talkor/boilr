@@ -33,7 +33,6 @@
 const FULL_DASH_ARRAY = 283;
 const WARNING_THRESHOLD = 10;
 const ALERT_THRESHOLD = 5;
-
 const COLOR_CODES = {
   info: {
     color: 'green'
@@ -58,36 +57,28 @@ export default {
       timerInterval: null
     };
   },
-
   computed: {
     circleDasharray() {
       return `${(this.timeFraction * FULL_DASH_ARRAY).toFixed(0)} 283`;
     },
-
     formattedTimeLeft() {
       const timeLeft = this.timeLeft;
       const minutes = Math.floor(timeLeft / 60);
       let seconds = timeLeft % 60;
-
       if (seconds < 10) {
         seconds = `0${seconds}`;
       }
-
       return `${minutes}:${seconds}`;
     },
-
     timeLeft() {
       return this.TIME_LIMIT - this.timePassed;
     },
-
     timeFraction() {
       const rawTimeFraction = this.timeLeft / this.TIME_LIMIT;
       return rawTimeFraction - (1 / this.TIME_LIMIT) * (1 - rawTimeFraction);
     },
-
     remainingPathColor() {
       const { alert, warning, info } = COLOR_CODES;
-
       if (this.timeLeft <= alert.threshold) {
         return alert.color;
       } else if (this.timeLeft <= warning.threshold) {
@@ -97,7 +88,6 @@ export default {
       }
     }
   },
-
   watch: {
     timeLeft(newValue) {
       if (newValue === 0) {
@@ -105,17 +95,13 @@ export default {
       }
     }
   },
-
   mounted() {
     this.startTimer();
   },
-
   methods: {
     onTimesUp() {
-      this.$emit('onTimesUp');
       clearInterval(this.timerInterval);
     },
-
     startTimer() {
       this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
     }
@@ -128,21 +114,17 @@ export default {
   position: relative;
   width: 100px;
   height: 100px;
-
   &__svg {
     transform: scaleX(-1);
   }
-
   &__circle {
     fill: none;
     stroke: none;
   }
-
   &__path-elapsed {
     stroke-width: 7px;
     stroke: grey;
   }
-
   &__path-remaining {
     stroke-width: 7px;
     stroke-linecap: round;
@@ -151,20 +133,16 @@ export default {
     transition: 1s linear all;
     fill-rule: nonzero;
     stroke: currentColor;
-
     &.green {
       color: rgb(65, 184, 131);
     }
-
     &.orange {
       color: orange;
     }
-
     &.red {
       color: red;
     }
   }
-
   &__label {
     position: absolute;
     width: 100px;
