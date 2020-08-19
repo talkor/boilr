@@ -22,8 +22,6 @@ import 'firebase/auth';
 import Title from '@/components/core/Title';
 import List from '@/components/List/List';
 import { reactive } from '@vue/composition-api';
-import { getUserData } from '@/services/userService';
-import { onMounted } from '@vue/composition-api';
 import Button from '@/components/core/Button';
 
 export default {
@@ -39,8 +37,7 @@ export default {
       });
     
     const changeName = () => {
-      router.push({ name: 'Profile', 
-        params: { name: userData.name }})
+      router.push({ name: 'Profile', params: { name: userData.name } });
     };
     
     onMounted(async () => {
