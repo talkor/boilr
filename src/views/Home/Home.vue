@@ -48,7 +48,6 @@
     </section>
   </div>
 </template>
-
 <script>
 import Card from '@/components/core/Card';
 import 'firebase/firestore';
