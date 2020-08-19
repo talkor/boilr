@@ -112,6 +112,7 @@ export default {
 
   methods: {
     onTimesUp() {
+      this.$emit('onTimesUp');
       clearInterval(this.timerInterval);
     },
 
