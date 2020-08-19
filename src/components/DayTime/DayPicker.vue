@@ -24,7 +24,7 @@ export default {
     const NUM_DAYS_OF_WEEK = 7; // TODO: move to consts
     const dayStrings = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-    const onDayChange = index => {
+    const onDayChange = (index) => {
       emit('dayChange', index);
     };
 

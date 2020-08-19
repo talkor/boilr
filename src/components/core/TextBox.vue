@@ -23,7 +23,7 @@ export default {
   setup(props, { emit }) {
     const error = ref('');
 
-    const onInput = value => {
+    const onInput = (value) => {
       emit('input', value);
     };
 
