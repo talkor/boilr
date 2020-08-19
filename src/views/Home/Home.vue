@@ -151,7 +151,6 @@ export default {
       timeClicked.value = !timeClicked.value;
       TIME_LIMIT.value = item.TIME_LIMIT;
     };
-
     return {
       onTimesUp,
       onSwitchClick,
