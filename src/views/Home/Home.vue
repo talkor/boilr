@@ -17,7 +17,9 @@
         icon="power-off"
       />
     </section>
-    <section :class="{ times: true, active: active, timerActive: !timerActive }">
+    <section
+      :class="{ times: true, active: active, timerActive: !timerActive }"
+    >
       <Button
         v-for="(timeItem, idx) in timeData"
         :key="idx"
@@ -26,8 +28,19 @@
         @click="onTimeClick(timeItem)"
       />
     </section>
+    <section v-if="timeIsUp">
+      <h1
+        class="times-up animate__animated animate__pulse animate__slow animate__infinite"
+      >
+        Shower Is Ready!
+      </h1>
+    </section>
     <section :class="{ times: true, active: active, timeClicked: timeClicked }">
-      <Timer v-if="timeClicked" :TIME_LIMIT="TIME_LIMIT" />
+      <Timer
+        v-if="timeClicked"
+        :TIME_LIMIT="TIME_LIMIT"
+        @onTimesUp="onTimesUp"
+      />
     </section>
     <section class="shower">
       <Button icon="shower" size="medium" text="Start Shower" />
@@ -45,6 +58,7 @@ import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
 import Timer from '@/components/core/Timer';
 import { ref } from '@vue/composition-api';
 import { watchDevice, postDeviceData } from '@/services/deviceService';
+import 'animate.css';
 
 export default {
   name: 'Home',
@@ -55,6 +69,7 @@ export default {
     const active = ref(false);
     const timerActive = ref(false);
     const timeClicked = ref(false);
+    const timeIsUp = ref(false);
     const TIME_LIMIT = ref(600);
     const homeData = [
       {
@@ -80,6 +95,14 @@ export default {
     ];
     const timeData = [
       {
+        text: 'Default shower time',
+        TIME_LIMIT: 10
+      },
+      {
+        text: '5 Minutes',
+        TIME_LIMIT: 300
+      },
+      {
         text: '10 Minutes',
         TIME_LIMIT: 600
       },
@@ -104,34 +127,41 @@ export default {
         TIME_LIMIT: 3599
       }
     ];
-    watchDevice({}, (data) => {
+    watchDevice({}, data => {
       active.value = data.active;
       //timerActive.value = data.timerActive; /* tal- Review this
     });
+
+    const onTimesUp = () => {
+      onSwitchClick();
+      timeIsUp.value = true;
+    };
 
     const onSwitchClick = () => {
       postDeviceData({ active: !active.value });
       active.value = !active.value;
       active.timerActive ? false : (timerActive.value = false);
       active.timeClicked ? false : (timeClicked.value = false);
+      active.timeIsUp ? true : (timeIsUp.value = false);
     };
 
-    const onTimeClick = (item) => {
+    const onTimeClick = item => {
       //postDeviceData({ timerActive: !timerActive.value }); /* tal- Review this
       timerActive.value = !timerActive.value;
       timeClicked.value = !timeClicked.value;
       TIME_LIMIT.value = item.TIME_LIMIT;
     };
-
     return {
+      onTimesUp,
       onSwitchClick,
       onTimeClick,
       homeData,
       timeData,
       active,
+      TIME_LIMIT,
       timerActive,
       timeClicked,
-      TIME_LIMIT
+      timeIsUp
     };
   },
   components: {
@@ -174,6 +204,13 @@ export default {
   grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
   margin-top: 30px;
+}
+
+.times-up {
+  font-size: 150%;
+  font-family: inherit;
+  font-weight: bolder;
+  color: mediumblue;
 }
 
 .times {
