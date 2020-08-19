@@ -127,7 +127,7 @@ export default {
         TIME_LIMIT: 3599
       }
     ];
-    watchDevice({}, data => {
+    watchDevice({}, (data) => {
       active.value = data.active;
       //timerActive.value = data.timerActive; /* tal- Review this
     });
@@ -145,7 +145,7 @@ export default {
       active.timeIsUp ? true : (timeIsUp.value = false);
     };
 
-    const onTimeClick = item => {
+    const onTimeClick = (item) => {
       //postDeviceData({ timerActive: !timerActive.value }); /* tal- Review this
       timerActive.value = !timerActive.value;
       timeClicked.value = !timeClicked.value;

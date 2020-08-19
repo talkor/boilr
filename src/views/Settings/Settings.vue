@@ -3,14 +3,15 @@
     <Title text="Settings" />
     <img v-bind:src="userData.photo" class="profile-photo" />
     <div>
-    <Button
-      class="name-button"
-      :noBorder="true"
-      :noPadding="true"
-      :rounded="false"
-      :text="username"
-      @click="changeName"
-    /></div>
+      <Button
+        class="name-button"
+        :noBorder="true"
+        :noPadding="true"
+        :rounded="false"
+        :text="username"
+        @click="changeName"
+      />
+    </div>
     <List :data="list.data" />
   </div>
 </template>
@@ -21,8 +22,6 @@ import 'firebase/auth';
 import Title from '@/components/core/Title';
 import List from '@/components/List/List';
 import { reactive } from '@vue/composition-api';
-import { getUserData } from '@/services/userService';
-import { onMounted } from '@vue/composition-api';
 import Button from '@/components/core/Button';
 
 export default {
@@ -34,17 +33,11 @@ export default {
     const username = userData.name;
 
     const changeName = () => {
-      router.push({ name: 'Profile', 
-        params: { name: userData.name }})
+      router.push({ name: 'Profile', params: { name: userData.name } });
     };
-    
+
     const list = reactive({
       data: [
-            // {
-            //   label: 'Shower settings',
-            //   icon: 'shower',
-            //   action: () => {}
-            // }
         {
           label: 'Device',
           items: [
@@ -108,7 +101,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .profile-photo {
+.profile-photo {
   margin-right: 10px;
   display: inline-block;
   width: 50px;
@@ -118,13 +111,13 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  }
-  .name-button {
-	color:#000000;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-shadow:0px 1px 0px #528ecc;
-  }
+}
+.name-button {
+  color: #000000;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-shadow: 0px 1px 0px #528ecc;
+}
 </style>
