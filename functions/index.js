@@ -8,7 +8,6 @@ const db = admin.firestore();
 exports.taskRunner = functions.pubsub
   .schedule('* * * * *')
   .onRun(async (context) => {
-    console.log('job');
     const data = await db
       .collection('devices')
       .doc('mhXWbGB4UxIdOPqeoOJz')
@@ -17,5 +16,7 @@ exports.taskRunner = functions.pubsub
         return { ...snapshot.data() };
       });
 
-    console.log(data);
+    db.collection('devices')
+      .doc('mhXWbGB4UxIdOPqeoOJz')
+      .set({ active: !data.active }, { merge });
   });
