@@ -19,6 +19,7 @@ import * as d3 from 'd3';
 export default {
   setup() {
     const active = ref(false);
+    const temperature = ref(25);
 
     const config = reactive({
       minValue: 0,
@@ -164,7 +165,7 @@ export default {
 
       fillCircleGroup
         .append('text')
-        .text('50' + '°C')
+        .text(temperature.value + '°C')
         .attr('class', 'liquidFillGaugeText')
         .attr('text-anchor', 'middle')
         .attr('font-size', textPixels + 'px')
@@ -218,6 +219,7 @@ export default {
       loadLiquidFillGauge('gauge', 80);
       watchDevice({ device: 'mhXWbGB4UxIdOPqeoOJz' }, (data) => {
         active.value = data.active;
+        temperature.value = data.temperature;
       });
     });
 
