@@ -28,13 +28,6 @@
         @click="onTimeClick(timeItem)"
       />
     </section>
-    <section v-if="timeIsUp">
-      <h1
-        class="times-up animate__animated animate__pulse animate__slow animate__infinite"
-      >
-        Shower Is Ready!
-      </h1>
-    </section>
     <section :class="{ times: true, active: active, timeClicked: timeClicked }">
       <Timer
         v-if="timeClicked"
@@ -241,13 +234,6 @@ export default {
   grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
   margin-top: 30px;
-}
-
-.times-up {
-  font-size: 150%;
-  font-family: inherit;
-  font-weight: bolder;
-  color: mediumblue;
 }
 
 .times {
