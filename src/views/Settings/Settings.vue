@@ -1,17 +1,17 @@
 <template>
   <div class="settings">
     <Title text="Settings" />
-    <img v-bind:src="userData.photo" class="profile-photo" />
-    <div>
-      <Button
-        class="name-button"
-        :noBorder="true"
-        :noPadding="true"
-        :rounded="false"
-        :text="username"
-        @click="changeName"
-      />
-    </div>
+    <div class="container">
+    <img v-bind:src="user.photo" class="profile-photo" />
+    
+    <Button
+      class="name-button"
+      :noBorder="true"
+      :noPadding="true"
+      :rounded="false"
+      :text="user.name"
+      @click="changeName"
+    /></div>
     <List :data="list.data" />
   </div>
 </template>
@@ -23,6 +23,8 @@ import Title from '@/components/core/Title';
 import List from '@/components/List/List';
 import { reactive } from '@vue/composition-api';
 import Button from '@/components/core/Button';
+import { onMounted } from '@vue/composition-api';
+import { getUserData } from '@/services/userService';
 
 export default {
   props: {
@@ -30,11 +32,21 @@ export default {
   },
   setup({ userData }, { root }) {
     const router = root.$router;
-    const username = userData.name;
 
+    const user = reactive({
+        name: '',
+        photo: ''
+      });
+    
     const changeName = () => {
       router.push({ name: 'Profile', params: { name: userData.name } });
     };
+    
+    onMounted(async () => {
+      const newUserData = await getUserData();
+      user.name = newUserData.name;
+      user.photo = newUserData.photo;
+    });
 
     const list = reactive({
       data: [
@@ -56,6 +68,14 @@ export default {
         {
           label: 'Preferences',
           items: [
+                       {
+              label: 'Shower settings',
+              icon: 'shower',
+              action: () => {
+                router.push({ name: 'ShowerSettings', 
+                params: { defaultShowerTime: userData.defaultShowerTime }})
+              }
+            },
             {
               label: 'Preferences',
               icon: 'cogs',
@@ -89,7 +109,7 @@ export default {
       onLogOut,
       list,
       changeName,
-      username
+      user
     };
   },
   components: {
@@ -101,23 +121,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.profile-photo {
+
+.container {
+    display: inline-block;
+    text-align: center;
+}
+  .profile-photo {
   margin-right: 10px;
-  display: inline-block;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  align-content: left;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-.name-button {
-  color: #000000;
-  font-family: Arial;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 6px 24px;
-  text-shadow: 0px 1px 0px #528ecc;
-}
+  }
+  .name-button {
+	font-size:15px;
+	font-weight:bold;
+	text-shadow:0px 1px 0px #528ecc;
+  display: block;
+  }
 </style>
