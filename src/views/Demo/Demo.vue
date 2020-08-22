@@ -205,9 +205,8 @@ export default {
     onMounted(async () => {
       loadLiquidFillGauge('gauge', 80);
       watchDevice({ device: 'mhXWbGB4UxIdOPqeoOJz' }, (data) => {
-        console.log(data);
         active.value = data.active;
-        temperature.value = data.temperature;
+        temperature.value = Math.trunc(data.temperature);
       });
     });
 
