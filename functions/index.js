@@ -10,6 +10,7 @@ const MIN_TEMP = 25;
 
 exports.taskRunner = functions.pubsub
   .schedule('* * * * *')
+  .timeZone('Asia/Jerusalem')
   .onRun(async (context) => {
     const { active, temperature } = await db
       .collection('devices')
