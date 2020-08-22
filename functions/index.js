@@ -12,6 +12,7 @@ exports.taskRunner = functions.pubsub
   .schedule('* * * * *')
   .timeZone('Asia/Jerusalem')
   .onRun(async (context) => {
+    console.log('TIME = ', new Date());
     const { active, temperature } = await db
       .collection('devices')
       .doc('mhXWbGB4UxIdOPqeoOJz')
