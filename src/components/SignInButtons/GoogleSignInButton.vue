@@ -27,7 +27,7 @@ export default {
           .auth()
           .signInWithPopup(googleProvider)
           .then(async (data) => {
-            const { email, uid, displayName, photoURL } = data.user;
+            const { email, uid, displayName, photoURL, defaultShowerTime } = data.user;
             const newUser = await isNewUser(uid);
 
             if (newUser) {
@@ -39,7 +39,8 @@ export default {
                   email,
                   uid,
                   device: 'mhXWbGB4UxIdOPqeoOJz',
-                  photo: photoURL
+                  photo: photoURL,
+                  defaultShowerTime: 15
                 }
               });
             }
