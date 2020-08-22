@@ -16,7 +16,10 @@ exports.taskRunner = functions.pubsub
         return { ...snapshot.data() };
       });
 
+    console.log(data.active);
     db.collection('devices')
       .doc('mhXWbGB4UxIdOPqeoOJz')
-      .set({ active: !data.active }, { merge });
+      .set({ active: !data.active }, { merge: true });
+
+    console.log('=======Setting: ', !data.active);
   });
