@@ -24,12 +24,26 @@ export default {
     const active = ref(false);
     const temperature = ref(25);
 
+    const getHue = (temp) => {
+      const maxHsl = 360;
+      const minHsl = 170;
+      const rngHsl = maxHsl - minHsl;
+
+      const maxTemp = 55;
+      const minTemp = 25;
+      const rngTemp = maxTemp - minTemp;
+      const degCnt = maxTemp - temp;
+      const hslsDeg = rngHsl / rngTemp;
+      const returnHue = 360 - (degCnt * hslsDeg - (maxHsl - 360));
+      return returnHue;
+    };
+
     const config = reactive({
       minValue: 0,
       maxValue: 100,
       circleThickness: 0.05,
       circleFillGap: 0.05,
-      circleColor: '#FF7777',
+      circleColor: '#333333',
       waveHeight: 0.1,
       waveCount: 3,
       waveRiseTime: 1000,
@@ -38,9 +52,7 @@ export default {
       waveColor: '#FFDDDD',
       waveOffset: 0.25,
       textVertPosition: 0.5,
-      textSize: 0.6,
-      textColor: '#553300',
-      waveTextColor: '#FF7777'
+      textSize: 0.6
     });
 
     const loadLiquidFillGauge = (elementId, value) => {
@@ -61,7 +73,6 @@ export default {
         .range([0, config.waveHeight, 0])
         .domain([0, 50, 100]);
 
-      const textPixels = (config.textSize * radius) / 2;
       const circleThickness = config.circleThickness * radius;
       const circleFillGap = config.circleFillGap * radius;
       const fillCircleMargin = circleThickness + circleFillGap;
@@ -107,14 +118,6 @@ export default {
       const waveAnimateScale = d3.scale
         .linear()
         .range([0, waveClipWidth - fillCircleRadius * 2])
-        .domain([0, 1]);
-
-      const textRiseScaleY = d3.scale
-        .linear()
-        .range([
-          fillCircleMargin + fillCircleRadius * 2,
-          fillCircleMargin + textPixels * 0.7
-        ])
         .domain([0, 1]);
 
       const gaugeGroup = gauge
@@ -197,6 +200,10 @@ export default {
             wave.attr('transform', 'translate(' + waveAnimateScale(0) + ',0)');
             animateWave(config.waveAnimateTime);
           });
+        d3.select('circle').style(
+          'fill',
+          `hsl(${getHue(temperature.value)}, 100%, 50%`
+        );
       };
 
       animateWave();
@@ -238,7 +245,7 @@ export default {
         width: 100%;
         height: 100%;
         font-size: 60px;
-        color: rgb(255, 119, 119);
+        color: #ffffff;
       }
     }
   }
