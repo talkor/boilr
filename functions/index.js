@@ -5,7 +5,7 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-export const taskRunner = functions.pubsub
+exports.taskRunner = functions.pubsub
   .schedule('* * * * *')
   .onRun(async (context) => {
     console.log('job');
