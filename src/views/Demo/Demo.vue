@@ -1,7 +1,10 @@
 <template>
   <div class="demo">
     <div class="demo-container">
-      <svg id="gauge" width="97%" height="400px"></svg>
+      <div class="gauge">
+        <div class="temperature">{{ temperature }}°C</div>
+        <svg id="gauge" width="97%" height="400px"></svg>
+      </div>
       <div class="power">
         <span :class="{ led: true, active: active }" />Power
         {{ active ? 'ON' : 'OFF' }}
@@ -163,22 +166,6 @@ export default {
         .attr('r', fillCircleRadius)
         .style('fill', config.waveColor);
 
-      fillCircleGroup
-        .append('text')
-        .text(temperature.value + '°C')
-        .attr('class', 'liquidFillGaugeText')
-        .attr('text-anchor', 'middle')
-        .attr('font-size', textPixels + 'px')
-        .style('fill', config.waveTextColor)
-        .attr(
-          'transform',
-          'translate(' +
-            radius +
-            ',' +
-            textRiseScaleY(config.textVertPosition) +
-            ')'
-        );
-
       const waveGroupXPosition =
         fillCircleMargin + fillCircleRadius * 2 - waveClipWidth;
       waveGroup
@@ -218,13 +205,15 @@ export default {
     onMounted(async () => {
       loadLiquidFillGauge('gauge', 80);
       watchDevice({ device: 'mhXWbGB4UxIdOPqeoOJz' }, (data) => {
+        console.log(data);
         active.value = data.active;
         temperature.value = data.temperature;
       });
     });
 
     return {
-      active
+      active,
+      temperature
     };
   }
 };
@@ -238,6 +227,21 @@ export default {
 
   .demo-container {
     width: 50%;
+
+    .gauge {
+      position: relative;
+
+      .temperature {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-size: 60px;
+        color: rgb(255, 119, 119);
+      }
+    }
   }
 
   .barcode {
