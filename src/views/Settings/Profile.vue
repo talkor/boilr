@@ -24,7 +24,7 @@ import 'firebase/auth';
 import TextBox from '@/components/core/TextBox';
 import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
-import {  postUserData } from '@/services/userService';
+import { postUserData } from '@/services/userService';
 import Button from '@/components/core/Button';
 
 export default {

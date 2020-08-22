@@ -35,15 +35,23 @@
         @onTimesUp="onTimesUp"
       />
     </section>
-    <section class="shower">
+    <section>
       <Button
-        v-if="timeIsUp"
+        @click="onStartShowerClick"
+        v-if="timeIsUp & startShower"
         class="start-shower animate__animated animate__pulse animate__slow animate__infinite"
         icon="shower"
         size="medium"
         text="Start Shower"
       />
-      <ConnectToSpotify />
+      <Button
+        v-if="timeIsUp & !startShower"
+        class="end-shower"
+        icon="shower"
+        size="medium"
+        text="End Shower"
+      />
+      <ConnectToSpotify class="spotify" />
     </section>
   </div>
 </template>
@@ -69,6 +77,7 @@ export default {
     const timerActive = ref(false);
     const timeClicked = ref(false);
     const timeIsUp = ref(false);
+    const startShower = ref(true);
     const TIME_LIMIT = ref(600);
     const homeData = [
       {
@@ -136,12 +145,17 @@ export default {
       timeIsUp.value = true;
     };
 
+    const onStartShowerClick = () => {
+      active.startShower ? true : (startShower.value = false);
+    };
+
     const onSwitchClick = () => {
       postDeviceData({ active: !active.value });
       active.value = !active.value;
       active.timerActive ? false : (timerActive.value = false);
       active.timeClicked ? false : (timeClicked.value = false);
       active.timeIsUp ? true : (timeIsUp.value = false);
+      active.startShower ? false : (startShower.value = true);
     };
 
     const onTimeClick = (item) => {
@@ -154,13 +168,15 @@ export default {
       onTimesUp,
       onSwitchClick,
       onTimeClick,
+      onStartShowerClick,
       homeData,
       timeData,
       active,
       TIME_LIMIT,
       timerActive,
       timeClicked,
-      timeIsUp
+      timeIsUp,
+      startShower
     };
   },
   components: {
@@ -197,11 +213,20 @@ export default {
 .start-shower {
   background-color: powderblue;
   font-weight: bolder;
-  margin: 20px 0 70px 0;
+  margin: 20%;
 }
 
-.shower {
-  margin-top: 20px;
+.end-shower {
+  background-color: rgb(247, 117, 117);
+  font-weight: bold;
+  margin: 20%;
+}
+
+.spotify {
+  position: fixed;
+  right: 50%;
+  left: 18%;
+  top: 75%;
 }
 
 .cards {
