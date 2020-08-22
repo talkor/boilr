@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-
+const spacetime = require('spacetime');
 admin.initializeApp();
 
 const db = admin.firestore();
@@ -12,7 +12,7 @@ exports.taskRunner = functions.pubsub
   .schedule('* * * * *')
   .timeZone('Asia/Jerusalem')
   .onRun(async (context) => {
-    console.log('TIME = ', new Date());
+    console.log('TIME = ', spacetime.now().goto('Asia/Jerusalem'));
     const { active, temperature } = await db
       .collection('devices')
       .doc('mhXWbGB4UxIdOPqeoOJz')
