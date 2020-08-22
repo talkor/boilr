@@ -5,7 +5,7 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-const MAX_TEMP = 55;
+const MAX_TEMP = 99;
 const MIN_TEMP = 25;
 
 exports.taskRunner = functions.pubsub
@@ -23,7 +23,7 @@ exports.taskRunner = functions.pubsub
       if (temperature < MAX_TEMP) {
         db.collection('devices')
           .doc('mhXWbGB4UxIdOPqeoOJz')
-          .set({ temperature: temperature + 1 }, { merge: true });
+          .set({ temperature: temperature + 2 }, { merge: true });
       } else {
         db.collection('devices')
           .doc('mhXWbGB4UxIdOPqeoOJz')
@@ -32,6 +32,6 @@ exports.taskRunner = functions.pubsub
     } else if (temperature > MIN_TEMP) {
       db.collection('devices')
         .doc('mhXWbGB4UxIdOPqeoOJz')
-        .set({ temperature: temperature - 0.5 }, { merge: true });
+        .set({ temperature: temperature - 0.1 }, { merge: true });
     }
   });

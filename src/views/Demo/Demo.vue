@@ -29,7 +29,7 @@ export default {
       const minHsl = 170;
       const rngHsl = maxHsl - minHsl;
 
-      const maxTemp = 55;
+      const maxTemp = 99;
       const minTemp = 25;
       const rngTemp = maxTemp - minTemp;
       const degCnt = maxTemp - temp;
