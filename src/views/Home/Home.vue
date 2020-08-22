@@ -28,13 +28,6 @@
         @click="onTimeClick(timeItem)"
       />
     </section>
-    <section v-if="timeIsUp">
-      <h1
-        class="times-up animate__animated animate__pulse animate__slow animate__infinite"
-      >
-        Shower Is Ready!
-      </h1>
-    </section>
     <section :class="{ times: true, active: active, timeClicked: timeClicked }">
       <Timer
         v-if="timeClicked"
@@ -43,7 +36,13 @@
       />
     </section>
     <section class="shower">
-      <Button icon="shower" size="medium" text="Start Shower" />
+      <Button
+        v-if="timeIsUp"
+        class="start-shower animate__animated animate__pulse animate__slow animate__infinite"
+        icon="shower"
+        size="medium"
+        text="Start Shower"
+      />
       <ConnectToSpotify />
     </section>
   </div>
@@ -195,6 +194,12 @@ export default {
   }
 }
 
+.start-shower {
+  background-color: powderblue;
+  font-weight: bolder;
+  margin: 20px 0 70px 0;
+}
+
 .shower {
   margin-top: 20px;
 }
@@ -204,13 +209,6 @@ export default {
   grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
   margin-top: 30px;
-}
-
-.times-up {
-  font-size: 150%;
-  font-family: inherit;
-  font-weight: bolder;
-  color: mediumblue;
 }
 
 .times {
