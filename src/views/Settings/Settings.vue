@@ -2,16 +2,8 @@
   <div class="settings">
     <Title text="Settings" />
     <div class="container">
-      <img v-bind:src="user.photo" class="profile-photo" />
-
-      <Button
-        class="name-button"
-        :noBorder="true"
-        :noPadding="true"
-        :rounded="false"
-        :text="user.name"
-        @click="changeName"
-      />
+      <img :src="user.photo" class="profile-photo" />
+      <Button :rounded="true" :text="user.name" @click="changeName" />
     </div>
     <List :data="list.data" />
   </div>
@@ -125,19 +117,14 @@ export default {
 
 <style scoped lang="scss">
 .container {
-  display: inline-block;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .profile-photo {
   margin-right: 10px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-}
-.name-button {
-  font-size: 15px;
-  font-weight: bold;
-  text-shadow: 0px 1px 0px #528ecc;
-  display: block;
 }
 </style>

@@ -5,14 +5,13 @@
     <TextBox
       type="input"
       label="Name"
-      placeholder="Want to change your name?"
+      placeholder="Your name"
       @input="onNameChange"
     />
     <Button
-      class="button"
       :noBorder="false"
       :noPadding="false"
-      :rounded="false"
+      :rounded="true"
       :text="save"
       @click="onSave"
     />
@@ -63,25 +62,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.button {
-  box-shadow: inset 0px 1px 0px 0px #bbdaf7;
-  background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
-  background-color: #79bbff;
-  border-radius: 6px;
-  border: 1px solid #84bbf3;
-  display: inline-block;
-  cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 6px 24px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #528ecc;
-}
-.button:active {
-  position: relative;
-  top: 1px;
-}
-</style>
+<style scoped lang="scss"></style>

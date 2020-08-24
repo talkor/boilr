@@ -1,6 +1,6 @@
 <template>
   <b-field :label="label" :message="error">
-    <b-numberinput @input="onInput" v-model="time.showerTime"></b-numberinput>
+    <b-numberinput @input="onInput" v-model="time" />
   </b-field>
 </template>
 
@@ -14,17 +14,15 @@ export default {
   props: {
     label: String
   },
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     const error = ref('');
     let userData;
 
-    const time = reactive({
-      showerTime: ''
-    });
+    const time = ref(0);
 
     onMounted(async () => {
       userData = await getUserData();
-      time.showerTime = userData.defaultShowerTime;
+      time.value = userData.defaultShowerTime;
     });
 
     const onInput = (value) => {
