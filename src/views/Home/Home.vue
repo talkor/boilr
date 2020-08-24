@@ -3,12 +3,11 @@
     <Title text="Boilr" />
     <section class="cards">
       <Card
-        v-for="(homeItem, index) in homeData"
-        :key="index"
-        :label="homeItem.label"
-        :dataLabel="homeItem.dataLabel"
-        :icon="homeItem.icon"
+        label="Temperature"
+        :dataLabel="`${Math.round(temperature)}°C`"
+        icon="thermometer-empty"
       />
+      <Card label="Weather" dataLabel="25°C" icon="sun" />
     </section>
     <section class="switch-container">
       <Button
@@ -74,33 +73,13 @@ export default {
   },
   setup() {
     const active = ref(false);
+    const temperature = ref(0);
     const timerActive = ref(false);
     const timeClicked = ref(false);
     const timeIsUp = ref(false);
     const startShower = ref(true);
     const TIME_LIMIT = ref(600);
-    const homeData = [
-      {
-        label: 'Temperatue',
-        dataLabel: '59°C',
-        icon: 'thermometer-empty'
-      },
-      {
-        label: 'Weather',
-        dataLabel: '23°C',
-        icon: 'sun'
-      },
-      {
-        label: 'Energy Points',
-        dataLabel: '5K',
-        icon: 'lightbulb'
-      },
-      {
-        label: 'Avg. Water',
-        dataLabel: '20L',
-        icon: 'tint'
-      }
-    ];
+
     const timeData = [
       {
         text: 'Default shower time',
@@ -137,6 +116,7 @@ export default {
     ];
     watchDevice({}, (data) => {
       active.value = data.active;
+      temperature.value = data.temperature;
       //timerActive.value = data.timerActive; /* tal- Review this
     });
 
@@ -169,7 +149,7 @@ export default {
       onSwitchClick,
       onTimeClick,
       onStartShowerClick,
-      homeData,
+      temperature,
       timeData,
       active,
       TIME_LIMIT,
