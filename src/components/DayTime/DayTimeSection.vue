@@ -7,7 +7,7 @@
       >
         <div class="name">{{ name }}</div>
         <div class="time">{{ time }}</div>
-        <div class="days">
+        <div class="days" v-if="repeat">
           <span v-for="(day, index) in days" :key="index" class="day">
             <template v-if="days[index]">
               <span>{{ dayString(index) }}&nbsp;</span>
@@ -19,16 +19,19 @@
       <Toggle
         v-if="allowEdit && !showEdit"
         :active="active"
-        @toggle="onToggle"
+        @toggle="onActiveToggle"
       />
     </div>
     <transition name="slide">
       <div v-if="showEdit" class="edit-container">
-        <TimePicker
-          :time="time"
-          @timeChange="onTimeChange"
-          class="time-picker"
-        />
+        <div class="row-container">
+          <TimePicker
+            :time="time"
+            @timeChange="onTimeChange"
+            class="time-picker"
+          />
+          <Checkbox :checked="repeat" label="Repeat" @change="onRepeatChange" />
+        </div>
         <DayPicker :days="days" @dayChange="onDayChange" />
       </div>
     </transition>
@@ -38,6 +41,7 @@
 <script>
 import Toggle from '@/components/core/Toggle';
 import Button from '@/components/core/Button';
+import Checkbox from '@/components/core/Checkbox';
 import TimePicker from '@/components/DayTime/TimePicker';
 import DayPicker from '@/components/DayTime/DayPicker';
 import { ref } from '@vue/composition-api';
@@ -47,6 +51,7 @@ export default {
     time: String,
     days: Array,
     active: Boolean,
+    repeat: Boolean,
     id: Number,
     isNewSchedule: Boolean,
     name: String,
@@ -85,7 +90,11 @@ export default {
       emit('timeChange', id, value);
     };
 
-    const onToggle = (value) => {
+    const onRepeatChange = (value) => {
+      emit('repeatChange', id, value);
+    };
+
+    const onActiveToggle = (value) => {
       if (!value) {
         showEdit.value = false;
       }
@@ -98,7 +107,8 @@ export default {
     };
 
     return {
-      onToggle,
+      onActiveToggle,
+      onRepeatChange,
       onClick,
       dayString,
       showEdit,
@@ -111,7 +121,8 @@ export default {
     Toggle,
     TimePicker,
     DayPicker,
-    Button
+    Button,
+    Checkbox
   }
 };
 </script>
@@ -143,6 +154,14 @@ export default {
 
     .time-picker {
       flex: 1;
+      margin-block-end: 0;
+      margin-inline-end: 10px;
+    }
+
+    .row-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-block-start: 20px;
       margin-block-end: 5px;
     }

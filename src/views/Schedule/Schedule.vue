@@ -11,9 +11,11 @@
         :days="item.days"
         :name="item.name"
         :active="item.active"
+        :repeat="item.repeat"
         @dayChange="onDayChange"
         @timeChange="onTimeChange"
         @activeToggle="onActiveToggle"
+        @repeatChange="onRepeatChange"
         :isNewItem="isNewSchedule"
         @delete="onDeleteTime"
         :allowEdit="allowEdit(item)"
@@ -50,7 +52,8 @@ export default {
         days: [true, true, true, true, true, false, false],
         active: true,
         name: userData.name,
-        userId: userData.uid
+        userId: userData.uid,
+        repeat: false
       };
       schedule.value.unshift({ ...newSchedule });
       isNewSchedule.value = true;
@@ -97,6 +100,16 @@ export default {
       updateServer();
     };
 
+    const onRepeatChange = (id) => {
+      const repeat = schedule.value[id].repeat;
+      const newValue = {
+        ...schedule.value[id],
+        repeat: !repeat
+      };
+      $set(schedule.value, id, newValue);
+      updateServer();
+    };
+
     const allowEdit = (item) => {
       return item.userId === userData.uid;
     };
@@ -105,6 +118,7 @@ export default {
       onActiveToggle,
       onTimeChange,
       onDayChange,
+      onRepeatChange,
       addTime,
       schedule,
       isNewSchedule,
