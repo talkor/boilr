@@ -37,27 +37,22 @@ export default {
     const isNewSchedule = ref(false);
     const schedule = ref([]);
     let userData;
-    let newSchedule = {
-      time: '7:00',
-      days: [true, true, true, true, true, false, false],
-      active: true,
-      name: '',
-      userId: ''
-    };
 
     onMounted(async () => {
       const deviceData = await getDeviceData();
       userData = await getUserData();
       schedule.value = [...deviceData.schedule];
-      newSchedule = {
-        ...newSchedule,
-        name: userData.name,
-        userId: userData.uid
-      };
     });
 
     const addTime = () => {
-      schedule.value.push(newSchedule);
+      const newSchedule = {
+        time: '7:00',
+        days: [true, true, true, true, true, false, false],
+        active: true,
+        name: userData.name,
+        userId: userData.uid
+      };
+      schedule.value.unshift({ ...newSchedule });
       isNewSchedule.value = true;
       updateServer();
     };
@@ -75,30 +70,30 @@ export default {
       const time = schedule.value[id];
       let days = time.days;
       days[index] = !days[index];
-      const newSchedule = {
+      const newValue = {
         ...time,
         days: [...days]
       };
-      $set(schedule.value, id, newSchedule);
+      $set(schedule.value, id, newValue);
       updateServer();
     };
 
     const onTimeChange = (id, time) => {
-      const newSchedule = {
+      const newValue = {
         ...schedule.value[id],
         time
       };
-      $set(schedule.value, id, newSchedule);
+      $set(schedule.value, id, newValue);
       updateServer();
     };
 
     const onActiveToggle = (id) => {
       const active = schedule.value[id].active;
-      const newSchedule = {
+      const newValue = {
         ...schedule.value[id],
         active: !active
       };
-      $set(schedule.value, id, newSchedule);
+      $set(schedule.value, id, newValue);
       updateServer();
     };
 
