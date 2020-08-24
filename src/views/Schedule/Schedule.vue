@@ -1,7 +1,10 @@
 <template>
   <div class="schedule">
-    <div class="title-container">
-      <Title text="Schedule" />
+    <div class="top-container">
+      <div class="title-container">
+        <Title text="Schedule" />
+        <Subtitle text="Select your shower schedules" />
+      </div>
       <Button @click="addTime" icon="plus" size="small" />
     </div>
     <div class="time" v-for="(item, index) in schedule" :key="index">
@@ -27,6 +30,7 @@
 
 <script>
 import Title from '@/components/core/Title';
+import Subtitle from '@/components/core/Subtitle';
 import Button from '@/components/core/Button';
 import Divider from '@/components/core/Divider';
 import DayTimeSection from '@/components/DayTime/DayTimeSection';
@@ -128,6 +132,7 @@ export default {
   },
   components: {
     Title,
+    Subtitle,
     Button,
     DayTimeSection,
     Divider
@@ -136,8 +141,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title-container {
+.top-container {
   display: flex;
   justify-content: space-between;
+  margin-block-end: 15px;
 }
 </style>

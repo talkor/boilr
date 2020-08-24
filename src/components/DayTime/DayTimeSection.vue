@@ -32,7 +32,7 @@
           />
           <Checkbox :checked="repeat" label="Repeat" @change="onRepeatChange" />
         </div>
-        <DayPicker :days="days" @dayChange="onDayChange" />
+        <DayPicker v-if="repeat" :days="days" @dayChange="onDayChange" />
       </div>
     </transition>
   </div>

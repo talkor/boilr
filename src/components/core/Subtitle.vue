@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">{{ text }}</h1>
+  <h2 class="subtitle">{{ text }}</h2>
 </template>
 
 <script>
@@ -12,10 +12,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h1.title {
-  margin-top: 10px;
-  margin-bottom: 30px;
-  font-size: 24px;
+h2.subtitle {
+  margin-block-start: 20px;
+  margin-block-end: 10px;
+  font-size: 18px;
   text-align: left;
 }
 </style>
