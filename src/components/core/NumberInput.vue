@@ -1,9 +1,6 @@
 <template>
   <b-field :label="label" :message="error">
-    <b-numberinput 
-      @input="onInput"
-      v-model="time.showerTime"
-    ></b-numberinput>
+    <b-numberinput @input="onInput" v-model="time.showerTime"></b-numberinput>
   </b-field>
 </template>
 
@@ -15,7 +12,7 @@ import { reactive } from '@vue/composition-api';
 export default {
   name: 'NumberInput',
   props: {
-    label: String,
+    label: String
   },
   setup(props, { emit }) {
     const error = ref('');

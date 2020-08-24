@@ -2,16 +2,17 @@
   <div class="settings">
     <Title text="Settings" />
     <div class="container">
-    <img v-bind:src="user.photo" class="profile-photo" />
-    
-    <Button
-      class="name-button"
-      :noBorder="true"
-      :noPadding="true"
-      :rounded="false"
-      :text="user.name"
-      @click="changeName"
-    /></div>
+      <img v-bind:src="user.photo" class="profile-photo" />
+
+      <Button
+        class="name-button"
+        :noBorder="true"
+        :noPadding="true"
+        :rounded="false"
+        :text="user.name"
+        @click="changeName"
+      />
+    </div>
     <List :data="list.data" />
   </div>
 </template>
@@ -34,14 +35,14 @@ export default {
     const router = root.$router;
 
     const user = reactive({
-        name: '',
-        photo: ''
-      });
-    
+      name: '',
+      photo: ''
+    });
+
     const changeName = () => {
       router.push({ name: 'Profile', params: { name: userData.name } });
     };
-    
+
     onMounted(async () => {
       const newUserData = await getUserData();
       user.name = newUserData.name;
@@ -68,12 +69,14 @@ export default {
         {
           label: 'Preferences',
           items: [
-                       {
+            {
               label: 'Shower settings',
               icon: 'shower',
               action: () => {
-                router.push({ name: 'ShowerSettings', 
-                params: { defaultShowerTime: userData.defaultShowerTime }})
+                router.push({
+                  name: 'ShowerSettings',
+                  params: { defaultShowerTime: userData.defaultShowerTime }
+                });
               }
             },
             {
@@ -121,21 +124,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .container {
-    display: inline-block;
-    text-align: center;
+  display: inline-block;
+  text-align: center;
 }
-  .profile-photo {
+.profile-photo {
   margin-right: 10px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  }
-  .name-button {
-	font-size:15px;
-	font-weight:bold;
-	text-shadow:0px 1px 0px #528ecc;
+}
+.name-button {
+  font-size: 15px;
+  font-weight: bold;
+  text-shadow: 0px 1px 0px #528ecc;
   display: block;
-  }
+}
 </style>
