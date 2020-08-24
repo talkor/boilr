@@ -7,7 +7,6 @@
 <script>
 import { getUserData } from '@/services/userService';
 import { ref, onMounted } from '@vue/composition-api';
-import { reactive } from '@vue/composition-api';
 
 export default {
   name: 'NumberInput',
