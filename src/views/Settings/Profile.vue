@@ -6,6 +6,7 @@
       type="input"
       label="Name"
       placeholder="Your name"
+      :value = "user.username"
       @input="onNameChange"
     />
     <Button
@@ -23,18 +24,25 @@ import 'firebase/auth';
 import TextBox from '@/components/core/TextBox';
 import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
-import { postUserData } from '@/services/userService';
+import { getUserData, postUserData } from '@/services/userService';
 import Button from '@/components/core/Button';
+import { onMounted } from '@vue/composition-api';
+import { reactive } from '@vue/composition-api';
 
 export default {
-  props: {
-    name: String
-  },
-  setup({ name }, { root }) {
+  setup(props, { root }) {
     const router = root.$router;
-    const username = name;
     var newUsername = '';
     const save = 'Save';
+
+    const user = reactive({
+      username: ''
+    });
+
+    onMounted(async () => {
+      const userData = await getUserData();
+      user.username = userData.name;
+    });
 
     const onNameChange = (value) => {
       newUsername = value;
@@ -47,7 +55,7 @@ export default {
 
     return {
       onNameChange,
-      username,
+      user,
       onSave,
       newUsername,
       save
