@@ -133,7 +133,7 @@ export default {
         this.latitude +
         '&lon=' +
         this.longitude +
-        '&APPID=69d3cf86b46f19cf3e049339355533aa';
+        '&APPID=9331930d6c227312d651952d1682f22a';
 
       axios
         .get(reqURL)
