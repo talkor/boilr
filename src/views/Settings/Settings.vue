@@ -2,7 +2,7 @@
   <div class="settings">
     <Title text="Settings" />
     <div class="container">
-      <img :src="user.photo" class="profile-photo" />
+      <Avatar :rounded="true" v-bind:name="user.name" size="70"></Avatar>
       <Button :rounded="true" :text="user.name" @click="changeName" />
     </div>
     <List :data="list.data" />
@@ -18,6 +18,7 @@ import { reactive } from '@vue/composition-api';
 import Button from '@/components/core/Button';
 import { onMounted } from '@vue/composition-api';
 import { getUserData } from '@/services/userService';
+import Avatar from '@/components/core/Avatar';
 
 export default {
   props: {
@@ -27,7 +28,7 @@ export default {
     const router = root.$router;
 
     const user = reactive({
-      name: '',
+      name: ' ',
       photo: ''
     });
 
@@ -110,7 +111,8 @@ export default {
   components: {
     Title,
     List,
-    Button
+    Button,
+    Avatar
   }
 };
 </script>
