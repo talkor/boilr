@@ -3,11 +3,11 @@
     <Title text="Boilr" />
     <section class="cards">
       <Card
-        label="Temperature"
+        label="Boiler Temperature"
         :dataLabel="`${Math.round(temperature)}°C`"
         icon="thermometer-empty"
       />
-      <Card label="Weather" dataLabel="25°C" icon="sun" />
+      <Weather />
     </section>
     <section class="switch-container">
       <Button
@@ -50,12 +50,15 @@
         size="medium"
         text="End Shower"
       />
-      <ConnectToSpotify class="spotify" />
+      <div>
+        <ConnectToSpotify class="spotify" />
+      </div>
     </section>
   </div>
 </template>
 
 <script>
+import Weather from '@/components/core/Weather';
 import Card from '@/components/core/Card';
 import 'firebase/firestore';
 import Title from '@/components/core/Title';
@@ -170,7 +173,8 @@ export default {
     Card,
     Button,
     ConnectToSpotify,
-    Timer
+    Timer,
+    Weather
   }
 };
 </script>
@@ -210,8 +214,8 @@ export default {
 
 .spotify {
   position: fixed;
-  right: 50%;
-  left: 18%;
+  left: 0px;
+  right: 0px;
   top: 75%;
 }
 

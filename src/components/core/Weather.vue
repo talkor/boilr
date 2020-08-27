@@ -1,0 +1,213 @@
+<template>
+  <div class="row column header">
+    <div class="row">
+      <div class="medium-6 medium-offset-3 columns card" id="weatherApp">
+        <h4 v-show="city">{{ city }}</h4>
+        <span class="text-caption" v-show="curTempDisplay"
+          >{{ weatherMain }}: {{ weatherDesc }}</span
+        >
+        <h1 v-show="curTempDisplay">
+          <i class="wi" :class="[classWI]"></i> {{ curTempDisplay }}
+          <span
+            class="btn btn-deg"
+            :class="{ 'btn-deactivate': displayMode }"
+            @click="getTemp(0)"
+            >°C</span
+          >
+          |
+          <span
+            class="btn btn-deg"
+            :class="{ 'btn-deactivate': !displayMode }"
+            @click="getTemp(1)"
+            >°F</span
+          >
+        </h1>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+var CELSIUS = 0;
+export default {
+  setup() {
+    const city = 'Retrieving Weather...';
+    const latitude = 0.0;
+    const longitude = 0.0;
+    const curTemp = null;
+    const displayMode = CELSIUS;
+    const dataObj = null;
+    const weatherMain = 'Fine';
+    const weatherDesc = 'Clear day';
+    const errorMsg = '';
+    return {
+      city,
+      latitude,
+      longitude,
+      curTemp,
+      displayMode,
+      dataObj,
+      weatherMain,
+      weatherDesc,
+      errorMsg
+    };
+  },
+  computed: {
+    classWI: function () {
+      if (this.dataObj != null) {
+        var weatherID = this.data.dataObj.weather[0].id;
+        if (weatherID >= 200 && weatherID <= 232) {
+          return 'wi-thunderstorm';
+        } else if (weatherID >= 300 && weatherID <= 321) {
+          return 'wi-sprinkle';
+        } else if (weatherID >= 500 && weatherID <= 531) {
+          return 'wi-rain';
+        } else if (weatherID >= 600 && weatherID <= 622) {
+          return 'wi-snow';
+        } else if (weatherID >= 701 && weatherID <= 781) {
+          return 'wi-train';
+        } else if (weatherID == 800) {
+          return 'wi-moon-alt-new';
+        } else if (weatherID >= 801 && weatherID <= 804) {
+          return 'wi-cloud';
+        } else if (weatherID >= 900 && weatherID <= 962) {
+          return 'wi-small-craft-advisory';
+        }
+      }
+      return '';
+    },
+    curTempDisplay: function () {
+      if (this.curTemp != null) {
+        if (this.displayMode == CELSIUS) {
+          return (this.curTemp - 273.15).toFixed(1);
+        } else {
+          return ((this.curTemp * 9) / 5 - 459.67).toFixed(1);
+        }
+      } else {
+        return null;
+      }
+    }
+  },
+  mounted() {
+    this.getLocation();
+  },
+  methods: {
+    getTemp: function (option) {
+      this.displayMode = option;
+    },
+    getLocation: function () {
+      if (!navigator.geolocation) {
+        this.errorMsg = 'Geolocation is not supported by your browser';
+        this.city = this.errorMsg;
+        console.warn(this.errorMsg);
+        return;
+      }
+      console.log('Getting current position..');
+      var options = { timeout: 60000 };
+      navigator.geolocation.getCurrentPosition(
+        this.success,
+        this.error,
+        options
+      );
+    },
+    success: function (position) {
+      this.latitude = position.coords.latitude;
+      this.longitude = position.coords.longitude;
+      this.latitude = parseFloat(this.latitude).toFixed(2);
+      this.longitude = parseFloat(this.longitude).toFixed(2);
+      this.getWeather();
+    },
+    error: function (err) {
+      this.errorMsg = 'Unable to retrieve your location';
+      this.city = this.errorMsg;
+
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+      console.warn(this.errorMsg);
+    },
+
+    getWeather: function () {
+      var reqURL =
+        'http://api.openweathermap.org/data/2.5/weather?lat=' +
+        this.latitude +
+        '&lon=' +
+        this.longitude +
+        '&APPID=69d3cf86b46f19cf3e049339355533aa';
+
+      axios
+        .get(reqURL)
+        .then(
+          (response) => (
+            (this.curTemp = response.data.main.temp),
+            (this.city = response.data.name),
+            (this.weatherMain = response.data.weather[0].main),
+            (this.weatherDesc = response.data.weather[0].description)
+          )
+        );
+    }
+  }
+};
+</script>
+
+<style scoped lang="sass">
+$bg-color: #E5E2CA
+$btn-deactivete-color: #DDD
+$header-color: #555
+$refresh-btn-color: #d9534f
+$refresh-btn-transition: color 0.4s ease
+$text-caption-color: #AAA
+
+=no-text-select
+  // prevent selection of text inside keys
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+body, html
+  width: 100%
+  height: 100%
+  background: $bg-color
+
+.btn-danger
+  background: transparent
+  color: $refresh-btn-color
+  cursor: pointer
+  font-size: 30px
+  font-weight: 200
+  transition: $refresh-btn-transition
+
+  &:hover
+    color: lighten($refresh-btn-color, 15%) // #e79290 previously
+
+.btn-deactivate
+  color: $btn-deactivete-color
+  cursor: pointer
+
+.btn-deg
+  +no-text-select
+
+.card
+  width: 100%
+  height: 80px
+  border-radius: 10px
+  border: 1px solid rgba(0, 0, 0, 0.11)
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  box-shadow: none
+
+  .link-icon i
+    margin-top: 7px
+
+  .bottom-button
+    margin-bottom: 0
+
+  .text-caption
+    color: $text-caption-color
+
+.card-icon
+    margin: 10px
+    font-size: 15px
+</style>
