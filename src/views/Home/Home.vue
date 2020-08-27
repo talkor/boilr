@@ -62,8 +62,9 @@ import Title from '@/components/core/Title';
 import Button from '@/components/core/Button';
 import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
 import Timer from '@/components/core/Timer';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import { watchDevice, postDeviceData } from '@/services/deviceService';
+import { getUserData } from '@/services/userService';
 import 'animate.css';
 
 export default {
@@ -79,11 +80,12 @@ export default {
     const timeIsUp = ref(false);
     const startShower = ref(true);
     const TIME_LIMIT = ref(600);
+    let userData;
 
     const timeData = [
       {
         text: 'Default shower time',
-        TIME_LIMIT: 10
+        TIME_LIMIT: 600
       },
       {
         text: '5 Minutes',
@@ -114,10 +116,15 @@ export default {
         TIME_LIMIT: 3599
       }
     ];
+
     watchDevice({}, (data) => {
       active.value = data.active;
       temperature.value = data.temperature;
-      //timerActive.value = data.timerActive; /* tal- Review this
+    });
+
+    onMounted(async () => {
+      userData = await getUserData();
+      timeData[0].TIME_LIMIT = userData.defaultShowerTime * 60;
     });
 
     const onTimesUp = () => {
@@ -139,7 +146,6 @@ export default {
     };
 
     const onTimeClick = (item) => {
-      //postDeviceData({ timerActive: !timerActive.value }); /* tal- Review this
       timerActive.value = !timerActive.value;
       timeClicked.value = !timeClicked.value;
       TIME_LIMIT.value = item.TIME_LIMIT;
