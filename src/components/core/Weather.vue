@@ -129,7 +129,7 @@ export default {
 
     getWeather: function () {
       var reqURL =
-        'http://api.openweathermap.org/data/2.5/weather?lat=' +
+        'https://api.openweathermap.org/data/2.5/weather?lat=' +
         this.latitude +
         '&lon=' +
         this.longitude +

@@ -32,7 +32,7 @@ export default {
     });
 
     const changeName = () => {
-      router.push({ name: 'Profile', params: { } });
+      router.push({ name: 'Profile', params: {} });
     };
 
     onMounted(async () => {
@@ -67,7 +67,7 @@ export default {
               action: () => {
                 router.push({
                   name: 'ShowerSettings',
-                  params: { }
+                  params: {}
                 });
               }
             },

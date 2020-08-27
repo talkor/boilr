@@ -6,7 +6,7 @@
       type="input"
       label="Name"
       placeholder="Your name"
-      :value = "user.username"
+      :value="user.username"
       @input="onNameChange"
     />
     <Button
