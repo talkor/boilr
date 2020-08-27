@@ -2,7 +2,7 @@
   <div class="settings">
     <Title text="Settings" />
     <div class="container">
-      <Avatar :rounded="true" v-bind:name="user.name" size="70"></Avatar>
+      <Avatar :src="user.photo" :username="user.name" ></Avatar>
       <Button :rounded="true" :text="user.name" @click="changeName" />
     </div>
     <List :data="list.data" />
@@ -125,8 +125,8 @@ export default {
 }
 .profile-photo {
   margin-right: 10px;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
 }
 </style>
