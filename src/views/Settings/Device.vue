@@ -1,4 +1,3 @@
-
 <template>
   <AppView class="device">
     <ViewHeader title="My Device">
@@ -8,7 +7,10 @@
     </ViewHeader>
     <ViewContent>
       <div v-if="deviceId">Connected to {{ deviceId }}</div>
-      <Button @click="onChangeDevice" :text="showScanner ? 'Cancel' : 'Change device'" />
+      <Button
+        @click="onChangeDevice"
+        :text="showScanner ? 'Cancel' : 'Change device'"
+      />
       <QRScanner v-if="showScanner" @decode="onDecode" @error="onError" />
       <div v-if="showScanner" class="message">{{ message }}</div>
     </ViewContent>
@@ -19,8 +21,6 @@
 import { ref } from '@vue/composition-api';
 import QRScanner from '@/components/QRScanner/QRScanner';
 import BackButton from '@/components/core/BackButton';
-import Title from '@/components/core/Title';
-import Button from '@/components/core/Button';
 import { postUserData } from '@/services/userService';
 import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
@@ -63,8 +63,6 @@ export default {
   components: {
     QRScanner,
     BackButton,
-    Title,
-    Button,
     AppView,
     ViewHeader,
     ViewContent

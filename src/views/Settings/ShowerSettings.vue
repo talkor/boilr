@@ -1,4 +1,3 @@
-
 <template>
   <AppView class="shower">
     <ViewHeader title="Shower Settings">
@@ -7,19 +6,18 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Slider label="Default Shower Time" :value="defaultShowerTime" @change="onTimeChange" />
+      <Slider
+        label="Default Shower Time"
+        :value="defaultShowerTime"
+        @change="onTimeChange"
+      />
     </ViewContent>
   </AppView>
 </template>
 
 <script>
-import { ref } from '@vue/composition-api';
-import NumberInput from '@/components/core/NumberInput';
 import BackButton from '@/components/core/BackButton';
-import Title from '@/components/core/Title';
-import { getUserData, postUserData } from '@/services/userService';
-import { onMounted } from '@vue/composition-api';
-import Button from '@/components/core/Button';
+import { postUserData } from '@/services/userService';
 import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
@@ -29,7 +27,7 @@ export default {
   props: {
     defaultShowerTime: Number
   },
-  setup({}, { emit }) {
+  setup() {
     const onTimeChange = (value) => {
       console.log('onchange', value);
       postUserData({ defaultShowerTime: value });
@@ -40,10 +38,7 @@ export default {
     };
   },
   components: {
-    NumberInput,
     BackButton,
-    Title,
-    Button,
     AppView,
     ViewHeader,
     ViewContent,

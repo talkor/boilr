@@ -5,10 +5,9 @@
     <h1 v-show="curTempDisplay">
       <i :class="[classWI]"></i>
       {{ curTempDisplay }}
-      <span
-        :class="{ 'btn-deactivate': displayMode }"
-        @click="getTemp(0)"
-      >°C</span>
+      <span :class="{ 'btn-deactivate': displayMode }" @click="getTemp(0)"
+        >°C</span
+      >
       |
       <span @click="getTemp(1)">°F</span>
     </h1>
@@ -138,5 +137,4 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
-</style>
+<style scoped lang="sass"></style>

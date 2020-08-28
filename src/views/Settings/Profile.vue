@@ -21,9 +21,7 @@
 import 'firebase/auth';
 import TextBox from '@/components/core/TextBox';
 import BackButton from '@/components/core/BackButton';
-import Title from '@/components/core/Title';
 import { getUserData, postUserData } from '@/services/userService';
-import Button from '@/components/core/Button';
 import { onMounted } from '@vue/composition-api';
 import { ref } from '@vue/composition-api';
 import AppView from '@/components/shell/AppView';
@@ -52,8 +50,6 @@ export default {
   components: {
     TextBox,
     BackButton,
-    Title,
-    Button,
     AppView,
     ViewHeader,
     ViewContent

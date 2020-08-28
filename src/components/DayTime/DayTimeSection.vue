@@ -2,7 +2,10 @@
   <div class="container">
     <div class="view-container">
       <UserIcon :image="userImage" class="user-image" />
-      <div :class="{ 'time-container': true, disabled: !active }" @click="onClick">
+      <div
+        :class="{ 'time-container': true, disabled: !active }"
+        @click="onClick"
+      >
         <div class="time">{{ time }}</div>
         <div v-if="!showEdit && repeat" class="days">
           <span v-for="(day, index) in days" :key="index" class="day">
@@ -20,12 +23,20 @@
         @click="onDelete"
         pack="far"
       />
-      <Toggle v-if="allowEdit && !showEdit" :active="active" @toggle="onActiveToggle" />
+      <Toggle
+        v-if="allowEdit && !showEdit"
+        :active="active"
+        @toggle="onActiveToggle"
+      />
     </div>
     <transition name="slide">
       <div v-if="showEdit" class="edit-container">
         <div class="row-container">
-          <TimePicker :time="time" @timeChange="onTimeChange" class="time-picker" />
+          <TimePicker
+            :time="time"
+            @timeChange="onTimeChange"
+            class="time-picker"
+          />
           <Checkbox :checked="repeat" label="Repeat" @change="onRepeatChange" />
         </div>
         <DayPicker v-if="repeat" :days="days" @dayChange="onDayChange" />

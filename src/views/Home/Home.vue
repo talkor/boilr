@@ -30,7 +30,9 @@
           icon="power-off"
         />
       </section>
-      <section :class="{ times: true, active: active, timerActive: !timerActive }">
+      <section
+        :class="{ times: true, active: active, timerActive: !timerActive }"
+      >
         <Button
           v-for="(timeItem, idx) in timeData"
           :key="idx"
@@ -39,8 +41,14 @@
           @click="onTimeClick(timeItem)"
         />
       </section>
-      <section :class="{ times: true, active: active, timeClicked: timeClicked }">
-        <Timer v-if="timeClicked" :TIME_LIMIT="TIME_LIMIT" @onTimesUp="onTimesUp" />
+      <section
+        :class="{ times: true, active: active, timeClicked: timeClicked }"
+      >
+        <Timer
+          v-if="timeClicked"
+          :TIME_LIMIT="TIME_LIMIT"
+          @onTimesUp="onTimesUp"
+        />
       </section>
       <section>
         <Button
@@ -58,8 +66,8 @@
           size="medium"
           text="End Shower"
         />
-        <div>
-          <!-- <ConnectToSpotify class="spotify" /> -->
+        <div v-show="false">
+          <ConnectToSpotify class="spotify" />
         </div>
       </section>
     </ViewContent>

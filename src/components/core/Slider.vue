@@ -1,6 +1,12 @@
 <template>
   <div class="slider">
-    <b-slider v-model="sliderValue" :min="5" :max="60" :step="5" rounded></b-slider>
+    <b-slider
+      v-model="sliderValue"
+      :min="5"
+      :max="60"
+      :step="5"
+      rounded
+    ></b-slider>
   </div>
 </template>
 
