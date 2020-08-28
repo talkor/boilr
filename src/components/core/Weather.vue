@@ -90,7 +90,7 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
     this.getLocation();
   },
   methods: {
@@ -104,7 +104,6 @@ export default {
         console.warn(this.errorMsg);
         return;
       }
-      console.log('Getting current position..');
       var options = { timeout: 60000 };
       navigator.geolocation.getCurrentPosition(
         this.success,
@@ -133,7 +132,8 @@ export default {
         this.latitude +
         '&lon=' +
         this.longitude +
-        '&APPID=9331930d6c227312d651952d1682f22a';
+        '&APPID=' +
+        process.env.VUE_APP_FIREBASE_WEATHER_ID;
 
       axios
         .get(reqURL)
@@ -150,64 +150,57 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
-$bg-color: #E5E2CA
-$btn-deactivete-color: #DDD
-$header-color: #555
-$refresh-btn-color: #d9534f
-$refresh-btn-transition: color 0.4s ease
-$text-caption-color: #AAA
+<style>
+.btn-danger {
+  background: transparent;
+  color: #d9534f;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 200;
+  transition: color 0.4s ease;
+}
 
-=no-text-select
-  // prevent selection of text inside keys
-  -webkit-user-select: none
-  -moz-user-select: none
-  -ms-user-select: none
-  user-select: none
+btn-danger:hover {
+  color: lighten(#d9534f, 15%);
+}
 
-body, html
-  width: 100%
-  height: 100%
-  background: $bg-color
+.btn-deactivate {
+  color: #ddd;
+  cursor: pointer;
+}
 
-.btn-danger
-  background: transparent
-  color: $refresh-btn-color
-  cursor: pointer
-  font-size: 30px
-  font-weight: 200
-  transition: $refresh-btn-transition
+.btn-deg {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-  &:hover
-    color: lighten($refresh-btn-color, 15%) // #e79290 previously
+.card {
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.11);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: none;
+}
 
-.btn-deactivate
-  color: $btn-deactivete-color
-  cursor: pointer
+card:link-icon i {
+  margin-top: 7px;
+}
 
-.btn-deg
-  +no-text-select
+card:bottom-button {
+  margin-bottom: 0;
+}
 
-.card
-  width: 100%
-  height: 80px
-  border-radius: 10px
-  border: 1px solid rgba(0, 0, 0, 0.11)
-  display: flex
-  flex-direction: column
-  justify-content: space-between
-  box-shadow: none
+card:text-caption {
+  color: #aaa;
+}
 
-  .link-icon i
-    margin-top: 7px
-
-  .bottom-button
-    margin-bottom: 0
-
-  .text-caption
-    color: $text-caption-color
-
-.card-icon
-    margin: 10px
-    font-size: 15px
+.card-icon {
+  margin: 10px;
+  font-size: 15px;
+}
 </style>
