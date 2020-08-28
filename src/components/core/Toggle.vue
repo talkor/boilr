@@ -26,11 +26,7 @@ export default {
 
 <style lang="scss">
 @import '@/styles/variables.scss';
-
-.toggle {
-  &.switch:hover input[type='checkbox']:checked + .check,
-  &.switch input[type='checkbox']:checked + .check {
-    background: $primary;
-  }
+.switch {
+  margin-inline-end: 0;
 }
 </style>

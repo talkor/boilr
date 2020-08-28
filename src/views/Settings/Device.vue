@@ -1,15 +1,18 @@
+
 <template>
-  <div class="device">
-    <BackButton />
-    <Title text="My Device" />
-    <div v-if="deviceId">Connected to {{ deviceId }}</div>
-    <Button
-      @click="onChangeDevice"
-      :text="showScanner ? 'Cancel' : 'Change device'"
-    />
-    <QRScanner v-if="showScanner" @decode="onDecode" @error="onError" />
-    <div v-if="showScanner" class="message">{{ message }}</div>
-  </div>
+  <AppView class="device">
+    <ViewHeader title="My Device">
+      <template v-slot:left>
+        <BackButton />
+      </template>
+    </ViewHeader>
+    <ViewContent>
+      <div v-if="deviceId">Connected to {{ deviceId }}</div>
+      <Button @click="onChangeDevice" :text="showScanner ? 'Cancel' : 'Change device'" />
+      <QRScanner v-if="showScanner" @decode="onDecode" @error="onError" />
+      <div v-if="showScanner" class="message">{{ message }}</div>
+    </ViewContent>
+  </AppView>
 </template>
 
 <script>
@@ -19,6 +22,9 @@ import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
 import Button from '@/components/core/Button';
 import { postUserData } from '@/services/userService';
+import AppView from '@/components/shell/AppView';
+import ViewHeader from '@/components/shell/ViewHeader';
+import ViewContent from '@/components/shell/ViewContent';
 
 export default {
   props: {
@@ -58,7 +64,10 @@ export default {
     QRScanner,
     BackButton,
     Title,
-    Button
+    Button,
+    AppView,
+    ViewHeader,
+    ViewContent
   }
 };
 </script>

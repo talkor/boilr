@@ -1,7 +1,7 @@
 module.exports = {
   lintOnSave: false,
   pwa: {
-    name: 'Boilr',
+    name: 'iBoiler',
     themeColor: '#4DBA87',
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',

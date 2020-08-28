@@ -1,12 +1,16 @@
 <template>
-  <div class="settings">
-    <Title text="Settings" />
-    <div class="container">
-      <img :src="user.photo" class="profile-photo" />
-      <Button :rounded="true" :text="user.name" @click="changeName" />
-    </div>
-    <List :data="list.data" />
-  </div>
+  <AppView class="settings">
+    <ViewHeader title="Settings" />
+    <ViewContent>
+      <div class="settings">
+        <div class="container">
+          <!-- <img :src="user.photo" class="profile-photo" /> -->
+          <!-- <Button :rounded="true" :text="user.name" @click="changeName" /> -->
+        </div>
+        <List :data="list.data" />
+      </div>
+    </ViewContent>
+  </AppView>
 </template>
 
 <script>
@@ -16,30 +20,24 @@ import Title from '@/components/core/Title';
 import List from '@/components/List/List';
 import { reactive } from '@vue/composition-api';
 import Button from '@/components/core/Button';
+import AppView from '@/components/shell/AppView';
+import ViewContent from '@/components/shell/ViewContent';
+import ViewHeader from '@/components/shell/ViewHeader';
 import { onMounted } from '@vue/composition-api';
 import { getUserData } from '@/services/userService';
 
 export default {
-  props: {
-    userData: Object
-  },
-  setup({ userData }, { root }) {
+  setup(_, { root }) {
     const router = root.$router;
+    let userData;
 
-    const user = reactive({
-      name: '',
-      photo: ''
+    onMounted(async () => {
+      userData = await getUserData();
     });
 
     const changeName = () => {
       router.push({ name: 'Profile', params: {} });
     };
-
-    onMounted(async () => {
-      const newUserData = await getUserData();
-      user.name = newUserData.name;
-      user.photo = newUserData.photo;
-    });
 
     const list = reactive({
       data: [
@@ -67,7 +65,7 @@ export default {
               action: () => {
                 router.push({
                   name: 'ShowerSettings',
-                  params: {}
+                  params: { defaultShowerTime: userData.defaultShowerTime }
                 });
               }
             },
@@ -103,14 +101,16 @@ export default {
     return {
       onLogOut,
       list,
-      changeName,
-      user
+      changeName
     };
   },
   components: {
     Title,
     List,
-    Button
+    Button,
+    AppView,
+    ViewHeader,
+    ViewContent
   }
 };
 </script>

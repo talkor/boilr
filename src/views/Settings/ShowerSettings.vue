@@ -1,70 +1,53 @@
+
 <template>
-  <div class="shower">
-    <BackButton />
-    <Title text="Shower Settings" />
-    <NumberInput
-      label="Default shower time"
-      :defaultTime="time.defaultShowerTime"
-      @input="onDefaultChange"
-    />
-    <Button
-      :noBorder="false"
-      :noPadding="false"
-      :rounded="true"
-      :text="save"
-      @click="onSave"
-    />
-  </div>
+  <AppView class="shower">
+    <ViewHeader title="Shower Settings">
+      <template v-slot:left>
+        <BackButton />
+      </template>
+    </ViewHeader>
+    <ViewContent>
+      <Slider label="Default Shower Time" :value="defaultShowerTime" @change="onTimeChange" />
+    </ViewContent>
+  </AppView>
 </template>
 
 <script>
-import 'firebase/auth';
-import { reactive } from '@vue/composition-api';
+import { ref } from '@vue/composition-api';
 import NumberInput from '@/components/core/NumberInput';
 import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
 import { getUserData, postUserData } from '@/services/userService';
 import { onMounted } from '@vue/composition-api';
 import Button from '@/components/core/Button';
+import AppView from '@/components/shell/AppView';
+import ViewHeader from '@/components/shell/ViewHeader';
+import ViewContent from '@/components/shell/ViewContent';
+import Slider from '@/components/core/Slider';
 
 export default {
-  setup(props, { root }) {
-    const router = root.$router;
-    let userData;
-    let newDefaultTime;
-    const save = 'Save';
-
-    const time = reactive({
-      defaultShowerTime: ''
-    });
-
-    onMounted(async () => {
-      userData = await getUserData();
-      time.defaultShowerTime = userData.defaultShowerTime;
-    });
-
-    const onDefaultChange = (value) => {
-      newDefaultTime = value;
-    };
-
-    const onSave = () => {
-      postUserData({ defaultShowerTime: newDefaultTime });
-      router.push({ name: 'Settings' });
+  props: {
+    defaultShowerTime: Number
+  },
+  setup({}, { emit }) {
+    const onTimeChange = (value) => {
+      console.log('onchange', value);
+      postUserData({ defaultShowerTime: value });
     };
 
     return {
-      onDefaultChange,
-      onSave,
-      newDefaultTime,
-      time,
-      save
+      onTimeChange
     };
   },
   components: {
     NumberInput,
     BackButton,
     Title,
-    Button
+    Button,
+    AppView,
+    ViewHeader,
+    ViewContent,
+    Slider
   }
 };
 </script>

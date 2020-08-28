@@ -1,13 +1,10 @@
 <template>
   <div class="container">
     <div class="view-container">
-      <div
-        :class="{ 'time-container': true, disabled: !active }"
-        @click="onClick"
-      >
-        <div class="name">{{ name }}</div>
+      <UserIcon :image="userImage" class="user-image" />
+      <div :class="{ 'time-container': true, disabled: !active }" @click="onClick">
         <div class="time">{{ time }}</div>
-        <div class="days" v-if="repeat">
+        <div v-if="!showEdit && repeat" class="days">
           <span v-for="(day, index) in days" :key="index" class="day">
             <template v-if="days[index]">
               <span>{{ dayString(index) }}&nbsp;</span>
@@ -15,21 +12,20 @@
           </span>
         </div>
       </div>
-      <Button v-if="showEdit" icon="trash" size="small" @click="onDelete" />
-      <Toggle
-        v-if="allowEdit && !showEdit"
-        :active="active"
-        @toggle="onActiveToggle"
+      <Icon
+        class="delete-icon"
+        v-if="showEdit"
+        name="trash-alt"
+        size="small"
+        @click="onDelete"
+        pack="far"
       />
+      <Toggle v-if="allowEdit && !showEdit" :active="active" @toggle="onActiveToggle" />
     </div>
     <transition name="slide">
       <div v-if="showEdit" class="edit-container">
         <div class="row-container">
-          <TimePicker
-            :time="time"
-            @timeChange="onTimeChange"
-            class="time-picker"
-          />
+          <TimePicker :time="time" @timeChange="onTimeChange" class="time-picker" />
           <Checkbox :checked="repeat" label="Repeat" @change="onRepeatChange" />
         </div>
         <DayPicker v-if="repeat" :days="days" @dayChange="onDayChange" />
@@ -40,11 +36,14 @@
 
 <script>
 import Toggle from '@/components/core/Toggle';
-import Button from '@/components/core/Button';
+import Icon from '@/components/core/Icon';
 import Checkbox from '@/components/core/Checkbox';
 import TimePicker from '@/components/DayTime/TimePicker';
 import DayPicker from '@/components/DayTime/DayPicker';
-import { ref } from '@vue/composition-api';
+import UserIcon from '@/components/UserIcon';
+import { ref, onMounted } from '@vue/composition-api';
+import { getDeviceData } from '@/services/deviceService';
+import { getUserPhotoByUuid } from '@/services/userService';
 
 export default {
   props: {
@@ -54,11 +53,17 @@ export default {
     repeat: Boolean,
     id: Number,
     isNewSchedule: Boolean,
-    name: String,
+    uuid: String,
     allowEdit: Boolean
   },
   setup({ id, isNewSchedule, allowEdit }, { emit }) {
     const showEdit = ref(isNewSchedule);
+    const userImage = ref('');
+
+    onMounted(async () => {
+      const { schedule } = await getDeviceData();
+      userImage.value = await getUserPhotoByUuid(schedule[id].uuid);
+    });
 
     const dayStrings = {
       0: 'Sun',
@@ -114,15 +119,17 @@ export default {
       showEdit,
       onDayChange,
       onTimeChange,
-      onDelete
+      onDelete,
+      userImage
     };
   },
   components: {
     Toggle,
     TimePicker,
     DayPicker,
-    Button,
-    Checkbox
+    Icon,
+    Checkbox,
+    UserIcon
   }
 };
 </script>
@@ -140,12 +147,19 @@ export default {
       }
     }
 
+    .delete-icon {
+      margin-inline-start: 5px;
+    }
+
     .time {
       font-size: 24px;
     }
 
-    .name {
-      font-size: 14px;
+    .user-image {
+      margin-inline-end: 10px;
+      // margin-block-start: 5px;
+      display: flex;
+      // align-self: start;
     }
   }
 
@@ -162,8 +176,8 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-block-start: 20px;
-      margin-block-end: 5px;
+      margin-block-start: 5px;
+      margin-block-end: 10px;
     }
   }
 }

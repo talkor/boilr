@@ -16,3 +16,11 @@ export const postUserData = async (data) => {
   }
   return postData({ collection: 'users', doc: userUid, data });
 };
+
+export const getUserPhotoByUuid = async (uuid) => {
+  if (!uuid) {
+    return;
+  }
+  const { photo } = await getData({ collection: 'users', doc: uuid });
+  return photo;
+};

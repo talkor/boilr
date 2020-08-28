@@ -1,22 +1,20 @@
 <template>
-  <div class="profile">
-    <BackButton />
-    <Title text="My Profile" />
-    <TextBox
-      type="input"
-      label="Name"
-      placeholder="Your name"
-      :value="user.username"
-      @input="onNameChange"
-    />
-    <Button
-      :noBorder="false"
-      :noPadding="false"
-      :rounded="true"
-      :text="save"
-      @click="onSave"
-    />
-  </div>
+  <AppView class="profile">
+    <ViewHeader title="My Profile">
+      <template v-slot:left>
+        <BackButton />
+      </template>
+    </ViewHeader>
+    <ViewContent>
+      <TextBox
+        type="input"
+        label="Name"
+        placeholder="Name"
+        :value="username"
+        @input="onNameChange"
+      />
+    </ViewContent>
+  </AppView>
 </template>
 
 <script>
@@ -27,45 +25,38 @@ import Title from '@/components/core/Title';
 import { getUserData, postUserData } from '@/services/userService';
 import Button from '@/components/core/Button';
 import { onMounted } from '@vue/composition-api';
-import { reactive } from '@vue/composition-api';
+import { ref } from '@vue/composition-api';
+import AppView from '@/components/shell/AppView';
+import ViewHeader from '@/components/shell/ViewHeader';
+import ViewContent from '@/components/shell/ViewContent';
 
 export default {
-  setup(props, { root }) {
-    const router = root.$router;
-    var newUsername = '';
-    const save = 'Save';
-
-    const user = reactive({
-      username: ''
-    });
+  setup() {
+    const username = ref('');
 
     onMounted(async () => {
       const userData = await getUserData();
-      user.username = userData.name;
+      username.value = userData.name;
     });
 
     const onNameChange = (value) => {
-      newUsername = value;
-    };
-
-    const onSave = () => {
-      postUserData({ name: newUsername });
-      router.push({ name: 'Settings', params: {} });
+      username.value = value;
+      postUserData({ name: value });
     };
 
     return {
       onNameChange,
-      user,
-      onSave,
-      newUsername,
-      save
+      username
     };
   },
   components: {
     TextBox,
     BackButton,
     Title,
-    Button
+    Button,
+    AppView,
+    ViewHeader,
+    ViewContent
   }
 };
 </script>

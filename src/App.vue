@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <transition mode="out-in">
-      <router-view :userData="userData" class="app-content" />
+      <router-view :userData="userData" />
     </transition>
     <Navbar />
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar/Navbar';
+import Navbar from '@/components/shell/Navbar/Navbar';
 import { ref, onMounted } from '@vue/composition-api';
 import { getUserData } from '@/services/userService';
 
@@ -56,7 +56,7 @@ body {
 }
 
 #app {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-user-select: none;
@@ -66,19 +66,14 @@ body {
   height: 100%;
   max-height: 100%;
   text-align: center;
-  color: #2c3e50;
+  color: #23262d;
   flex-direction: column;
   display: flex;
   position: static;
 
-  .app-content {
-    flex: 1;
-    height: 100%;
-    max-height: 100%;
-    width: 90%;
-    margin: 1.5em auto;
-    position: static;
-    overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
   }
 
   input {

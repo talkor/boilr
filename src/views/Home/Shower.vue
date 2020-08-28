@@ -1,15 +1,20 @@
 <template>
-  <div class="shower">
-    <Title text="Shower" />
-  </div>
+  <AppView class="shower">
+    <ViewHeader title="Shower" />
+    <ViewContent />
+  </AppView>
 </template>
 
 <script>
-import Title from '@/components/core/Title';
+import AppView from '@/components/shell/AppView';
+import ViewHeader from '@/components/shell/ViewHeader';
+import ViewContent from '@/components/shell/ViewContent';
 
 export default {
   components: {
-    Title
+    AppView,
+    ViewHeader,
+    ViewContent
   }
 };
 </script>

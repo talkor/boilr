@@ -18,6 +18,13 @@ export const postData = ({ collection, doc, data, merge = true }) => {
     .set({ ...data }, { merge });
 };
 
+export const updateData = ({ collection, doc, data }) => {
+  return db()
+    .collection(collection)
+    .doc(doc)
+    .update({ ...data });
+};
+
 export const watchData = ({ collection, doc }, callback) => {
   return db()
     .collection(collection)

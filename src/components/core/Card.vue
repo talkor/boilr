@@ -1,9 +1,14 @@
 <template>
   <div class="card">
-    <h3 class="card-title">{{ label }}</h3>
-    <div class="card-container">
-      <span class="card-number">{{ dataLabel }}</span>
-      <Icon class="card-icon" v-if="icon" :name="icon" />
+    <div class="container">
+      <h3 class="card-title">{{ label }}</h3>
+      <Icon v-if="icon" :name="icon" class="icon" />
+    </div>
+    <div class="container data-container">
+      <span v-if="dataLabel" class="card-number">{{ dataLabel }}</span>
+      <span v-else>
+        <slot></slot>
+      </span>
     </div>
   </div>
 </template>
@@ -24,43 +29,47 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 15px;
-  margin-top: 30px;
+.card {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.11);
+  padding: 15px;
+  margin-block-end: 10px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: none;
 
-  .card {
-    width: 100%;
-    height: 80px;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.11);
+  .container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-shadow: none;
+    margin: 0;
+
+    &.data-container {
+      margin-block-start: 10px;
+    }
+
+    .card-number {
+      font-size: 32px;
+    }
 
     .card-title {
-      align-self: flex-start;
-      margin: 10px 0 0 10px;
-      font-size: 14px;
+      font-size: 18px;
+      align-self: start;
+      margin-block-end: 15px;
     }
 
-    .card-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-
-      .card-icon {
-        margin: 10px;
-        font-size: 15px;
-      }
-
-      .card-number {
-        margin-left: 10px;
-        font-size: 22px;
-      }
+    .icon {
+      // margin: 10px;
+      line-height: 20px;
+      font-size: 20px;
     }
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 }
 </style>

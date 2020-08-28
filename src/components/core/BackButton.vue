@@ -1,17 +1,9 @@
 <template>
-  <div class="back-button">
-    <Button
-      class="button"
-      icon="chevron-left"
-      @click="onBack"
-      size="medium"
-      :noBorder="true"
-    />
-  </div>
+  <Icon class="back-button" name="arrow-left" @click="onBack" size="small" />
 </template>
 
 <script>
-import Button from '@/components/core/Button';
+import Icon from '@/components/core/Icon';
 
 export default {
   name: 'BackButton',
@@ -25,19 +17,16 @@ export default {
     return { onBack };
   },
   components: {
-    Button
+    Icon
   }
 };
 </script>
 
 <style scoped lang="scss">
-.back-button {
-  display: flex;
-  align-items: flex-start;
+@import '@/styles/variables.scss';
 
-  .button {
-    padding: 0;
-    margin: 0;
-  }
+.back-button {
+  color: $primary;
+  font-size: 20px;
 }
 </style>

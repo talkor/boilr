@@ -13,9 +13,8 @@ export default {
 
 <style scoped lang="scss">
 h1.title {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-block-end: 0;
   font-size: 24px;
-  text-align: left;
+  text-align: center;
 }
 </style>

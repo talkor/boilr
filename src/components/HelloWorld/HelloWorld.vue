@@ -1,9 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      Welcome!
-    </p>
+    <p>Welcome!</p>
   </div>
 </template>
 
@@ -11,7 +9,7 @@
 export default {
   data() {
     return {
-      msg: 'Welcome to Boilr'
+      msg: 'Welcome to iBoiler'
     };
   },
   methods: {},

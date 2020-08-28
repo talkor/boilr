@@ -1,37 +1,44 @@
 <template>
-  <div class="schedule">
-    <div class="top-container">
-      <div class="title-container">
-        <Title text="Schedule" />
-        <Subtitle text="Select your shower schedules" />
+  <AppView class="schedule">
+    <ViewHeader title="Schedule">
+      <template v-slot:right>
+        <Icon @click="addTime" name="plus" size="small" />
+      </template>
+    </ViewHeader>
+    <ViewContent>
+      <div class="top-container">
+        <div class="title-container">
+          <Subtitle text="Select your shower schedules" />
+        </div>
       </div>
-      <Button @click="addTime" icon="plus" size="small" />
-    </div>
-    <div class="time" v-for="(item, index) in schedule" :key="index">
-      <DayTimeSection
-        :id="index"
-        :time="item.time"
-        :days="item.days"
-        :name="item.name"
-        :active="item.active"
-        :repeat="item.repeat"
-        @dayChange="onDayChange"
-        @timeChange="onTimeChange"
-        @activeToggle="onActiveToggle"
-        @repeatChange="onRepeatChange"
-        :isNewItem="isNewSchedule"
-        @delete="onDeleteTime"
-        :allowEdit="allowEdit(item)"
-      />
-      <Divider v-if="index !== schedule.length - 1" />
-    </div>
-  </div>
+      <div class="time" v-for="(item, index) in schedule" :key="index">
+        <DayTimeSection
+          :id="index"
+          :time="item.time"
+          :days="item.days"
+          :uuid="item.uuid"
+          :active="item.active"
+          :repeat="item.repeat"
+          @dayChange="onDayChange"
+          @timeChange="onTimeChange"
+          @activeToggle="onActiveToggle"
+          @repeatChange="onRepeatChange"
+          :isNewItem="isNewSchedule"
+          @delete="onDeleteTime"
+          :allowEdit="allowEdit(item)"
+        />
+        <Divider v-if="index !== schedule.length - 1" />
+      </div>
+    </ViewContent>
+  </AppView>
 </template>
 
 <script>
-import Title from '@/components/core/Title';
+import ViewHeader from '@/components/shell/ViewHeader';
+import AppView from '@/components/shell/AppView';
+import ViewContent from '@/components/shell/ViewContent';
 import Subtitle from '@/components/core/Subtitle';
-import Button from '@/components/core/Button';
+import Icon from '@/components/core/Icon';
 import Divider from '@/components/core/Divider';
 import DayTimeSection from '@/components/DayTime/DayTimeSection';
 import { ref, onMounted } from '@vue/composition-api';
@@ -55,7 +62,7 @@ export default {
         time: '7:00',
         days: [true, true, true, true, true, false, false],
         active: true,
-        name: userData.name,
+        uuid: userData.uid,
         userId: userData.uid,
         repeat: false
       };
@@ -131,11 +138,13 @@ export default {
     };
   },
   components: {
-    Title,
+    ViewHeader,
     Subtitle,
-    Button,
+    Icon,
     DayTimeSection,
-    Divider
+    Divider,
+    AppView,
+    ViewContent
   }
 };
 </script>

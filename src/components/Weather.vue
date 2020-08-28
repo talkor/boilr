@@ -1,36 +1,24 @@
 <template>
-  <div class="row column header">
-    <div class="row">
-      <div class="medium-6 medium-offset-3 columns card" id="weatherApp">
-        <h4 v-show="city">{{ city }}</h4>
-        <span class="text-caption" v-show="curTempDisplay"
-          >{{ weatherMain }}: {{ weatherDesc }}</span
-        >
-        <h1 v-show="curTempDisplay">
-          <i class="wi" :class="[classWI]"></i> {{ curTempDisplay }}
-          <span
-            class="btn btn-deg"
-            :class="{ 'btn-deactivate': displayMode }"
-            @click="getTemp(0)"
-            >°C</span
-          >
-          |
-          <span
-            class="btn btn-deg"
-            :class="{ 'btn-deactivate': !displayMode }"
-            @click="getTemp(1)"
-            >°F</span
-          >
-        </h1>
-      </div>
-    </div>
+  <div>
+    <h4 v-show="city">{{ city }}</h4>
+    <span v-show="curTempDisplay">{{ weatherMain }}: {{ weatherDesc }}</span>
+    <h1 v-show="curTempDisplay">
+      <i :class="[classWI]"></i>
+      {{ curTempDisplay }}
+      <span
+        :class="{ 'btn-deactivate': displayMode }"
+        @click="getTemp(0)"
+      >°C</span>
+      |
+      <span @click="getTemp(1)">°F</span>
+    </h1>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 
-var CELSIUS = 0;
+const CELSIUS = 0;
 export default {
   setup() {
     const city = 'Retrieving Weather...';
@@ -57,7 +45,7 @@ export default {
   computed: {
     classWI: function () {
       if (this.dataObj != null) {
-        var weatherID = this.data.dataObj.weather[0].id;
+        const weatherID = this.data.dataObj.weather[0].id;
         if (weatherID >= 200 && weatherID <= 232) {
           return 'wi-thunderstorm';
         } else if (weatherID >= 300 && weatherID <= 321) {
@@ -104,7 +92,7 @@ export default {
         console.warn(this.errorMsg);
         return;
       }
-      var options = { timeout: 60000 };
+      const options = { timeout: 60000 };
       navigator.geolocation.getCurrentPosition(
         this.success,
         this.error,
@@ -127,7 +115,7 @@ export default {
     },
 
     getWeather: function () {
-      var reqURL =
+      const reqURL =
         'https://api.openweathermap.org/data/2.5/weather?lat=' +
         this.latitude +
         '&lon=' +
@@ -150,57 +138,5 @@ export default {
 };
 </script>
 
-<style>
-.btn-danger {
-  background: transparent;
-  color: #d9534f;
-  cursor: pointer;
-  font-size: 30px;
-  font-weight: 200;
-  transition: color 0.4s ease;
-}
-
-btn-danger:hover {
-  color: lighten(#d9534f, 15%);
-}
-
-.btn-deactivate {
-  color: #ddd;
-  cursor: pointer;
-}
-
-.btn-deg {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.card {
-  width: 100%;
-  height: 80px;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.11);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: none;
-}
-
-card:link-icon i {
-  margin-top: 7px;
-}
-
-card:bottom-button {
-  margin-bottom: 0;
-}
-
-card:text-caption {
-  color: #aaa;
-}
-
-.card-icon {
-  margin: 10px;
-  font-size: 15px;
-}
+<style scoped lang="sass">
 </style>

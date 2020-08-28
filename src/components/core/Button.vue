@@ -44,8 +44,6 @@ export default {
 
 <style scoped lang="scss">
 .main {
-  margin: 10px 0;
-
   &.no-border {
     border: none;
   }
@@ -60,3 +58,4 @@ export default {
   }
 }
 </style>
+

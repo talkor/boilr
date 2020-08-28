@@ -1,9 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400');
 @import '~bulma/sass/utilities/_all';
 
-$primary: #ef6767;
+$primary: #35b5f6;
 $primary-invert: findColorInvert($primary);
 
+$colors: (
+  'primary': (
+    $primary,
+    $primary-invert
+  )
+);
 $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;

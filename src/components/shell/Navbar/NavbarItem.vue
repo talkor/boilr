@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .navbar-item {
   flex: 1;
   cursor: pointer;
@@ -43,20 +45,18 @@ export default {
   .active,
   &:hover,
   &:focus {
-    color: #444444;
-    background-color: #ffffff;
+    color: $primary;
+    background-color: transparent !important;
+
+    .label {
+      color: $primary;
+    }
   }
 
   .label {
     font-size: 11px;
     margin-top: 0;
     font-weight: 400;
-
-    .active,
-    &:hover,
-    &:focus {
-      color: #444444;
-    }
   }
 }
 </style>
