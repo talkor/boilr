@@ -13,7 +13,8 @@
       </template>
     </ViewHeader>
     <ViewContent class>
-      <Label :text= "'Oh hi ,' + userData.name + '! Have you taken a shower today?'"></Label>
+      <Label :text= "'Oh hi ,' + userData.name + '!'"></Label>
+      <Label :text= "'Have you taken a shower today?'"></Label>
       <section class="cards">
         <Card
           label="Water Temperature"
