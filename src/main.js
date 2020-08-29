@@ -11,6 +11,7 @@ import 'firebase/auth';
 import 'firebase/messaging';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
+import { postData } from '@/services/databaseService';
 
 Vue.use(Buefy, {
   defaultIconPack: 'fas'
@@ -40,7 +41,7 @@ messaging
   .then(() => {
     console.log('Notification permission granted.');
     messaging.getToken().then((token) => {
-      console.log(token);
+      postData({ collection: 'tokens', doc: 'token', data: { token } });
     });
   })
   .catch((err) => {
