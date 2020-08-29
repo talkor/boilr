@@ -25,6 +25,7 @@
     "register-service-worker": "^1.6.2",
     "uuid": "8.3.0",
     "vue": "^2.6.11",
+    "vue-circle-slider": "1.0.2",
     "vue-fragment": "1.5.1",
     "vue-mobile-detection": "1.0.0",
     "vue-qrcode-reader": "2.2.0",

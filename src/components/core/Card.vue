@@ -2,13 +2,13 @@
   <div class="card">
     <div class="container">
       <h3 class="card-title">{{ label }}</h3>
-      <Icon v-if="icon" :name="icon" class="icon" />
-    </div>
-    <div class="container data-container">
       <span v-if="dataLabel" class="card-number">{{ dataLabel }}</span>
       <span v-else>
         <slot></slot>
       </span>
+    </div>
+    <div>
+      <Icon v-if="icon" :name="icon" class="icon" />
     </div>
   </div>
 </template>
@@ -36,42 +36,35 @@ export default {
   height: auto;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.11);
-  padding: 15px;
+  padding: 10px;
   margin-block-end: 10px;
   display: flex;
   justify-content: space-between;
-  box-shadow: none;
+  box-shadow: none !important;
 
   .container {
     display: flex;
     flex-direction: column;
     margin: 0;
 
-    &.data-container {
-      margin-block-start: 10px;
-    }
-
     .card-number {
       font-size: 24px;
+      flex: 1;
+      justify-content: start;
+      text-align: start;
     }
 
     .card-title {
-      font-size: 18px;
+      font-size: 14px;
       align-self: start;
       margin-block-end: 15px;
-    }
-
-    .icon {
-      line-height: 20px;
-      font-size: 20px;
-      color: $primary;
+      font-weight: 600;
     }
   }
-
-  .card-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+  .icon {
+    line-height: 30px;
+    font-size: 20px;
+    color: $primary;
   }
 }
 </style>

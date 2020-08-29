@@ -14,9 +14,8 @@
     </ViewHeader>
     <ViewContent>
       <section class="cards">
-        <Card icon="info" label="Info">
-          <Label :text="`Oh hi, ${userData.name}!`" />
-          <Label bold text="Your next shower is at 7:00" />
+        <Card icon="info" :label="`Oh hi, ${userData.name}!`">
+          <Label text="Your next shower is at 7:00" />
         </Card>
         <Card
           label="Water Temperature"
@@ -70,6 +69,21 @@
           size="medium"
           text="End Shower"
         />
+        <!-- <circle-slider
+          v-model="sliderValue"
+          :side="150"
+          :min="5"
+          :max="60"
+          :step-size="5"
+          :circle-width-rel="50"
+          circle-color="#dbdbdb"
+          progress-color="#35b5f6"
+          :progress-width-rel="10"
+          :knob-radius="10"
+          knob-color="#35b5f6"
+        ></circle-slider> -->
+        <div>{{ sliderValue }}</div>
+        <div>Minutes</div>
         <div v-show="false">
           <ConnectToSpotify class="spotify" />
         </div>
@@ -112,6 +126,7 @@ export default {
     const startShower = ref(true);
     const TIME_LIMIT = ref(600);
     let userData;
+    const sliderValue = ref(0);
 
     const timeData = [
       {
@@ -206,7 +221,8 @@ export default {
       timerActive,
       timeClicked,
       timeIsUp,
-      startShower
+      startShower,
+      sliderValue
     };
   },
   components: {

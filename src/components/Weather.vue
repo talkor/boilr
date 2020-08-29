@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <div>
-      <strong>{{ curTempDisplay }}°C in {{ city }}</strong>
-    </div>
+  <div class="weather">
+    <div>{{ curTempDisplay }}°C in {{ city }}</div>
     <span>{{ weatherMain }}: {{ weatherDesc }}</span>
   </div>
 </template>
@@ -130,4 +128,8 @@ export default {
 };
 </script>
 
-<style scoped lang="sass"></style>
+<style scoped lang="scss">
+.weather {
+  text-align: start;
+}
+</style>
