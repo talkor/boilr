@@ -26,7 +26,7 @@
         </Card>
       </section>
       <section class="switch-container">
-        <Button
+        <CoreButton
           @click="onSwitchClick"
           :class="{ 'switch-button': true, active: active }"
           icon="power-off"
@@ -35,7 +35,7 @@
       <section
         :class="{ times: true, active: active, timerActive: !timerActive }"
       >
-        <Button
+        <CoreButton
           v-for="(timeItem, idx) in timeData"
           :key="idx"
           :text="timeItem.text"
@@ -53,7 +53,7 @@
         />
       </section>
       <section>
-        <Button
+        <CoreButton
           @click="onStartShowerClick"
           v-if="timeIsUp & startShower"
           class="start-shower animate__animated animate__pulse animate__slow animate__infinite"
@@ -61,7 +61,7 @@
           size="medium"
           text="Start Shower"
         />
-        <Button
+        <CoreButton
           v-if="timeIsUp & !startShower"
           class="end-shower"
           icon="shower"
@@ -81,7 +81,7 @@ import Weather from '@/components/Weather';
 import Card from '@/components/core/Card';
 import 'firebase/firestore';
 import ViewHeader from '@/components/shell/ViewHeader';
-import Button from '@/components/core/Button';
+import CoreButton from '@/components/core/CoreButton';
 import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
 import Timer from '@/components/core/Timer';
 import { ref, onMounted } from '@vue/composition-api';
@@ -152,7 +152,6 @@ export default {
     });
 
     onMounted(async () => {
-      console.log(root.$refs);
       userData = await getUserData();
       timeData[0].TIME_LIMIT = userData.defaultShowerTime * 60;
     });
@@ -211,7 +210,7 @@ export default {
   components: {
     ViewHeader,
     Card,
-    Button,
+    CoreButton,
     ConnectToSpotify,
     Timer,
     Weather,

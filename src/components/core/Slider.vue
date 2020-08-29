@@ -18,7 +18,6 @@ export default {
     value: Number
   },
   setup({ value }, { emit }) {
-    console.log(value);
     const sliderValue = ref(value);
 
     watch(sliderValue, (sliderValue) => {

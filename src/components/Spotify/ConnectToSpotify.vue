@@ -1,10 +1,11 @@
 <template>
   <router-link to="">
-    <Button
+    <CoreButton
       class="spotify-button"
       rounded
       size="medium"
-      text="Connect To Spotify"
+      text="Connect To
+    Spotify"
       icon="spotify"
       iconPack="fab"
     />
@@ -12,12 +13,12 @@
 </template>
 
 <script>
-import Button from '@/components/core/Button';
+import CoreButton from '@/components/core/CoreButton';
 
 export default {
   setup() {},
   components: {
-    Button
+    CoreButton
   }
 };
 </script>

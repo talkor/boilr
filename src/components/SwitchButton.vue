@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Icon from '@/components/core/Button';
+import Icon from '@/components/core/CoreButton';
 
 export default {
   props: {

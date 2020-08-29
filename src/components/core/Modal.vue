@@ -14,14 +14,14 @@
       </section>
     </div>
     <footer class="modal-card-foot">
-      <Button :noBorder="true" @click="$parent.close()" text="Cancel" />
-      <Button :primary="true" text="Save" />
+      <CoreButton :noBorder="true" @click="$parent.close()" text="Cancel" />
+      <CoreButton :primary="true" text="Save" />
     </footer>
   </b-modal>
 </template>
 
 <script>
-import Button from '@/components/core/Button';
+import CoreButton from '@/components/core/CoreButton';
 
 export default {
   props: {

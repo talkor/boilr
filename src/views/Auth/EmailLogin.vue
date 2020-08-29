@@ -14,7 +14,7 @@
       placeholder="Password"
       @input="onPasswordChange"
     />
-    <Button @click="onSignIn" text="Sign In" />
+    CoreButton @click="onSignIn" text="Sign In" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { reactive } from '@vue/composition-api';
 import TextBox from '@/components/core/TextBox';
-import Button from '@/components/core/Button';
+import CoreButton from '@/components/core/CoreButton';
 import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
 
@@ -63,7 +63,7 @@ export default {
   },
   components: {
     TextBox,
-    Button,
+    CoreButton,
     BackButton,
     Title
   }

@@ -1,22 +1,23 @@
 <template>
   <router-link to="login/email">
-    <Button
+    <CoreButton
       class="email-button"
       rounded
       size="medium"
-      text="Sign In With Email"
+      text="Sign In With
+    Email"
       icon="envelope"
     />
   </router-link>
 </template>
 
 <script>
-import Button from '@/components/core/Button';
+import CoreButton from '@/components/core/CoreButton';
 
 export default {
   setup() {},
   components: {
-    Button
+    CoreButton
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <Button
+  <CoreButton
     class="google-button"
     rounded
     @click="onLogin"
@@ -7,13 +7,13 @@
     text="Sign In With Google"
   >
     <img src="../../assets/google.svg" class="google-icon" />
-  </Button>
+  </CoreButton>
 </template>
 
 <script>
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import Button from '@/components/core/Button';
+import CoreButton from '@/components/core/CoreButton';
 import { getData, postData } from '@/services/databaseService';
 
 export default {
@@ -63,7 +63,7 @@ export default {
       onLogin
     };
   },
-  components: { Button }
+  components: { CoreButton }
 };
 </script>
 <style scoped lang="scss">

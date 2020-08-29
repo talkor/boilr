@@ -1,29 +1,39 @@
 <template>
-  <div class="demo">
+  <AppView class="demo">
     <div class="demo-container">
-      <div class="gauge">
+      <div class="gauge" v-if="!showQRCode">
         <div class="temperature">{{ temperature }}°C</div>
         <svg id="gauge" width="97%" height="400px"></svg>
       </div>
+
       <div class="power">
         <span :class="{ led: true, active: active }" />Power
         {{ active ? 'ON' : 'OFF' }}
       </div>
     </div>
-    <img class="barcode" src="../../assets/qr.png" />
-  </div>
+    <CoreButton @click="onShowCodeClick" text="Scan QR Code" />
+    <img v-if="showQRCode" class="barcode" src="../../assets/qr.png" />
+  </AppView>
 </template>
 
 <script>
 import { reactive, ref, onMounted } from '@vue/composition-api';
 import { watchDevice } from '@/services/deviceService';
 import * as d3 from 'd3';
+import AppView from '@/components/shell/AppView';
+import ViewHeader from '@/components/shell/ViewHeader';
+import ViewContent from '@/components/shell/ViewContent';
+import CoreButton from '@/components/core/CoreButton';
 
 export default {
   setup() {
     const active = ref(false);
     const temperature = ref(25);
+    const showQRCode = ref(false);
 
+    const onShowCodeClick = () => {
+      showQRCode.value = !showQRCode.value;
+    };
     const getHue = (temp) => {
       const maxHsl = 360;
       const minHsl = 170;
@@ -219,8 +229,16 @@ export default {
 
     return {
       active,
-      temperature
+      temperature,
+      onShowCodeClick,
+      showQRCode
     };
+  },
+  components: {
+    CoreButton,
+    AppView,
+    ViewHeader,
+    ViewContent
   }
 };
 </script>

@@ -7,7 +7,7 @@
     </ViewHeader>
     <ViewContent>
       <div v-if="deviceId">Connected to {{ deviceId }}</div>
-      <Button
+      <CoreButton
         @click="onChangeDevice"
         :text="showScanner ? 'Cancel' : 'Change device'"
       />
@@ -25,6 +25,7 @@ import { postUserData } from '@/services/userService';
 import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
+import CoreButton from '@/components/core/CoreButton';
 
 export default {
   props: {
@@ -63,6 +64,7 @@ export default {
   components: {
     QRScanner,
     BackButton,
+    CoreButton,
     AppView,
     ViewHeader,
     ViewContent

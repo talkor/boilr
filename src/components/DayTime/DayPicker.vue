@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Button
+    <CoreButton
       v-for="(day, index) in 7"
       :key="index"
       :noBorder="!days[index]"
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Button from '@/components/core/Button';
+import CoreButton from '@/components/core/CoreButton';
 
 export default {
   props: {
@@ -35,7 +35,7 @@ export default {
     };
   },
   components: {
-    Button
+    CoreButton
   }
 };
 </script>

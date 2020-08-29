@@ -6,7 +6,6 @@
 import { watch, ref } from '@vue/composition-api';
 
 export default {
-  name: 'Button',
   props: {
     label: String,
     checked: Boolean

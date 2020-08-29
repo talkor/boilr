@@ -5,7 +5,7 @@
       <div class="settings">
         <div class="container">
           <!-- <img :src="user.photo" class="profile-photo" /> -->
-          <!-- <Button :rounded="true" :text="user.name" @click="changeName" /> -->
+          <!-- CoreButton :rounded="true" :text="user.name" @click="changeName" /> -->
         </div>
         <List :data="list.data" />
       </div>

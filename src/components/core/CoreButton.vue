@@ -16,7 +16,6 @@
 
 <script>
 export default {
-  name: 'Button',
   props: {
     text: String,
     size: String,
@@ -44,6 +43,8 @@ export default {
 
 <style scoped lang="scss">
 .main {
+  margin: 10px 0;
+
   &.no-border {
     border: none;
   }

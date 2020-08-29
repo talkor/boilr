@@ -1,22 +1,23 @@
 <template>
   <router-link to="register">
-    <Button
+    <CoreButton
       class="register-button"
       rounded
       size="medium"
-      text="No Account? Register"
+      text="No Account?
+    Register"
       icon="account"
     />
   </router-link>
 </template>
 
 <script>
-import Button from '@/components/core/Button';
+import CoreButton from '@/components/core/CoreButton';
 
 export default {
   setup() {},
   components: {
-    Button
+    CoreButton
   }
 };
 </script>

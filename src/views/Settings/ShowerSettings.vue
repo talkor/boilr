@@ -6,9 +6,7 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Label
-        :text="'Default Shower Time: ' + defaultShowerTime + ' minutes'"
-      ></Label>
+      <Label :text="`Default Shower Time: ${showerTime} minutes`"></Label>
       <Slider
         label="Default Shower Time"
         :value="defaultShowerTime"
@@ -26,19 +24,23 @@ import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import Slider from '@/components/core/Slider';
 import Label from '@/components/core/Label';
+import { ref } from '@vue/composition-api';
 
 export default {
   props: {
     defaultShowerTime: Number
   },
-  setup() {
+  setup({ defaultShowerTime }) {
+    const showerTime = ref(defaultShowerTime);
+
     const onTimeChange = (value) => {
-      console.log('onchange', value);
+      showerTime.value = value;
       postUserData({ defaultShowerTime: value });
     };
 
     return {
-      onTimeChange
+      onTimeChange,
+      showerTime
     };
   },
   components: {
