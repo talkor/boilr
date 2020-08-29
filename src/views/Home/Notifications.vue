@@ -10,7 +10,7 @@
         <div v-for="(item, index) in shortLogList" :key="index">
           <div class="log-item">
             <div class="time">
-              {{ new Date(item.timestamp.toDate()).toLocaleString() }}
+              {{ new Date(item.timestamp.toDate()).toLocaleString('he-IL') }}
             </div>
             <div class="text">
               iBoiler was turned
@@ -46,7 +46,7 @@ export default {
       if (!logList.value.length) {
         return;
       }
-      return logList.value.slice(0, 10).reverse();
+      return logList.value.reverse().slice(0, 15);
     });
 
     return { shortLogList };
