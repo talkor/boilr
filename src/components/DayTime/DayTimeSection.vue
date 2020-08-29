@@ -37,6 +37,13 @@
             @timeChange="onTimeChange"
             class="time-picker"
           />
+          <Dropdown
+            class="shower-time-dropdown"
+            icon="hourglass-end"
+            :options="showerTimeOptions()"
+            :initialValue="`${duration} min`"
+            @change="onDurationChange"
+          />
           <Checkbox :checked="repeat" label="Repeat" @change="onRepeatChange" />
         </div>
         <DayPicker v-if="repeat" :days="days" @dayChange="onDayChange" />
@@ -52,6 +59,7 @@ import Checkbox from '@/components/core/Checkbox';
 import TimePicker from '@/components/DayTime/TimePicker';
 import DayPicker from '@/components/DayTime/DayPicker';
 import UserIcon from '@/components/UserIcon';
+import Dropdown from '@/components/core/Dropdown';
 import { ref, onMounted } from '@vue/composition-api';
 import { getUserPhotoByUuid } from '@/services/userService';
 
@@ -61,6 +69,7 @@ export default {
     days: Array,
     active: Boolean,
     repeat: Boolean,
+    duration: Number,
     id: String,
     isNewSchedule: Boolean,
     uuid: String,
@@ -108,6 +117,10 @@ export default {
       emit('repeatChange', id, value);
     };
 
+    const onDurationChange = (value) => {
+      emit('durationChange', id, value);
+    };
+
     const onActiveToggle = (value) => {
       if (!value) {
         showEdit.value = false;
@@ -120,16 +133,30 @@ export default {
       emit('delete', id);
     };
 
+    const showerTimeOptions = () => {
+      const options = [];
+      for (let index = 5; index <= 60; index += 5) {
+        options.push({
+          id: index,
+          value: `${index}`,
+          label: `${index} min`
+        });
+      }
+
+      return options;
+    };
     return {
       onActiveToggle,
       onRepeatChange,
+      onDurationChange,
       onClick,
       dayString,
       showEdit,
       onDayChange,
       onTimeChange,
       onDelete,
-      userImage
+      userImage,
+      showerTimeOptions
     };
   },
   components: {
@@ -138,16 +165,23 @@ export default {
     DayPicker,
     Icon,
     Checkbox,
-    UserIcon
+    UserIcon,
+    Dropdown
   }
 };
 </script>
 <style scoped lang="scss">
 .container {
+  .shower-time-dropdown {
+    margin-inline-end: 10px;
+    flex: 1;
+  }
+
   .view-container {
     text-align: start;
     display: flex;
     align-items: flex-start;
+    margin-block-end: 10px;
 
     .time-container {
       flex: 1;

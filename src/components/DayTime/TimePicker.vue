@@ -2,10 +2,11 @@
   <b-field :label="label">
     <b-timepicker
       class="time-picker"
-      :placeholder="placeholder"
-      editable
       icon="clock"
       v-model="value"
+      :enable-seconds="false"
+      :editable="true"
+      :hour-format="`24`"
     />
   </b-field>
 </template>
@@ -16,7 +17,6 @@ import { ref, watch } from '@vue/composition-api';
 export default {
   props: {
     time: String,
-    placeholder: String,
     label: String
   },
   setup({ time }, { emit }) {

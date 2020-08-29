@@ -6,14 +6,16 @@
 
 <script>
 export default {
-  name: 'Icon',
   props: {
     name: String,
     pack: {
       type: String,
       default: 'fas'
     },
-    size: String
+    size: {
+      type: String,
+      default: 'medium'
+    }
   },
   setup(_, { emit }) {
     const onClick = (event) => {

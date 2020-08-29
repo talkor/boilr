@@ -26,7 +26,7 @@ export default {
 
 <style lang="scss">
 @import '@/styles/variables.scss';
-.switch {
+.switch.switch {
   margin-inline-end: 0;
 }
 </style>

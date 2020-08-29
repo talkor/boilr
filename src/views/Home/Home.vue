@@ -25,6 +25,7 @@
         <Card label="Weather" icon="sun">
           <Weather />
         </Card>
+        <Card label="Shower Minutes" :dataLabel="`40 Min`" icon="tint" />
       </section>
       <section class="switch-container">
         <CoreButton
@@ -244,6 +245,12 @@ export default {
         left: -5px;
       }
     }
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
   }
 
   .switch-container {

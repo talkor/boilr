@@ -22,16 +22,17 @@
         >
           <DayTimeSection
             :id="item.id"
-            :key="index"
             :time="item.time"
             :days="item.days"
             :uuid="item.uuid"
             :active="item.active"
             :repeat="item.repeat"
+            :duration="parseInt(item.duration, 10)"
             @dayChange="onDayChange"
             @timeChange="onTimeChange"
             @activeToggle="onActiveToggle"
             @repeatChange="onRepeatChange"
+            @durationChange="onDurationChange"
             :isNewItem="isNewSchedule"
             @delete="onDeleteTime"
             :allowEdit="true"
@@ -52,12 +53,6 @@
             :uuid="item.uuid"
             :active="item.active"
             :repeat="item.repeat"
-            @dayChange="onDayChange"
-            @timeChange="onTimeChange"
-            @activeToggle="onActiveToggle"
-            @repeatChange="onRepeatChange"
-            :isNewItem="isNewSchedule"
-            @delete="onDeleteTime"
             :allowEdit="false"
           />
           <Divider v-if="index !== otherSchedule.length - 1" />
@@ -94,13 +89,15 @@ export default {
     });
 
     const addTime = () => {
+      const time = new Date();
       const newSchedule = {
-        time: '7:00',
+        time: `${time.getHours()}:${time.getMinutes()}`,
         days: [true, true, true, true, true, false, false],
         active: true,
         id: uuidv4(),
         uuid: userData.uid,
-        repeat: false
+        repeat: false,
+        duration: userData.defaultShowerTime
       };
       schedule.value.unshift({ ...newSchedule });
       isNewSchedule.value = true;
@@ -138,7 +135,7 @@ export default {
     };
 
     const onDayChange = (index, id) => {
-      const oldSchedule = schedule.value.find((item) => item.id === id);
+      const oldSchedule = getScheduleById(id);
       let days = oldSchedule.days;
       days[index] = !days[index];
       const newValue = {
@@ -149,7 +146,7 @@ export default {
     };
 
     const onTimeChange = (id, time) => {
-      const oldSchedule = schedule.value.find((item) => item.id === id);
+      const oldSchedule = getScheduleById(id);
       const newValue = {
         ...oldSchedule,
         time
@@ -158,7 +155,7 @@ export default {
     };
 
     const onActiveToggle = (id) => {
-      const oldSchedule = schedule.value.find((item) => item.id === id);
+      const oldSchedule = getScheduleById(id);
       const newValue = {
         ...oldSchedule,
         active: !oldSchedule.active
@@ -166,13 +163,26 @@ export default {
       updateValues({ id, value: newValue });
     };
 
+    const onDurationChange = (id, duration) => {
+      const oldSchedule = getScheduleById(id);
+      const newValue = {
+        ...oldSchedule,
+        duration
+      };
+      updateValues({ id, value: newValue });
+    };
+
     const onRepeatChange = (id) => {
-      const oldSchedule = schedule.value.find((item) => item.id === id);
+      const oldSchedule = getScheduleById(id);
       const newValue = {
         ...oldSchedule,
         repeat: !oldSchedule.repeat
       };
       updateValues({ id, value: newValue });
+    };
+
+    const getScheduleById = (id) => {
+      return schedule.value.find((item) => item.id === id);
     };
 
     const allowEdit = (item) => {
@@ -184,6 +194,7 @@ export default {
       onTimeChange,
       onDayChange,
       onRepeatChange,
+      onDurationChange,
       addTime,
       schedule,
       isNewSchedule,
