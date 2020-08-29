@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-label.label.label.label {
+label.label {
   margin-block-start: 0px;
   font-size: 16px;
   font-weight: 300;
