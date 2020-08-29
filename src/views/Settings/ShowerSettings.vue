@@ -6,7 +6,9 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Label :text= "'Default Shower Time: ' + defaultShowerTime + ' minutes'"></Label>
+      <Label
+        :text="'Default Shower Time: ' + defaultShowerTime + ' minutes'"
+      ></Label>
       <Slider
         label="Default Shower Time"
         :value="defaultShowerTime"

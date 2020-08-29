@@ -7,6 +7,7 @@ import VueCompositionApi from '@vue/composition-api';
 import VueMobileDetection from 'vue-mobile-detection';
 import Buefy from 'buefy';
 import * as firebase from 'firebase/app';
+import '@firebase/messaging';
 import 'firebase/auth';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
@@ -32,6 +33,17 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
+messaging.usePublicVapidKey(process.env.VUE_APP_MESSAGING_KEY_PAIR);
+messaging
+  .requestPermission()
+  .then(() => {
+    console.log('Have messaging permission');
+    messaging.getToken().then((token) => console.log(token));
+  })
+  .catch((err) => {
+    console.log(err, 'No permission');
+  });
 
 let app;
 
