@@ -19,7 +19,7 @@
         </Card>
         <Card
           label="Water Temperature"
-          :dataLabel="`${Math.round(temperature)}°C`"
+          :dataLabel="`${Math.floor(temperature)}°C`"
           icon="thermometer-empty"
         />
         <Card label="Weather" icon="sun">
@@ -69,21 +69,6 @@
           size="medium"
           text="End Shower"
         />
-        <!-- <circle-slider
-          v-model="sliderValue"
-          :side="150"
-          :min="5"
-          :max="60"
-          :step-size="5"
-          :circle-width-rel="50"
-          circle-color="#dbdbdb"
-          progress-color="#35b5f6"
-          :progress-width-rel="10"
-          :knob-radius="10"
-          knob-color="#35b5f6"
-        ></circle-slider>
-        <div>{{ sliderValue }}</div>
-        <div>Minutes</div> -->
         <div v-show="false">
           <ConnectToSpotify class="spotify" />
         </div>

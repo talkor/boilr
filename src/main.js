@@ -11,7 +11,6 @@ import 'firebase/auth';
 import 'firebase/messaging';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
-import VueCircleSlider from 'vue-circle-slider';
 
 Vue.use(Buefy, {
   defaultIconPack: 'fas'
@@ -19,7 +18,6 @@ Vue.use(Buefy, {
 
 Vue.use(VueMobileDetection);
 Vue.use(VueCompositionApi);
-Vue.use(VueCircleSlider);
 
 Vue.config.productionTip = false;
 
