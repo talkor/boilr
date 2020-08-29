@@ -62,18 +62,18 @@ export default {
     days: Array,
     active: Boolean,
     repeat: Boolean,
-    id: Number,
+    id: String,
     isNewSchedule: Boolean,
     uuid: String,
     allowEdit: Boolean
   },
-  setup({ id, isNewSchedule, allowEdit }, { emit }) {
+  setup({ id, uuid, isNewSchedule, allowEdit }, { emit }) {
     const showEdit = ref(isNewSchedule);
     const userImage = ref('');
 
     onMounted(async () => {
       const { schedule } = await getDeviceData();
-      userImage.value = await getUserPhotoByUuid(schedule[id].uuid);
+      userImage.value = await getUserPhotoByUuid(uuid);
     });
 
     const dayStrings = {

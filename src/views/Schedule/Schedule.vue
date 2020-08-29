@@ -8,12 +8,17 @@
     <ViewContent>
       <div class="top-container">
         <div class="title-container">
-          <Subtitle text="Select your shower schedules" />
+          <Subtitle text="My shower schedules" />
         </div>
       </div>
-      <div class="time" v-for="(item, index) in schedule" :key="index">
+      <div
+        class="time"
+        v-for="(item, index) in currentUserSchedule"
+        :key="item.id"
+      >
         <DayTimeSection
-          :id="index"
+          :id="item.id"
+          :key="index"
           :time="item.time"
           :days="item.days"
           :uuid="item.uuid"
@@ -25,7 +30,31 @@
           @repeatChange="onRepeatChange"
           :isNewItem="isNewSchedule"
           @delete="onDeleteTime"
-          :allowEdit="allowEdit(item)"
+          :allowEdit="true"
+        />
+        <Divider v-if="index !== schedule.length - 1" />
+      </div>
+      <Divider />
+      <div class="top-container" v-if="otherSchedule.length">
+        <div class="title-container">
+          <Subtitle text="Other schedules" />
+        </div>
+      </div>
+      <div class="time" v-for="(item, index) in otherSchedule" :key="item.id">
+        <DayTimeSection
+          :id="item.id"
+          :time="item.time"
+          :days="item.days"
+          :uuid="item.uuid"
+          :active="item.active"
+          :repeat="item.repeat"
+          @dayChange="onDayChange"
+          @timeChange="onTimeChange"
+          @activeToggle="onActiveToggle"
+          @repeatChange="onRepeatChange"
+          :isNewItem="isNewSchedule"
+          @delete="onDeleteTime"
+          :allowEdit="false"
         />
         <Divider v-if="index !== schedule.length - 1" />
       </div>
@@ -41,9 +70,10 @@ import Subtitle from '@/components/core/Subtitle';
 import Icon from '@/components/core/Icon';
 import Divider from '@/components/core/Divider';
 import DayTimeSection from '@/components/DayTime/DayTimeSection';
-import { ref, onMounted } from '@vue/composition-api';
+import { ref, onMounted, computed } from '@vue/composition-api';
 import { getDeviceData, postDeviceData } from '@/services/deviceService';
 import { getUserData } from '@/services/userService';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   setup(_, { root: { $set, $delete } }) {
@@ -62,63 +92,81 @@ export default {
         time: '7:00',
         days: [true, true, true, true, true, false, false],
         active: true,
+        id: uuidv4(),
         uuid: userData.uid,
-        userId: userData.uid,
         repeat: false
       };
       schedule.value.unshift({ ...newSchedule });
       isNewSchedule.value = true;
-      updateServer();
+      postDeviceData({ schedule: [...schedule.value] });
     };
 
-    const updateServer = () => {
+    const currentUserSchedule = computed(() => {
+      return schedule.value.filter((item) => {
+        return item.uuid === userData.uid;
+      });
+    });
+
+    const otherSchedule = computed(() => {
+      return schedule.value.filter((item) => item.uuid !== userData.uid);
+    });
+
+    const updateValues = ({ value = '', deleteValue = false }) => {
+      if (deleteValue) {
+        $delete(
+          schedule.value,
+          schedule.value.findIndex((item) => item.id === id)
+        );
+      } else if (value) {
+        $set(
+          schedule.value,
+          schedule.value.findIndex((item) => item.id === id),
+          value
+        );
+      }
       postDeviceData({ schedule: [...schedule.value] });
     };
 
     const onDeleteTime = (id) => {
-      $delete(schedule.value, id);
-      updateServer();
+      updateValues({ deleteValue: true });
     };
 
     const onDayChange = (index, id) => {
-      const time = schedule.value[id];
-      let days = time.days;
+      const oldSchedule = schedule.value.find((item) => item.id === id);
+      let days = oldSchedule.days;
       days[index] = !days[index];
       const newValue = {
-        ...time,
+        ...oldSchedule,
         days: [...days]
       };
-      $set(schedule.value, id, newValue);
-      updateServer();
+      updateValues({ value: newValue });
     };
 
     const onTimeChange = (id, time) => {
+      const oldSchedule = schedule.value.find((item) => item.id === id);
       const newValue = {
-        ...schedule.value[id],
+        ...oldSchedule,
         time
       };
-      $set(schedule.value, id, newValue);
-      updateServer();
+      updateValues({ value: newValue });
     };
 
     const onActiveToggle = (id) => {
-      const active = schedule.value[id].active;
+      const oldSchedule = schedule.value.find((item) => item.id === id);
       const newValue = {
-        ...schedule.value[id],
-        active: !active
+        ...oldSchedule,
+        active: !oldSchedule.active
       };
-      $set(schedule.value, id, newValue);
-      updateServer();
+      updateValues({ value: newValue });
     };
 
     const onRepeatChange = (id) => {
-      const repeat = schedule.value[id].repeat;
+      const oldSchedule = schedule.value.find((item) => item.id === id);
       const newValue = {
-        ...schedule.value[id],
-        repeat: !repeat
+        ...oldSchedule,
+        repeat: !oldSchedule.repeat
       };
-      $set(schedule.value, id, newValue);
-      updateServer();
+      updateValues({ value: newValue });
     };
 
     const allowEdit = (item) => {
@@ -134,7 +182,9 @@ export default {
       schedule,
       isNewSchedule,
       onDeleteTime,
-      allowEdit
+      allowEdit,
+      otherSchedule,
+      currentUserSchedule
     };
   },
   components: {
