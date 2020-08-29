@@ -1,9 +1,10 @@
 <template>
   <div class="sign-in">
-    <Title text="Hi There" />
+    <Title text="Welcome to iBoiler" />
+    <img class="login-image" src="../../assets/login.png" />
     <GoogleSignInButton />
     <!-- <EmailSignInButton />
-    <RegisterButton /> -->
+    <RegisterButton />-->
   </div>
 </template>
 
@@ -22,3 +23,18 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.sign-in {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+
+  .login-image {
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+  }
+}
+</style>
