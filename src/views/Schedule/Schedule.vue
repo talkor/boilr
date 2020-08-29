@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="skeleton" v-if="!schedule.length">
-        <b-skeleton width="20%" :animated="true"></b-skeleton>
+        <ScheduleSkeleton />
       </div>
       <div v-else>
         <div
@@ -79,6 +79,7 @@ import { ref, onMounted, computed } from '@vue/composition-api';
 import { getDeviceData, postDeviceData } from '@/services/deviceService';
 import { getUserData } from '@/services/userService';
 import { v4 as uuidv4 } from 'uuid';
+import ScheduleSkeleton from './ScheduleSkeleton';
 
 export default {
   setup(_, { root: { $set, $delete } }) {
@@ -199,7 +200,8 @@ export default {
     DayTimeSection,
     Divider,
     AppView,
-    ViewContent
+    ViewContent,
+    ScheduleSkeleton
   }
 };
 </script>
