@@ -66,7 +66,7 @@ body {
   height: 100%;
   max-height: 100%;
   text-align: center;
-  color: #23262d;
+  color: $text-color;
   flex-direction: column;
   display: flex;
   position: static;

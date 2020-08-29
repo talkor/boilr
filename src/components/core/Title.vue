@@ -14,7 +14,7 @@ export default {
 <style scoped lang="scss">
 h1.title {
   margin-block-end: 0;
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
 }
 </style>

@@ -3,7 +3,7 @@
     <ViewHeader title="iBoiler">
       <template v-slot:right>
         <router-link to="/notifications">
-          <Icon class="card-icon" name="bell" pack="far" />
+          <Icon name="bell" pack="far" class="notifications-icon new" />
         </router-link>
       </template>
       <template v-slot:left>
@@ -30,9 +30,7 @@
           icon="power-off"
         />
       </section>
-      <section
-        :class="{ times: true, active: active, timerActive: !timerActive }"
-      >
+      <section :class="{ times: true, active: active, timerActive: !timerActive }">
         <Button
           v-for="(timeItem, idx) in timeData"
           :key="idx"
@@ -41,14 +39,8 @@
           @click="onTimeClick(timeItem)"
         />
       </section>
-      <section
-        :class="{ times: true, active: active, timeClicked: timeClicked }"
-      >
-        <Timer
-          v-if="timeClicked"
-          :TIME_LIMIT="TIME_LIMIT"
-          @onTimesUp="onTimesUp"
-        />
+      <section :class="{ times: true, active: active, timeClicked: timeClicked }">
+        <Timer v-if="timeClicked" :TIME_LIMIT="TIME_LIMIT" @onTimesUp="onTimesUp" />
       </section>
       <section>
         <Button
@@ -209,7 +201,25 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .home {
+  .notifications-icon {
+    color: $text-color;
+    position: relative;
+
+    &.new {
+      &::after {
+        position: absolute;
+        content: '.';
+        color: red;
+        font-size: 50px;
+        top: -50px;
+        left: -5px;
+      }
+    }
+  }
+
   .switch-container {
     display: flex;
     align-items: center;
