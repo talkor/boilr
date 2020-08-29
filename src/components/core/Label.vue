@@ -1,20 +1,21 @@
 <template>
-  <h2 class="label">{{ text }}</h2>
+  <label class="label">{{ text }}</label>
 </template>
 
 <script>
 export default {
   props: {
     text: String
-  },
-  setup() {}
+  }
 };
 </script>
 
 <style scoped lang="scss">
-h2.label {
-  margin-block-end: 0;
-  font-size: 15px;
-  text-align: center;
+label.label.label.label {
+  margin-block-start: 0px;
+  margin-block-end: 15px;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: start;
 }
 </style>
