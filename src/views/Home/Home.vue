@@ -81,9 +81,9 @@
           :progress-width-rel="10"
           :knob-radius="10"
           knob-color="#35b5f6"
-        ></circle-slider> -->
+        ></circle-slider>
         <div>{{ sliderValue }}</div>
-        <div>Minutes</div>
+        <div>Minutes</div> -->
         <div v-show="false">
           <ConnectToSpotify class="spotify" />
         </div>
