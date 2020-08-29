@@ -7,8 +7,8 @@ import VueCompositionApi from '@vue/composition-api';
 import VueMobileDetection from 'vue-mobile-detection';
 import Buefy from 'buefy';
 import * as firebase from 'firebase/app';
-import '@firebase/messaging';
 import 'firebase/auth';
+import 'firebase/messaging';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
 
@@ -38,11 +38,13 @@ messaging.usePublicVapidKey(process.env.VUE_APP_MESSAGING_KEY_PAIR);
 messaging
   .requestPermission()
   .then(() => {
-    console.log('Have messaging permission');
-    messaging.getToken().then((token) => console.log(token));
+    console.log('Notification permission granted.');
+    messaging.getToken().then((token) => {
+      console.log(token);
+    });
   })
   .catch((err) => {
-    console.log(err, 'No permission');
+    console.log('Unable to get permission to notify.', err);
   });
 
 let app;
