@@ -128,7 +128,7 @@ export default {
     };
 
     const onDeleteTime = (id) => {
-      updateValues({ id, deleteValue: true, id });
+      updateValues({ id, deleteValue: true });
     };
 
     const onDayChange = (index, id) => {

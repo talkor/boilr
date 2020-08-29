@@ -53,7 +53,6 @@ import TimePicker from '@/components/DayTime/TimePicker';
 import DayPicker from '@/components/DayTime/DayPicker';
 import UserIcon from '@/components/UserIcon';
 import { ref, onMounted } from '@vue/composition-api';
-import { getDeviceData } from '@/services/deviceService';
 import { getUserPhotoByUuid } from '@/services/userService';
 
 export default {
@@ -72,7 +71,6 @@ export default {
     const userImage = ref('');
 
     onMounted(async () => {
-      const { schedule } = await getDeviceData();
       userImage.value = await getUserPhotoByUuid(uuid);
     });
 
