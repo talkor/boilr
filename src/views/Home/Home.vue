@@ -94,6 +94,7 @@ import UserIcon from '@/components/UserIcon';
 import { log } from '@/services/loggerService';
 import 'animate.css';
 import Label from '@/components/core/Label';
+import { ToastProgrammatic } from 'buefy';
 
 export default {
   name: 'Home',
@@ -151,11 +152,22 @@ export default {
     });
 
     onMounted(async () => {
+      console.log(root.$refs);
       userData = await getUserData();
       timeData[0].TIME_LIMIT = userData.defaultShowerTime * 60;
     });
 
+    const notify = () => {
+      ToastProgrammatic.open({
+        duration: 5000,
+        message: 'Your shower is ready!',
+        position: 'is-top',
+        type: 'is-success'
+      });
+    };
+
     const onTimesUp = () => {
+      notify();
       onSwitchClick();
       timeIsUp.value = true;
     };

@@ -9,6 +9,10 @@ $colors: (
   'primary': (
     $primary,
     $primary-invert
+  ),
+  'success': (
+    $primary,
+    $primary-invert
   )
 );
 $link: $primary;

@@ -91,4 +91,8 @@ body {
   opacity: 0;
   transform: translateX(-10%);
 }
+
+.notices.is-top {
+  margin-block-start: 70px;
+}
 </style>
