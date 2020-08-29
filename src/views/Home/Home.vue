@@ -15,7 +15,7 @@
     <ViewContent>
       <section class="cards">
         <Card icon="info" label="Info">
-          <Label :text="`Oh hi ,${userData.name}!`" />
+          <Label :text="`Oh hi, ${userData.name}!`" />
           <Label bold text="Your next shower is at 7:00" />
         </Card>
         <Card
