@@ -6,6 +6,7 @@
       </template>
     </ViewHeader>
     <ViewContent>
+      <Label :text= "'Default Shower Time: ' + defaultShowerTime + ' minutes'"></Label>
       <Slider
         label="Default Shower Time"
         :value="defaultShowerTime"
@@ -22,6 +23,7 @@ import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import Slider from '@/components/core/Slider';
+import Label from '@/components/core/Label';
 
 export default {
   props: {
@@ -42,7 +44,8 @@ export default {
     AppView,
     ViewHeader,
     ViewContent,
-    Slider
+    Slider,
+    Label
   }
 };
 </script>
