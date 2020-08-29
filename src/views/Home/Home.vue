@@ -12,9 +12,9 @@
         </router-link>
       </template>
     </ViewHeader>
-    <ViewContent class>
-      <Label :text= "'Oh hi ,' + userData.name + '!'"></Label>
-      <Label :text= "'Have you taken a shower today?'"></Label>
+    <ViewContent>
+      <Label :text="`Oh hi ,${userData.name}!`" />
+      <Label text="Have you taken a shower today?" />
       <section class="cards">
         <Card
           label="Water Temperature"
