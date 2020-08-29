@@ -111,7 +111,7 @@ export default {
       return schedule.value.filter((item) => item.uuid !== userData.uid);
     });
 
-    const updateValues = ({ value = '', deleteValue = false }) => {
+    const updateValues = ({ id, value = '', deleteValue = false }) => {
       if (deleteValue) {
         $delete(
           schedule.value,
@@ -128,7 +128,7 @@ export default {
     };
 
     const onDeleteTime = (id) => {
-      updateValues({ deleteValue: true });
+      updateValues({ id, deleteValue: true, id });
     };
 
     const onDayChange = (index, id) => {
@@ -139,7 +139,7 @@ export default {
         ...oldSchedule,
         days: [...days]
       };
-      updateValues({ value: newValue });
+      updateValues({ id, value: newValue });
     };
 
     const onTimeChange = (id, time) => {
@@ -148,7 +148,7 @@ export default {
         ...oldSchedule,
         time
       };
-      updateValues({ value: newValue });
+      updateValues({ id, value: newValue });
     };
 
     const onActiveToggle = (id) => {
@@ -157,7 +157,7 @@ export default {
         ...oldSchedule,
         active: !oldSchedule.active
       };
-      updateValues({ value: newValue });
+      updateValues({ id, value: newValue });
     };
 
     const onRepeatChange = (id) => {
@@ -166,7 +166,7 @@ export default {
         ...oldSchedule,
         repeat: !oldSchedule.repeat
       };
-      updateValues({ value: newValue });
+      updateValues({ id, value: newValue });
     };
 
     const allowEdit = (item) => {
