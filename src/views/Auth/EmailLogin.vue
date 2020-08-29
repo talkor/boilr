@@ -14,7 +14,7 @@
       placeholder="Password"
       @input="onPasswordChange"
     />
-    CoreButton @click="onSignIn" text="Sign In" />
+    <CoreButton @click="onSignIn" text="Sign In" />
   </div>
 </template>
 

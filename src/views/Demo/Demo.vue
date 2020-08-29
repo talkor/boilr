@@ -24,7 +24,6 @@ import { reactive, ref, onMounted } from '@vue/composition-api';
 import { watchDevice } from '@/services/deviceService';
 import * as d3 from 'd3';
 import AppView from '@/components/shell/AppView';
-import ViewHeader from '@/components/shell/ViewHeader';
 import CoreButton from '@/components/core/CoreButton';
 
 export default {
@@ -238,8 +237,7 @@ export default {
   },
   components: {
     CoreButton,
-    AppView,
-    ViewHeader
+    AppView
   }
 };
 </script>

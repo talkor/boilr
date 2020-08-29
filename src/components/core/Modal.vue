@@ -28,7 +28,7 @@ export default {
     isActive: Boolean
   },
   components: {
-    Button
+    CoreButton
   }
 };
 </script>
