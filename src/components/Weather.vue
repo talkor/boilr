@@ -1,16 +1,9 @@
 <template>
   <div>
-    <h4 v-show="city">{{ city }}</h4>
-    <span v-show="curTempDisplay">{{ weatherMain }}: {{ weatherDesc }}</span>
-    <h1 v-show="curTempDisplay">
-      <i :class="[classWI]"></i>
-      {{ curTempDisplay }}
-      <span :class="{ 'btn-deactivate': displayMode }" @click="getTemp(0)"
-        >°C</span
-      >
-      |
-      <span @click="getTemp(1)">°F</span>
-    </h1>
+    <div>
+      <strong>{{ curTempDisplay }}°C in {{ city }}</strong>
+    </div>
+    <span>{{ weatherMain }}: {{ weatherDesc }}</span>
   </div>
 </template>
 

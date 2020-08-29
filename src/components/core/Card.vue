@@ -29,6 +29,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .card {
   width: 100%;
   height: auto;
@@ -50,7 +52,7 @@ export default {
     }
 
     .card-number {
-      font-size: 32px;
+      font-size: 24px;
     }
 
     .card-title {
@@ -60,9 +62,9 @@ export default {
     }
 
     .icon {
-      // margin: 10px;
       line-height: 20px;
       font-size: 20px;
+      color: $primary;
     }
   }
 

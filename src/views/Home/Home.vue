@@ -13,9 +13,11 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Label :text="`Oh hi, ${userData.name}!`" />
-      <Label text="Have you taken a shower today?" />
       <section class="cards">
+        <Card icon="info" label="Info">
+          <Label :text="`Oh hi ,${userData.name}!`" />
+          <Label bold text="Your next shower is at 7:00" />
+        </Card>
         <Card
           label="Water Temperature"
           :dataLabel="`${Math.round(temperature)}°C`"
@@ -247,7 +249,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 50px;
 
     .switch-button {
       font-size: 24px;
