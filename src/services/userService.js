@@ -24,3 +24,11 @@ export const getUserPhotoByUuid = async (uuid) => {
   const { photo } = await getData({ collection: 'users', doc: uuid });
   return photo;
 };
+
+export const getUserNameByUuid = async (uuid) => {
+  if (!uuid) {
+    return;
+  }
+  const { name } = await getData({ collection: 'users', doc: uuid });
+  return name;
+};
