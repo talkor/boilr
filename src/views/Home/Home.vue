@@ -13,7 +13,7 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Label :text="`Oh hi ,${userData.name}!`" />
+      <Label :text="`Oh hi, ${userData.name}!`" />
       <Label text="Have you taken a shower today?" />
       <section class="cards">
         <Card
