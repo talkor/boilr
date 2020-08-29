@@ -120,7 +120,7 @@ export default {
         '&lon=' +
         this.longitude +
         '&APPID=' +
-        process.env.VUE_APP_FIREBASE_WEATHER_ID;
+        process.env.VUE_APP_WEATHER_API_TOKEN;
 
       axios
         .get(reqURL)
