@@ -1,7 +1,7 @@
 <template>
   <AppView class="demo">
-    <div class="demo-container">
-      <div class="gauge" v-if="!showQRCode">
+    <div class="demo-container" v-show="!showQRCode">
+      <div class="gauge">
         <div class="temperature">{{ temperature }}°C</div>
         <svg id="gauge" width="97%" height="400px"></svg>
       </div>
@@ -11,8 +11,11 @@
         {{ active ? 'ON' : 'OFF' }}
       </div>
     </div>
-    <CoreButton @click="onShowCodeClick" text="Scan QR Code" />
-    <img v-if="showQRCode" class="barcode" src="../../assets/qr.png" />
+    <img v-show="showQRCode" class="barcode" src="../../assets/qr.png" />
+    <CoreButton
+      @click="onShowCodeClick"
+      :text="showQRCode ? 'Hide QR Code' : 'Show QR Code'"
+    />
   </AppView>
 </template>
 
@@ -22,7 +25,6 @@ import { watchDevice } from '@/services/deviceService';
 import * as d3 from 'd3';
 import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
-import ViewContent from '@/components/shell/ViewContent';
 import CoreButton from '@/components/core/CoreButton';
 
 export default {
@@ -237,8 +239,7 @@ export default {
   components: {
     CoreButton,
     AppView,
-    ViewHeader,
-    ViewContent
+    ViewHeader
   }
 };
 </script>
