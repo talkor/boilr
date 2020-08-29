@@ -6,10 +6,8 @@ module.exports = {
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black-translucent',
-    workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      exclude: [/_redirects/],
-      swSrc: 'src/firebase-messaging-sw.js'
+      exclude: [/_redirects/]
     },
     manifestOptions: {
       icons: [
