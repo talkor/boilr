@@ -5,20 +5,21 @@ $primary: #35b5f6;
 $primary-invert: findColorInvert($primary);
 $text-color: #23262d;
 
-// $colors: (
-//   'primary': (
-//     $primary,
-//     $primary-invert
-//   ),
-//   'success': (
-//     $primary,
-//     $primary-invert
-//   )
-// );
-// $link: $primary;
-// $link-invert: $primary-invert;
-// $link-focus-border: $primary;
-// $link-visited: $primary;
+$colors: (
+  'primary': (
+    $primary,
+    $primary-invert
+  ),
+  'success': (
+    $primary,
+    $primary-invert
+  )
+);
+
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+$link-visited: $primary;
 
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
