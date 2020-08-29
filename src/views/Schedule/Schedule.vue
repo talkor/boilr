@@ -14,7 +14,7 @@
       <div class="skeleton" v-if="!schedule.length">
         <ScheduleSkeleton />
       </div>
-      <div v-else>
+      <div class="all-schedules" v-else>
         <div
           class="time"
           v-for="(item, index) in currentUserSchedule"
@@ -211,5 +211,9 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-block-end: 15px;
+}
+
+.all-schedules {
+  margin-block-end: 25px;
 }
 </style>

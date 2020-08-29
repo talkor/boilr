@@ -162,7 +162,7 @@ export default {
     }
 
     .time {
-      font-size: 24px;
+      font-size: 20px;
       line-height: normal;
       margin-block-end: 5px;
     }
