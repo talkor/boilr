@@ -13,6 +13,7 @@
       </template>
     </ViewHeader>
     <ViewContent class>
+      <Label :text= "'Oh hi ,' + userData.name + '! Have you taken a shower today?'"></Label>
       <section class="cards">
         <Card
           label="Water Temperature"
@@ -91,6 +92,7 @@ import AppView from '@/components/shell/AppView';
 import UserIcon from '@/components/UserIcon';
 import { log } from '@/services/loggerService';
 import 'animate.css';
+import Label from '@/components/core/Label';
 
 export default {
   name: 'Home',
@@ -203,7 +205,8 @@ export default {
     Icon,
     ViewContent,
     AppView,
-    UserIcon
+    UserIcon,
+    Label
   }
 };
 </script>
