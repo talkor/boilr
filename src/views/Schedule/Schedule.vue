@@ -11,52 +11,57 @@
           <Subtitle text="My shower schedules" />
         </div>
       </div>
-      <div
-        class="time"
-        v-for="(item, index) in currentUserSchedule"
-        :key="item.id"
-      >
-        <DayTimeSection
-          :id="item.id"
-          :key="index"
-          :time="item.time"
-          :days="item.days"
-          :uuid="item.uuid"
-          :active="item.active"
-          :repeat="item.repeat"
-          @dayChange="onDayChange"
-          @timeChange="onTimeChange"
-          @activeToggle="onActiveToggle"
-          @repeatChange="onRepeatChange"
-          :isNewItem="isNewSchedule"
-          @delete="onDeleteTime"
-          :allowEdit="true"
-        />
-        <Divider v-if="index !== schedule.length - 1" />
+      <div class="skeleton" v-if="!schedule.length">
+        <b-skeleton width="20%" :animated="true"></b-skeleton>
       </div>
-      <Divider />
-      <div class="top-container" v-if="otherSchedule.length">
-        <div class="title-container">
-          <Subtitle text="Other schedules" />
+      <div v-else>
+        <div
+          class="time"
+          v-for="(item, index) in currentUserSchedule"
+          :key="item.id"
+        >
+          <DayTimeSection
+            :id="item.id"
+            :key="index"
+            :time="item.time"
+            :days="item.days"
+            :uuid="item.uuid"
+            :active="item.active"
+            :repeat="item.repeat"
+            @dayChange="onDayChange"
+            @timeChange="onTimeChange"
+            @activeToggle="onActiveToggle"
+            @repeatChange="onRepeatChange"
+            :isNewItem="isNewSchedule"
+            @delete="onDeleteTime"
+            :allowEdit="true"
+          />
+          <Divider v-if="index !== currentUserSchedule.length - 1" />
         </div>
-      </div>
-      <div class="time" v-for="(item, index) in otherSchedule" :key="item.id">
-        <DayTimeSection
-          :id="item.id"
-          :time="item.time"
-          :days="item.days"
-          :uuid="item.uuid"
-          :active="item.active"
-          :repeat="item.repeat"
-          @dayChange="onDayChange"
-          @timeChange="onTimeChange"
-          @activeToggle="onActiveToggle"
-          @repeatChange="onRepeatChange"
-          :isNewItem="isNewSchedule"
-          @delete="onDeleteTime"
-          :allowEdit="false"
-        />
-        <Divider v-if="index !== schedule.length - 1" />
+        <Divider />
+        <div class="top-container" v-if="otherSchedule.length">
+          <div class="title-container">
+            <Subtitle text="Other schedules" />
+          </div>
+        </div>
+        <div class="time" v-for="(item, index) in otherSchedule" :key="item.id">
+          <DayTimeSection
+            :id="item.id"
+            :time="item.time"
+            :days="item.days"
+            :uuid="item.uuid"
+            :active="item.active"
+            :repeat="item.repeat"
+            @dayChange="onDayChange"
+            @timeChange="onTimeChange"
+            @activeToggle="onActiveToggle"
+            @repeatChange="onRepeatChange"
+            :isNewItem="isNewSchedule"
+            @delete="onDeleteTime"
+            :allowEdit="false"
+          />
+          <Divider v-if="index !== otherSchedule.length - 1" />
+        </div>
       </div>
     </ViewContent>
   </AppView>

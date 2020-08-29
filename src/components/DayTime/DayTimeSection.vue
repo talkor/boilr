@@ -7,7 +7,7 @@
         @click="onClick"
       >
         <div class="time">{{ time }}</div>
-        <div v-if="!showEdit && repeat" class="days">
+        <div v-if="repeat" class="days">
           <span v-for="(day, index) in days" :key="index" class="day">
             <template v-if="days[index]">
               <span>{{ dayString(index) }}&nbsp;</span>
@@ -147,6 +147,7 @@ export default {
   .view-container {
     text-align: start;
     display: flex;
+    align-items: flex-start;
 
     .time-container {
       flex: 1;
@@ -162,13 +163,13 @@ export default {
 
     .time {
       font-size: 24px;
+      line-height: normal;
+      margin-block-end: 5px;
     }
 
     .user-image {
       margin-inline-end: 10px;
-      // margin-block-start: 5px;
       display: flex;
-      // align-self: start;
     }
   }
 
