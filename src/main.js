@@ -11,7 +11,6 @@ import 'firebase/auth';
 import 'firebase/messaging';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
-import { postData } from '@/services/databaseService';
 
 Vue.use(Buefy, {
   defaultIconPack: 'fas'
@@ -34,19 +33,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const messaging = firebase.messaging();
-messaging.usePublicVapidKey(process.env.VUE_APP_MESSAGING_KEY_PAIR);
-messaging
-  .requestPermission()
-  .then(() => {
-    console.log('Notification permission granted.');
-    messaging.getToken().then((token) => {
-      postData({ collection: 'tokens', doc: 'token', data: { token } });
-    });
-  })
-  .catch((err) => {
-    console.log('Unable to get permission to notify.', err);
-  });
 
 let app;
 
