@@ -14,7 +14,7 @@
             </div>
             <div class="text">
               iBoiler was turned
-              <strong>{{ item.event.toUpperCase() }}</strong> by
+              <strong>{{ item.event.toUpperCase() }}</strong> for
               {{ item.name }}
             </div>
           </div>
@@ -66,10 +66,10 @@ export default {
   margin-block-end: 20px;
 
   .time {
-    font-size: 16px;
+    font-size: 14px;
   }
   .text {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 </style>

@@ -41,7 +41,7 @@
             class="shower-time-dropdown"
             icon="hourglass-end"
             :options="showerTimeOptions()"
-            :initialValue="`${duration} min`"
+            :initialValue="`${duration}`"
             @change="onDurationChange"
           />
           <Checkbox :checked="repeat" label="Repeat" @change="onRepeatChange" />
@@ -139,7 +139,7 @@ export default {
         options.push({
           id: index,
           value: `${index}`,
-          label: `${index} min`
+          label: index
         });
       }
 
