@@ -8,13 +8,13 @@
       </template>
       <template v-slot:left>
         <router-link to="/settings/profile">
-          <UserIcon :image="userData.photo" />
+          <UserIcon :image="user.photo" />
         </router-link>
       </template>
     </ViewHeader>
     <ViewContent>
       <section class="cards">
-        <Card icon="info" :label="`Oh hi, ${userData.name}!`">
+        <Card icon="info" :label="`Oh hi, ${user.name}!`">
           <Label text="Your next shower is at 7:00" />
         </Card>
         <Card
@@ -97,6 +97,7 @@ import { log } from '@/services/loggerService';
 import 'animate.css';
 import Label from '@/components/core/Label';
 import { ToastProgrammatic } from 'buefy';
+import { reactive } from '@vue/composition-api';
 
 export default {
   name: 'Home',
@@ -113,6 +114,11 @@ export default {
     const TIME_LIMIT = ref(600);
     let userData;
     const sliderValue = ref(0);
+
+    const user = reactive({
+      name: '',
+      photo: ''
+    });
 
     const timeData = [
       {
@@ -157,6 +163,8 @@ export default {
     onMounted(async () => {
       userData = await getUserData();
       timeData[0].TIME_LIMIT = userData.defaultShowerTime * 60;
+      user.name = userData.name;
+      user.photo = userData.photo;
     });
 
     const notify = () => {
@@ -208,7 +216,8 @@ export default {
       timeClicked,
       timeIsUp,
       startShower,
-      sliderValue
+      sliderValue,
+      user
     };
   },
   components: {
