@@ -1,5 +1,4 @@
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
 
 <template>
   <AppView class="preferences">
@@ -9,26 +8,14 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Label
-        text="Time to add if your shower time ends"
-        :bold=true
-        />
+      <Label text="Time to add if your shower time ends" :bold="true" />
       <Divider />
-      <div class='beep'>
-      <Label
-        text="In-Shower Beep reminders"
-        :bold=true
-        />
-      <Toggle class = 'toggleBtn'
-        :active=false
-        @toggle="onActiveToggle"
-      />
+      <div class="beep">
+        <Label text="In-Shower Beep reminders" :bold="true" />
+        <Toggle class="toggleBtn" :active="false" @toggle="onActiveToggle" />
       </div>
       <Divider />
-      <Label
-        text="C/F"
-        :bold=true
-      />
+      <Label text="C/F" :bold="true" />
       <Divider />
     </ViewContent>
   </AppView>
@@ -44,15 +31,10 @@ import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import Divider from '@/components/core/Divider';
 
-import { getUserData, postUserData } from '@/services/userService';
-
-
 export default {
   setup() {
-
-
     const onActiveToggle = (value) => {
-      console.log("sound reminders toggled")
+      console.log('sound reminders toggled to ' + value);
     };
 
     return {
