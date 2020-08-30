@@ -12,6 +12,7 @@ import Settings from '@/views/Settings/Settings';
 import Device from '@/views/Settings/Device';
 import Profile from '@/views/Settings/Profile';
 import ShowerSettings from '@/views/Settings/ShowerSettings';
+import Preferences from '@/views/Settings/Preferences';
 import Demo from '@/views/Demo/Demo';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -105,6 +106,15 @@ const routes = [
     path: '/settings/shower',
     name: 'ShowerSettings',
     component: ShowerSettings,
+    meta: {
+      requiresAuth: true
+    },
+    props: true
+  },
+  {
+    path: '/settings/preferences',
+    name: 'Preferences',
+    component: Preferences,
     meta: {
       requiresAuth: true
     },

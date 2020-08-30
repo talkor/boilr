@@ -3,10 +3,6 @@
     <ViewHeader title="Settings" />
     <ViewContent>
       <div class="settings">
-        <div class="container">
-          <!-- <img :src="user.photo" class="profile-photo" /> -->
-          <!-- CoreButton :rounded="true" :text="user.name" @click="changeName" /> -->
-        </div>
         <List :data="list.data" />
       </div>
     </ViewContent>
@@ -32,10 +28,6 @@ export default {
     onMounted(async () => {
       userData = await getUserData();
     });
-
-    const changeName = () => {
-      router.push({ name: 'Profile', params: {} });
-    };
 
     const list = reactive({
       data: [
@@ -70,7 +62,12 @@ export default {
             {
               label: 'Preferences',
               icon: 'cogs',
-              action: () => {}
+              action: () => {
+                router.push({
+                  name: 'Preferences',
+                  params: {}
+                });
+              }
             }
           ]
         },
@@ -98,8 +95,7 @@ export default {
 
     return {
       onLogOut,
-      list,
-      changeName
+      list
     };
   },
   components: {
@@ -110,17 +106,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.profile-photo {
-  margin-right: 10px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-</style>
