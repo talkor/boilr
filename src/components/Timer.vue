@@ -6,15 +6,10 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  onMounted,
-  onBeforeUnmount
-} from '@vue/composition-api';
+import { reactive, onMounted } from '@vue/composition-api';
 
 export default {
-  setup({ target }, { emit }) {
+  setup() {
     let current = 0;
     const time = reactive({
       minutes: 0,

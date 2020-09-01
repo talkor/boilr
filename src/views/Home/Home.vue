@@ -81,11 +81,6 @@ export default {
     });
 
     onMounted(async () => {
-      userData = await getUserData();
-      schedule.value = [...deviceData.schedule];
-    });
-
-    onMounted(async () => {
       const userData = await getUserData();
       user.photo = userData.photo;
       user.name = userData.name;
