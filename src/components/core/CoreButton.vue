@@ -3,7 +3,12 @@
     @click="onClick"
     :size="`is-${size}`"
     :icon-left="icon"
-    :class="{ main: true, 'no-border': noBorder, 'no-padding': noPadding }"
+    :class="{
+      main: true,
+      'no-border': noBorder,
+      'no-padding': noPadding,
+      primary
+    }"
     :rounded="rounded"
     :icon-pack="iconPack"
   >
@@ -29,6 +34,10 @@ export default {
     iconPack: {
       type: String,
       default: 'fa'
+    },
+    primary: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props, { emit }) {
@@ -42,8 +51,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .main {
-  margin: 10px 0;
+  &.primary {
+    margin: 10px 0;
+    background: $primary;
+    color: white;
+  }
 
   &.no-border {
     border: none;

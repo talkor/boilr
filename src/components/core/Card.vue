@@ -1,14 +1,14 @@
 <template>
   <div class="card">
+    <div>
+      <Icon v-if="icon" :name="icon" class="icon" />
+    </div>
     <div class="container">
       <h3 class="card-title">{{ label }}</h3>
       <span v-if="dataLabel" class="card-number">{{ dataLabel }}</span>
       <span v-else>
         <slot></slot>
       </span>
-    </div>
-    <div>
-      <Icon v-if="icon" :name="icon" class="icon" />
     </div>
   </div>
 </template>
@@ -35,12 +35,10 @@ export default {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.11);
   padding: 10px;
   margin-block-end: 10px;
   display: flex;
   justify-content: space-between;
-  box-shadow: none !important;
 
   .container {
     display: flex;
@@ -48,7 +46,7 @@ export default {
     margin: 0;
 
     .card-number {
-      font-size: 24px;
+      font-size: 16px;
       flex: 1;
       justify-content: start;
       text-align: start;
@@ -56,15 +54,13 @@ export default {
 
     .card-title {
       font-size: 14px;
-      align-self: start;
-      margin-block-end: 15px;
+      text-align: start;
       font-weight: 600;
     }
   }
   .icon {
-    line-height: 30px;
-    font-size: 20px;
     color: $primary;
+    margin-inline-end: 10px;
   }
 }
 </style>

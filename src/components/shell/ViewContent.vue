@@ -7,10 +7,11 @@
 <style scoped lang="scss">
 .view-content {
   flex: 1;
-  width: 90%;
-  margin-block-start: 20px;
-  margin-inline-start: auto;
-  margin-inline-end: auto;
+  width: 100%;
+  padding-block-start: 20px;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
   overflow: auto;
-}</style
->;
+  background-color: #fafbfb54;
+}
+</style>

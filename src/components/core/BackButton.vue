@@ -1,12 +1,17 @@
 <template>
-  <Icon class="back-button" name="arrow-left" @click="onBack" size="small" />
+  <Icon class="back-button" :name="icon" @click="onBack" size="small" />
 </template>
 
 <script>
 import Icon from '@/components/core/Icon';
 
 export default {
-  name: 'BackButton',
+  props: {
+    icon: {
+      type: String,
+      default: 'arrow-left'
+    }
+  },
   setup(props, { root }) {
     const router = root.$router;
 
