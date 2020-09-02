@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <portal-target class="portal" name="shower-screen"></portal-target>
-    <transition>
-      <router-view />
-    </transition>
+    <router-view />
     <Navbar />
   </div>
 </template>

@@ -7,12 +7,7 @@
         </template>
       </ViewHeader>
       <ViewContent>
-        <img
-          width="335px"
-          height="335px"
-          class="shower-image"
-          src="../../assets/shower.svg"
-        />
+        <img class="shower-image" src="../../assets/shower.svg" />
         <Timer class="timer" />
         <CoreButton
           class="start-shower"
@@ -61,5 +56,11 @@ export default {
 <style lang="scss" scoped>
 .timer {
   margin-block-end: 50px;
+}
+
+.shower-image {
+  width: 335px;
+  height: 335px;
+  transition: 0.2s all;
 }
 </style>
