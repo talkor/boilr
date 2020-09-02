@@ -6,11 +6,11 @@
     :class="{
       main: true,
       'no-border': noBorder,
-      'no-padding': noPadding,
-      primary
+      'no-padding': noPadding
     }"
     :rounded="rounded"
     :icon-pack="iconPack"
+    :type="primary ? `is-primary` : null"
   >
     <span v-if="text" class="button-content">
       <slot></slot>
@@ -54,12 +54,6 @@ export default {
 @import '@/styles/variables.scss';
 
 .main {
-  &.primary {
-    margin: 10px 0;
-    background: $primary;
-    color: white;
-  }
-
   &.no-border {
     border: none;
   }
