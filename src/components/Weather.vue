@@ -1,7 +1,6 @@
 <template>
   <div class="weather">
-    <div>{{ curTempDisplay }}°C</div>
-    <div>{{ city }}</div>
+    <div>{{ curTempDisplay }}°C | {{ city }}</div>
   </div>
 </template>
 

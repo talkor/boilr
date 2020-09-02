@@ -26,16 +26,11 @@
           icon="thermometer-empty"
         />
         <Card label="Shower Minutes" :dataLabel="`40 Min`" icon="tint" />
+        <Card icon="power-off" label="Boiler Status" :dataLabel="active ? 'ON' : 'OFF'" />
       </section>
       <section>
         <router-link to="shower">
-          <CoreButton
-            class="start-shower"
-            icon="shower"
-            size="medium"
-            text="Start Shower"
-            primary
-          />
+          <CoreButton class="start-shower" icon="shower" size="medium" text="Start Shower" primary />
         </router-link>
         <div v-show="false">
           <ConnectToSpotify class="spotify" />
