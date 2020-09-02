@@ -1,7 +1,8 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const spacetime = require('spacetime');
-const { schedule } = require('firebase-functions/lib/providers/pubsub');
+const { log } = require('../src/services/loggerService');
+
 admin.initializeApp();
 
 const db = admin.firestore();
@@ -116,6 +117,7 @@ const scheduler = async (schedule) => {
   todaysSchedule.forEach(({ time, event }) => {
     if (time === currentTime) {
       setBoilerActive(event === 'on' ? true : false);
+      log({ event });
     }
   });
 };
