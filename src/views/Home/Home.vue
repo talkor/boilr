@@ -17,8 +17,9 @@
         <Card icon="home" :label="`Oh hi, ${user.name}!`">
           <Label text="Next shower at 7:00" />
         </Card>
-        <Card label="Weather" icon="sun">
-          <Weather />
+        <Card icon="power-off" label="Boiler Status">
+          <Label v-if="!!active" class="boiler-active" text="ON" />
+          <Label v-else text="OFF" />
         </Card>
         <Card label="Water Temperature" icon="thermometer-empty">
           <Label
@@ -27,9 +28,8 @@
           />
         </Card>
         <Card label="Shower Minutes" :dataLabel="`40 Min`" icon="tint" />
-        <Card icon="power-off" label="Boiler Status">
-          <Label v-if="!!active" class="boiler-active" text="ON" />
-          <Label v-else text="OFF" />
+        <Card label="Weather" icon="sun">
+          <Weather />
         </Card>
       </section>
       <section>
