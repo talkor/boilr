@@ -57,7 +57,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint && pretty-quick --staged"
+      "pre-push": "npm run lint"
     }
   }
 }
