@@ -5,6 +5,8 @@
 </template>
 
 <style scoped lang="scss">
+@import '@/styles/variables.scss';
+
 .view-content {
   flex: 1;
   width: 100%;
@@ -12,6 +14,6 @@
   padding-inline-start: 20px;
   padding-inline-end: 20px;
   overflow: auto;
-  background-color: #fafbfb54;
+  background-color: $background;
 }
 </style>

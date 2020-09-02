@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <transition mode="out-in">
+    <portal-target class="portal" name="shower-screen"></portal-target>
+    <transition>
       <router-view />
     </transition>
     <Navbar />
@@ -14,16 +15,8 @@ import { getUserData } from '@/services/userService';
 
 export default {
   name: 'Home',
-  setup(_, { root }) {
-    const router = root.$router;
+  setup() {
     const userData = ref({});
-
-    router.beforeEach = (to, from, next) => {
-      const toDepth = to.path.split('/').length;
-      const fromDepth = from.path.split('/').length;
-      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
-      next();
-    };
 
     onMounted(async () => {
       const data = await getUserData();
@@ -94,5 +87,14 @@ body {
 
 .notices.is-top {
   margin-block-start: 70px;
+}
+
+.portal {
+  z-index: 100;
+  position: absolute;
+  background: $background;
+  width: 100%;
+  transition: 0.2s all;
+  // height: 100%;
 }
 </style>

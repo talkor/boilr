@@ -1,27 +1,24 @@
 <template>
-  <AppView class="shower">
-    <ViewHeader title="Shower">
-      <template v-slot:left>
-        <BackButton icon="times" />
-      </template>
-    </ViewHeader>
-    <ViewContent>
-      <img
-        width="100%"
-        height="100%"
-        class="shower-image"
-        src="../../assets/shower.png"
-      />
-      <Timer class="timer" />
-      <CoreButton
-        class="start-shower"
-        size="medium"
-        text="End Shower"
-        primary
-        @click="playSound"
-      />
-    </ViewContent>
-  </AppView>
+  <portal to="shower-screen">
+    <AppView class="shower">
+      <ViewHeader title="Shower">
+        <template v-slot:left>
+          <BackButton icon="times" />
+        </template>
+      </ViewHeader>
+      <ViewContent>
+        <img width="335px" height="335px" class="shower-image" src="../../assets/shower.svg" />
+        <Timer class="timer" />
+        <CoreButton
+          class="start-shower"
+          size="medium"
+          text="End Shower"
+          primary
+          @click="playSound"
+        />
+      </ViewContent>
+    </AppView>
+  </portal>
 </template>
 
 <script>
