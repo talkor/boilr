@@ -1,12 +1,12 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const spacetime = require('spacetime');
-const { log } = require('../src/services/loggerService');
 
 admin.initializeApp();
 
 const db = admin.firestore();
 
+const DEVICE_ID = 'mhXWbGB4UxIdOPqeoOJz';
 const MAX_TEMP = 99;
 const MIN_TEMP = 25;
 
@@ -32,7 +32,7 @@ const getCurrentTime = () => {
 const fetchSchedule = async () => {
   const { schedule } = await db
     .collection('devices')
-    .doc('mhXWbGB4UxIdOPqeoOJz')
+    .doc(DEVICE_ID)
     .get()
     .then((snapshot) => {
       return { ...snapshot.data() };
@@ -44,7 +44,7 @@ const fetchSchedule = async () => {
 const temperatueSimulation = async () => {
   const { active, temperature } = await db
     .collection('devices')
-    .doc('mhXWbGB4UxIdOPqeoOJz')
+    .doc(DEVICE_ID)
     .get()
     .then((snapshot) => {
       return { ...snapshot.data() };
@@ -64,14 +64,14 @@ const temperatueSimulation = async () => {
 const setBoilerActive = async (value) => {
   return db
     .collection('devices')
-    .doc('mhXWbGB4UxIdOPqeoOJz')
+    .doc(DEVICE_ID)
     .set({ active: value }, { merge: true });
 };
 
 const getBoilerActive = async () => {
   const { active } = await db
     .collection('devices')
-    .doc('mhXWbGB4UxIdOPqeoOJz')
+    .doc(DEVICE_ID)
     .get()
     .then((snapshot) => {
       return { ...snapshot.data() };
@@ -83,12 +83,20 @@ const getBoilerActive = async () => {
 const setBoilerTemperature = async (value) => {
   return db
     .collection('devices')
-    .doc('mhXWbGB4UxIdOPqeoOJz')
+    .doc(DEVICE_ID)
     .set({ temperature: value }, { merge: true });
 };
 
 const timeMapper = (schedule) => {
-  let timeMapper = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
+  let timeMapper = {
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: []
+  };
 
   schedule.map((item) => {
     item.days.forEach((day, dayIndex) => {
@@ -120,4 +128,16 @@ const scheduler = async (schedule) => {
       log({ event });
     }
   });
+};
+
+const log = async (data) => {
+  return db
+    .collection('devices')
+    .doc(DEVICE_ID)
+    .update({
+      log: firebase.firestore.FieldValue.arrayUnion({
+        timestamp: new Date(),
+        ...data
+      })
+    });
 };
