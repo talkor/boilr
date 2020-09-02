@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from '@vue/composition-api';
+import { ref } from '@vue/composition-api';
 import QRScanner from '@/components/QRScanner/QRScanner';
 import BackButton from '@/components/core/BackButton';
 import { postUserData } from '@/services/userService';
@@ -39,11 +39,7 @@ import ViewContent from '@/components/shell/ViewContent';
 import CoreButton from '@/components/core/CoreButton';
 import Divider from '@/components/core/Divider';
 import Subtitle from '@/components/core/Subtitle';
-import {
-  getDeviceData,
-  postDeviceData,
-  watchDevice
-} from '@/services/deviceService';
+import { postDeviceData, watchDevice } from '@/services/deviceService';
 import { log } from '@/services/loggerService';
 
 export default {
