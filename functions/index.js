@@ -87,6 +87,13 @@ const setBoilerTemperature = async (value) => {
     .set({ temperature: value }, { merge: true });
 };
 
+const setShowerReady = async () => {
+  return db
+    .collection('devices')
+    .doc(DEVICE_ID)
+    .set({ ready: true }, { merge: true });
+};
+
 const timeMapper = (schedule) => {
   let timeMapper = {
     0: [],
@@ -101,11 +108,16 @@ const timeMapper = (schedule) => {
   schedule.map((item) => {
     item.days.forEach((day, dayIndex) => {
       if (day) {
-        const boilerStartTime = spacetime()
+        const startTime = spacetime()
           .time(item.time)
           .subtract(item.duration, 'minutes')
-          .format('time-24');
-        timeMapper[dayIndex].push({ time: boilerStartTime, event: 'on' });
+          .format('time-24')
+          .split(':');
+        const paddedHours = `${startTime[0]}`.padStart(2, 0);
+        const paddedMinutes = `${startTime[1]}`.padStart(2, 0);
+        const paddedStartTime = `${paddedHours}:${paddedMinutes}`;
+
+        timeMapper[dayIndex].push({ time: paddedStartTime, event: 'on' });
         timeMapper[dayIndex].push({ time: item.time, event: 'off' });
       }
     });
@@ -123,9 +135,15 @@ const scheduler = async (schedule) => {
   const todaysSchedule = timeMap[currentDay];
 
   todaysSchedule.forEach(({ time, event }) => {
+    console.log('Compate: ', time, currentTime);
     if (time === currentTime) {
+      console.log('OK!');
       setBoilerActive(event === 'on' ? true : false);
       log({ event });
+
+      if (event === 'off') {
+        setShowerReady();
+      }
     }
   });
 };
