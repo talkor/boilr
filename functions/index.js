@@ -135,7 +135,7 @@ const log = async (data) => {
     .collection('devices')
     .doc(DEVICE_ID)
     .update({
-      log: firebase.firestore.FieldValue.arrayUnion({
+      log: admin.firestore.FieldValue.arrayUnion({
         timestamp: new Date(),
         ...data
       })
