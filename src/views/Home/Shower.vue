@@ -6,7 +6,12 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <img width="100%" height="100%" class="shower-image" src="../../assets/shower.png" />
+      <img
+        width="100%"
+        height="100%"
+        class="shower-image"
+        src="../../assets/shower.png"
+      />
       <Timer class="timer" />
       <CoreButton
         class="start-shower"

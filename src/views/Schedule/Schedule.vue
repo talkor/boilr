@@ -15,7 +15,11 @@
         <ScheduleSkeleton />
       </div>
       <div class="all-schedules" v-else>
-        <div class="time" v-for="(item, index) in currentUserSchedule" :key="item.id">
+        <div
+          class="time"
+          v-for="(item, index) in currentUserSchedule"
+          :key="item.id"
+        >
           <DayTimeSection
             :id="item.id"
             :time="item.time"
