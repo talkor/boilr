@@ -8,6 +8,7 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
+  "runtime": "nodejs10",
   "main": "index.js",
   "dependencies": {
     "firebase-admin": "^8.10.0",
