@@ -15,11 +15,7 @@
         <ScheduleSkeleton />
       </div>
       <div class="all-schedules" v-else>
-        <div
-          class="time"
-          v-for="(item, index) in currentUserSchedule"
-          :key="item.id"
-        >
+        <div class="time" v-for="(item, index) in currentUserSchedule" :key="item.id">
           <DayTimeSection
             :id="item.id"
             :time="item.time"
@@ -86,12 +82,15 @@ export default {
       const deviceData = await getDeviceData();
       userData = await getUserData();
       schedule.value = [...deviceData.schedule];
+      console.log(schedule.value);
     });
 
     const addTime = () => {
       const time = new Date();
+      const hours = `${time.getHours()}`.padStart(2, 0);
+      const minutes = `${time.getMinutes()}`.padStart(2, 0);
       const newSchedule = {
-        time: `${time.getHours()}:${time.getMinutes()}`,
+        time: `${hours}:${minutes}`,
         days: [true, true, true, true, true, false, false],
         active: true,
         id: uuidv4(),
