@@ -82,7 +82,6 @@ export default {
       const deviceData = await getDeviceData();
       userData = await getUserData();
       schedule.value = [...deviceData.schedule];
-      console.log(schedule.value);
     });
 
     const addTime = () => {
