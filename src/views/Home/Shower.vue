@@ -18,7 +18,7 @@
           class="start-shower"
           size="medium"
           text="End Shower"
-          type="primary"
+          type="danger"
           @click="playSound"
         />
       </ViewContent>

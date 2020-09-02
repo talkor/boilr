@@ -20,11 +20,12 @@
         <Card label="Weather" icon="sun">
           <Weather />
         </Card>
-        <Card
-          label="Water Temperature"
-          :dataLabel="`${Math.floor(temperature)}°C`"
-          icon="thermometer-empty"
-        />
+        <Card label="Water Temperature" icon="thermometer-empty">
+          <Label
+            :class="{ 'min-hot-temperature': temperature >= 40 }"
+            :text="`${temperature}°C`"
+          />
+        </Card>
         <Card label="Shower Minutes" :dataLabel="`40 Min`" icon="tint" />
         <Card icon="power-off" label="Boiler Status">
           <Label v-if="!!active" class="boiler-active" text="ON" />
@@ -38,7 +39,8 @@
             icon="shower"
             size="medium"
             text="Start Shower"
-            type="primary"
+            :type="notifyStartShower ? 'primary' : null"
+            @click="onStartShower"
           />
         </router-link>
         <div v-show="false">
@@ -57,7 +59,7 @@ import ViewHeader from '@/components/shell/ViewHeader';
 import CoreButton from '@/components/core/CoreButton';
 import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
 import { ref, onMounted, reactive } from '@vue/composition-api';
-import { watchDevice } from '@/services/deviceService';
+import { watchDevice, postDeviceData } from '@/services/deviceService';
 import Icon from '@/components/core/Icon';
 import ViewContent from '@/components/shell/ViewContent';
 import AppView from '@/components/shell/AppView';
@@ -74,6 +76,7 @@ export default {
   setup() {
     const active = ref(false);
     const temperature = ref(0);
+    const notifyStartShower = ref(false);
     const user = reactive({
       name: '',
       photo: ''
@@ -81,18 +84,24 @@ export default {
 
     watchDevice({}, (data) => {
       active.value = data.active;
-      temperature.value = data.temperature;
+      temperature.value = Math.floor(data.temperature);
+
+      if (data.ready) {
+        notify();
+        postDeviceData({ ready: false });
+        notifyStartShower.value = true;
+      }
     });
 
     onMounted(async () => {
       const userData = await getUserData();
       user.photo = userData.photo;
       user.name = userData.name;
-
-      if (active.value) {
-        notify();
-      }
     });
+
+    const onStartShower = () => {
+      notifyStartShower.value = false;
+    };
 
     const notify = () => {
       ToastProgrammatic.open({
@@ -106,7 +115,9 @@ export default {
     return {
       temperature,
       active,
-      user
+      user,
+      onStartShower,
+      notifyStartShower
     };
   },
   components: {
@@ -150,7 +161,11 @@ export default {
   }
 
   .boiler-active {
-    color: rgb(255, 70, 70);
+    color: $danger;
+  }
+
+  .min-hot-temperature {
+    color: $danger;
   }
 }
 </style>

@@ -17,16 +17,16 @@ import { reactive } from '@vue/composition-api';
 import AppView from '@/components/shell/AppView';
 import ViewContent from '@/components/shell/ViewContent';
 import ViewHeader from '@/components/shell/ViewHeader';
-import { onMounted } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import { getUserData } from '@/services/userService';
 
 export default {
   setup(_, { root }) {
     const router = root.$router;
-    let userData;
+    const userData = ref(null);
 
     onMounted(async () => {
-      userData = await getUserData();
+      userData.value = await getUserData();
     });
 
     const list = reactive({
@@ -40,7 +40,7 @@ export default {
               action: () => {
                 router.push({
                   name: 'Device',
-                  params: { device: userData.device }
+                  params: { device: userData.value.device }
                 });
               }
             }
@@ -55,7 +55,9 @@ export default {
               action: () => {
                 router.push({
                   name: 'ShowerSettings',
-                  params: { defaultShowerTime: userData.defaultShowerTime }
+                  params: {
+                    defaultShowerTime: userData.value.defaultShowerTime
+                  }
                 });
               }
             },

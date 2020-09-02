@@ -26,7 +26,14 @@ const getCurrentDay = () => {
 };
 
 const getCurrentTime = () => {
-  return spacetime.now().goto('Asia/Jerusalem').format('time-24');
+  const time = spacetime
+    .now()
+    .goto('Asia/Jerusalem')
+    .format('time-24')
+    .split(':');
+  const paddedHours = `${time[0]}`.padStart(2, 0);
+  const paddedMinutes = `${time[1]}`.padStart(2, 0);
+  return `${paddedHours}:${paddedMinutes}`;
 };
 
 const fetchSchedule = async () => {
@@ -108,16 +115,16 @@ const timeMapper = (schedule) => {
   schedule.map((item) => {
     item.days.forEach((day, dayIndex) => {
       if (day) {
-        const startTime = spacetime()
+        const boilerStartTime = spacetime()
           .time(item.time)
           .subtract(item.duration, 'minutes')
           .format('time-24')
           .split(':');
-        const paddedHours = `${startTime[0]}`.padStart(2, 0);
-        const paddedMinutes = `${startTime[1]}`.padStart(2, 0);
-        const paddedStartTime = `${paddedHours}:${paddedMinutes}`;
+        const paddedHours = `${boilerStartTime[0]}`.padStart(2, 0);
+        const paddedMinutes = `${boilerStartTime[1]}`.padStart(2, 0);
+        const startTime = `${paddedHours}:${paddedMinutes}`;
 
-        timeMapper[dayIndex].push({ time: paddedStartTime, event: 'on' });
+        timeMapper[dayIndex].push({ time: startTime, event: 'on' });
         timeMapper[dayIndex].push({ time: item.time, event: 'off' });
       }
     });
@@ -135,7 +142,7 @@ const scheduler = async (schedule) => {
   const todaysSchedule = timeMap[currentDay];
 
   todaysSchedule.forEach(({ time, event }) => {
-    console.log('Compate: ', time, currentTime);
+    console.log('Compare: ', time, currentTime);
     if (time === currentTime) {
       console.log('OK!');
       setBoilerActive(event === 'on' ? true : false);
