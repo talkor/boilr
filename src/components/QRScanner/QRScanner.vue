@@ -50,5 +50,6 @@ export default {
   width: 100%;
   height: 300px;
   border: 2px dashed black;
+  margin-block-start: 10px;
 }
 </style>

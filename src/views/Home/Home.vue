@@ -15,7 +15,7 @@
     <ViewContent>
       <section class="cards">
         <Card icon="home" :label="`Oh hi, ${user.name}!`">
-          <Label text="Next shower: 7:00" />
+          <Label text="Next shower at 7:00" />
         </Card>
         <Card label="Weather" icon="sun">
           <Weather />
@@ -26,11 +26,20 @@
           icon="thermometer-empty"
         />
         <Card label="Shower Minutes" :dataLabel="`40 Min`" icon="tint" />
-        <Card icon="power-off" label="Boiler Status" :dataLabel="active ? 'ON' : 'OFF'" />
+        <Card icon="power-off" label="Boiler Status">
+          <Label v-if="!!active" class="boiler-active" text="ON" />
+          <Label v-else text="OFF" />
+        </Card>
       </section>
       <section>
         <router-link to="shower">
-          <CoreButton class="start-shower" icon="shower" size="medium" text="Start Shower" primary />
+          <CoreButton
+            class="start-shower"
+            icon="shower"
+            size="medium"
+            text="Start Shower"
+            type="primary"
+          />
         </router-link>
         <div v-show="false">
           <ConnectToSpotify class="spotify" />
@@ -125,7 +134,6 @@ export default {
   }
 
   .cards {
-    // display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
   }
@@ -139,6 +147,10 @@ export default {
 
   .start-shower {
     margin-block-start: 50px;
+  }
+
+  .boiler-active {
+    color: rgb(255, 70, 70);
   }
 }
 </style>

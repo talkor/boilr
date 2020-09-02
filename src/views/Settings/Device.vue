@@ -6,19 +6,30 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <div v-if="deviceId">Connected to {{ deviceId }}</div>
+      <Subtitle text="Device control" class="section-heading" />
       <CoreButton
-        @click="onChangeDevice"
-        :text="showScanner ? 'Cancel' : 'Change device'"
+        @click="onSwitchClick"
+        :type="active ? 'danger' : null"
+        icon="power-off"
+        :text="`Turn ${active ? 'OFF' : 'ON'}`"
       />
-      <QRScanner v-if="showScanner" @decode="onDecode" @error="onError" />
-      <div v-if="showScanner" class="message">{{ message }}</div>
+      <Divider />
+      <section>
+        <Subtitle text="Connected device" class="section-heading" />
+        <div v-if="deviceId" class="device-id">{{ deviceId }}</div>
+        <CoreButton
+          @click="onChangeDevice"
+          :text="showScanner ? 'Cancel' : 'Change device'"
+        />
+        <QRScanner v-if="showScanner" @decode="onDecode" @error="onError" />
+        <div v-if="showScanner" class="message">{{ message }}</div>
+      </section>
     </ViewContent>
   </AppView>
 </template>
 
 <script>
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
 import QRScanner from '@/components/QRScanner/QRScanner';
 import BackButton from '@/components/core/BackButton';
 import { postUserData } from '@/services/userService';
@@ -26,6 +37,14 @@ import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import CoreButton from '@/components/core/CoreButton';
+import Divider from '@/components/core/Divider';
+import Subtitle from '@/components/core/Subtitle';
+import {
+  getDeviceData,
+  postDeviceData,
+  watchDevice
+} from '@/services/deviceService';
+import { log } from '@/services/loggerService';
 
 export default {
   props: {
@@ -35,6 +54,11 @@ export default {
     const deviceId = ref(device);
     const message = ref('Scanning...');
     const showScanner = ref(false);
+    const active = ref(false);
+
+    watchDevice({}, (data) => {
+      active.value = data.active;
+    });
 
     const onDecode = (decodedString) => {
       const newDeviceId = `${decodedString}`;
@@ -52,13 +76,21 @@ export default {
       showScanner.value = !showScanner.value;
     };
 
+    const onSwitchClick = () => {
+      const newActive = !active.value;
+      postDeviceData({ active: newActive });
+      log({ event: newActive ? 'on' : 'off' });
+    };
+
     return {
       onDecode,
       onError,
       message,
       showScanner,
       onChangeDevice,
-      deviceId
+      deviceId,
+      onSwitchClick,
+      active
     };
   },
   components: {
@@ -67,13 +99,29 @@ export default {
     CoreButton,
     AppView,
     ViewHeader,
-    ViewContent
+    ViewContent,
+    Divider,
+    Subtitle
   }
 };
 </script>
 
 <style scoped lang="scss">
-.message {
-  margin-block-start: 20px;
+.device {
+  text-align: start;
+
+  .message {
+    margin-block-start: 20px;
+  }
+
+  .section-heading {
+    font-weight: 600;
+    margin-block-end: 20px;
+  }
+
+  .device-id {
+    margin-block-start: 15px;
+    margin-block-end: 10px;
+  }
 }
 </style>

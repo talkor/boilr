@@ -12,10 +12,13 @@
       <div class="log-list" v-else>
         <div v-for="(item, index) in shortLogList" :key="index">
           <div class="log-item">
-            <div class="time">{{ new Date(item.timestamp.toDate()).toLocaleString('he-IL') }}</div>
+            <div class="time">
+              {{ new Date(item.timestamp.toDate()).toLocaleString('he-IL') }}
+            </div>
             <div class="text">
               iBoiler was turned
               <strong>{{ item.event.toUpperCase() }}</strong>
+              <span v-if="item.name"> manually by {{ item.name }}</span>
             </div>
           </div>
           <Divider v-if="index !== shortLogList.length - 1" />

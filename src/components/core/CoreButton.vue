@@ -10,7 +10,7 @@
     }"
     :rounded="rounded"
     :icon-pack="iconPack"
-    :type="primary ? `is-primary` : null"
+    :type="`is-${type}`"
   >
     <span v-if="text" class="button-content">
       <slot></slot>
@@ -35,10 +35,7 @@ export default {
       type: String,
       default: 'fa'
     },
-    primary: {
-      type: Boolean,
-      default: false
-    }
+    type: String
   },
   setup(props, { emit }) {
     const onClick = (event) => {

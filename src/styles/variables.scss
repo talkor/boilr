@@ -5,6 +5,8 @@ $primary: #35b5f6;
 $primary-invert: findColorInvert($primary);
 $text-color: #23262d;
 $background: #fafbfb;
+$danger: #ff3860;
+$danger-invert: findColorInvert($danger);
 
 $colors: (
   'primary': (
@@ -14,6 +16,10 @@ $colors: (
   'success': (
     $primary,
     $primary-invert
+  ),
+  'danger': (
+    $danger,
+    $danger-invert
   )
 );
 

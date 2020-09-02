@@ -7,13 +7,18 @@
         </template>
       </ViewHeader>
       <ViewContent>
-        <img width="335px" height="335px" class="shower-image" src="../../assets/shower.svg" />
+        <img
+          width="335px"
+          height="335px"
+          class="shower-image"
+          src="../../assets/shower.svg"
+        />
         <Timer class="timer" />
         <CoreButton
           class="start-shower"
           size="medium"
           text="End Shower"
-          primary
+          type="primary"
           @click="playSound"
         />
       </ViewContent>
