@@ -10,5 +10,6 @@
   flex-direction: column;
   flex: 1;
   overflow: hidden;
+  height: 100vh;
 }
 </style>

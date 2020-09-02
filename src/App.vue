@@ -92,9 +92,7 @@ body {
 .portal {
   z-index: 100;
   position: absolute;
-  background: $background;
   width: 100%;
   transition: 0.2s all;
-  // height: 100%;
 }
 </style>

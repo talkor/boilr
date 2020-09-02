@@ -32,6 +32,7 @@ export default {
   border-block-end: 1px solid #c2c2c26c;
   padding-block-start: 20px;
   padding-block-end: 20px;
+  background-color: #fff;
 
   .left-slot {
     width: 30px;
