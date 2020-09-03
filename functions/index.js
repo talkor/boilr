@@ -94,11 +94,11 @@ const setBoilerTemperature = async (value) => {
     .set({ temperature: value }, { merge: true });
 };
 
-const setShowerReady = async () => {
+const setShowerReady = async (data) => {
   return db
     .collection('devices')
     .doc(DEVICE_ID)
-    .set({ ready: true }, { merge: true });
+    .set({ showerData: { ...data, ready: true } }, { merge: true });
 };
 
 const timeMapper = (schedule) => {
@@ -113,21 +113,33 @@ const timeMapper = (schedule) => {
   };
 
   schedule.map((item) => {
-    item.days.forEach((day, dayIndex) => {
-      if (day) {
-        const boilerStartTime = spacetime()
-          .time(item.time)
-          .subtract(item.duration, 'minutes')
-          .format('time-24')
-          .split(':');
-        const paddedHours = `${boilerStartTime[0]}`.padStart(2, 0);
-        const paddedMinutes = `${boilerStartTime[1]}`.padStart(2, 0);
-        const startTime = `${paddedHours}:${paddedMinutes}`;
+    if (item.repeat) {
+      item.days
+        .filter((day) => !day.active)
+        .forEach((day, dayIndex) => {
+          if (day) {
+            const boilerStartTime = spacetime()
+              .time(item.time)
+              .subtract(item.duration, 'minutes')
+              .format('time-24')
+              .split(':');
+            const paddedHours = `${boilerStartTime[0]}`.padStart(2, 0);
+            const paddedMinutes = `${boilerStartTime[1]}`.padStart(2, 0);
+            const startTime = `${paddedHours}:${paddedMinutes}`;
 
-        timeMapper[dayIndex].push({ time: startTime, event: 'on' });
-        timeMapper[dayIndex].push({ time: item.time, event: 'off' });
-      }
-    });
+            timeMapper[dayIndex].push({ time: startTime, event: 'on' });
+            timeMapper[dayIndex].push({
+              time: item.time,
+              event: 'off',
+              uuid: item.uuid,
+              id: item.id,
+              duration: item.duration
+            });
+          }
+        });
+    } else {
+      // single schedule
+    }
   });
 
   return timeMapper;
@@ -136,12 +148,10 @@ const timeMapper = (schedule) => {
 const scheduler = async (schedule) => {
   const currentDay = getCurrentDay();
   const currentTime = getCurrentTime();
-  // const boilerActive = await getBoilerActive();
-
   const timeMap = timeMapper(schedule);
   const todaysSchedule = timeMap[currentDay];
 
-  todaysSchedule.forEach(({ time, event }) => {
+  todaysSchedule.forEach(({ time, event, id, uuid, duration }) => {
     console.log('Compare: ', time, currentTime);
     if (time === currentTime) {
       console.log('OK!');
@@ -149,7 +159,7 @@ const scheduler = async (schedule) => {
       log({ event });
 
       if (event === 'off') {
-        setShowerReady();
+        setShowerReady({ id, uuid, duration });
       }
     }
   });
