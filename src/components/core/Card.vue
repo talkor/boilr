@@ -53,7 +53,7 @@ export default {
     }
 
     .card-title {
-      font-size: 14px;
+      font-size: 16px;
       text-align: start;
       font-weight: 600;
     }

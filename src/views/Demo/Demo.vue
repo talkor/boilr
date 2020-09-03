@@ -37,7 +37,7 @@ export default {
     };
     const getHue = (temp) => {
       const maxHsl = 360;
-      const minHsl = 170;
+      const minHsl = 250;
       const rngHsl = maxHsl - minHsl;
 
       const maxTemp = 99;

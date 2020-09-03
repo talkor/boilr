@@ -1,34 +1,39 @@
 <template>
   <div class="timer">
-    <span class="minutes">{{ `${time.minutes}`.padStart(2, 0) }}</span
-    >:<span class="seconds">{{ `${time.seconds}`.padStart(2, 0) }} </span>
+    <span class="minutes">{{ `${timer.minutes}`.padStart(2, 0) }}</span
+    >:<span class="seconds">{{ `${timer.seconds}`.padStart(2, 0) }} </span>
   </div>
 </template>
 
 <script>
-import { reactive, onMounted } from '@vue/composition-api';
+import { ref, reactive, onMounted } from '@vue/composition-api';
 
 export default {
-  setup() {
-    let current = 0;
-    const time = reactive({
+  props: {
+    time: Number
+  },
+  setup(props) {
+    const current = ref(props.time * 1000 * 60);
+    const timer = reactive({
       minutes: 0,
       seconds: 0
     });
 
-    const timer = () => {
-      current += 1000;
-      time.minutes = Math.floor(current / 1000 / 60);
-      time.seconds = (current / 1000) % 60;
-      setTimeout(timer, 1000);
+    const runTimer = () => {
+      timer.minutes = Math.floor(current.value / 1000 / 60);
+      timer.seconds = (current.value / 1000) % 60;
+      current.value -= 1000;
+      if (current.value > 0) {
+        setTimeout(runTimer, 1000);
+      }
     };
 
     onMounted(() => {
-      timer();
+      runTimer();
     });
 
     return {
-      time
+      timer
     };
   }
 };

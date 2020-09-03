@@ -26,7 +26,8 @@ const routes = [
     component: Home,
     meta: {
       requiresAuth: true
-    }
+    },
+    props: true
   },
   {
     path: '/shower',
@@ -34,7 +35,8 @@ const routes = [
     component: Shower,
     meta: {
       requiresAuth: true
-    }
+    },
+    props: true
   },
   {
     path: '/notifications',

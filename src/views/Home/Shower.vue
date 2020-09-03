@@ -8,14 +8,19 @@
       </ViewHeader>
       <ViewContent>
         <img class="shower-image" src="../../assets/shower.svg" />
-        <Timer class="timer" />
-        <CoreButton
-          class="start-shower"
-          size="medium"
-          text="End Shower"
-          type="danger"
-          @click="playSound"
+        <Timer
+          class="timer"
+          :time="(showerData && parseInt(showerData.duration, 10)) || 0"
         />
+        <router-link :to="{ name: 'Home', params: {} }">
+          <CoreButton
+            class="start-shower"
+            size="medium"
+            text="End Shower"
+            type="danger"
+            @click="playSound"
+          />
+        </router-link>
       </ViewContent>
     </AppView>
   </portal>
@@ -31,7 +36,11 @@ import Timer from '@/components/Timer';
 import { Howl } from 'howler';
 
 export default {
-  setup() {
+  props: {
+    showerData: Object
+  },
+  setup({ showerData }) {
+    console.log(showerData);
     const playSound = () => {
       var sound = new Howl({
         src: ['pinwheel.mp3']

@@ -142,6 +142,7 @@ export default {
           label: index
         });
       }
+      options.push({ id: 111, value: `${2}`, label: 2 });
 
       return options;
     };

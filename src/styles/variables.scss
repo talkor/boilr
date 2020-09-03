@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:wght@200;300;400');
+@import url('https://fonts.googleapis.com/css?family=Roboto:wght@100;200;300;400');
 @import '~bulma/sass/utilities/_all';
 
 $primary: #35b5f6;
 $primary-invert: findColorInvert($primary);
 $text-color: #23262d;
-$background: #fafbfb;
+$background: #fbfbfb;
 $danger: #ff3860;
 $danger-invert: findColorInvert($danger);
 

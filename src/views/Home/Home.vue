@@ -14,9 +14,7 @@
     </ViewHeader>
     <ViewContent>
       <section class="cards">
-        <Card icon="home" :label="`Oh hi, ${user.name}!`">
-          <Label text="Next shower at 7:00" />
-        </Card>
+        <Label bold :text="`Hi there, ${user.name}`" class="greeting" />
         <Card icon="power-off" label="Boiler Status">
           <Label v-if="!!active" class="boiler-active" text="ON" />
           <Label v-else text="OFF" />
@@ -27,13 +25,17 @@
             :text="`${temperature}°C`"
           />
         </Card>
-        <Card label="Shower Minutes" :dataLabel="`40 Min`" icon="tint" />
+        <Card
+          label="Shower Minutes"
+          :dataLabel="`${showerMinutes > 0 ? showerMinutes : 0} Minutes`"
+          icon="tint"
+        />
         <Card label="Weather" icon="sun">
           <Weather />
         </Card>
       </section>
       <section>
-        <router-link to="shower">
+        <router-link :to="{ name: 'Shower', params: { showerData } }">
           <CoreButton
             class="start-shower"
             icon="shower"
@@ -58,7 +60,7 @@ import 'firebase/firestore';
 import ViewHeader from '@/components/shell/ViewHeader';
 import CoreButton from '@/components/core/CoreButton';
 import ConnectToSpotify from '@/components/Spotify/ConnectToSpotify';
-import { ref, onMounted, reactive } from '@vue/composition-api';
+import { ref, onMounted, reactive, watch } from '@vue/composition-api';
 import { watchDevice, postDeviceData } from '@/services/deviceService';
 import Icon from '@/components/core/Icon';
 import ViewContent from '@/components/shell/ViewContent';
@@ -68,15 +70,20 @@ import Label from '@/components/core/Label';
 import { ToastProgrammatic } from 'buefy';
 import { getUserData } from '@/services/userService';
 
+const MINIMUM_SHOWER_TEMP = 40;
+
 export default {
   name: 'Home',
   props: {
     userData: Object
   },
-  setup() {
+  setup({ userData }) {
     const active = ref(false);
     const temperature = ref(0);
     const notifyStartShower = ref(false);
+    const showerMinutes = ref(0);
+    const showerData = ref(null);
+
     const user = reactive({
       name: '',
       photo: ''
@@ -86,10 +93,13 @@ export default {
       active.value = data.active;
       temperature.value = Math.floor(data.temperature);
 
-      if (data.ready) {
-        notify();
-        postDeviceData({ ready: false });
+      showerMinutes.value = (temperature.value - MINIMUM_SHOWER_TEMP) / 2;
+
+      if (data.showerData?.ready) {
         notifyStartShower.value = true;
+        showerData.value = data.showerData;
+        console.log(showerData.value);
+        postDeviceData({ showerData: { ...data.showerData, ready: false } });
       }
     });
 
@@ -97,6 +107,13 @@ export default {
       const userData = await getUserData();
       user.photo = userData.photo;
       user.name = userData.name;
+      user.defaultShowerTime = userData.defaultShowerTime;
+    });
+
+    watch(notifyStartShower, (oldNotifyStartShower, newNotifyShower) => {
+      if (oldNotifyStartShower && !newNotifyShower) {
+        notify();
+      }
     });
 
     const onStartShower = () => {
@@ -117,7 +134,9 @@ export default {
       active,
       user,
       onStartShower,
-      notifyStartShower
+      notifyStartShower,
+      showerMinutes,
+      showerData
     };
   },
   components: {
@@ -158,6 +177,7 @@ export default {
 
   .start-shower {
     margin-block-start: 50px;
+    color: $primary;
   }
 
   .boiler-active {
@@ -166,6 +186,10 @@ export default {
 
   .min-hot-temperature {
     color: $danger;
+  }
+
+  .greeting {
+    margin-block-end: 15px;
   }
 }
 </style>
