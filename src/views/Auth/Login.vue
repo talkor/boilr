@@ -1,8 +1,10 @@
 <template>
   <div class="sign-in">
-    <div class="logo-title">iBoiler</div>
-    <img class="logo-image" src="../../assets/logo-inverted.png" />
-    <img class="login-image" src="../../assets/login.png" />
+    <div class="logo-container">
+      <img class="logo-image" src="../../assets/logo.png" />
+      <div class="logo-title">iBoiler</div>
+    </div>
+    <img class="login-image" src="../../assets/shower.svg" />
     <GoogleSignInButton class="login-button" />
   </div>
 </template>
@@ -26,9 +28,13 @@ export default {
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  background: $primary;
   padding-block-end: 0px;
+
+  .logo-container {
+    margin-block-start: 50px;
+    display: flex;
+    align-items: center;
+  }
 
   .login-image {
     padding-inline-start: 30px;
@@ -37,22 +43,18 @@ export default {
 
   .logo-image {
     width: 100px;
-    position: absolute;
-    top: 105px;
-    left: 50px;
   }
 
   .logo-title {
-    color: white;
+    color: $primary;
     font-weight: 900;
     font-size: 50px;
-    position: relative;
-    top: 60px;
-    left: 25px;
+    margin-block-start: 10px;
   }
 
   .login-button {
     margin-block-end: 50px;
+    border: gray 1px solid;
   }
 }
 </style>

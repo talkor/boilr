@@ -177,7 +177,6 @@ export default {
 
   .start-shower {
     margin-block-start: 50px;
-    color: $primary;
   }
 
   .boiler-active {
