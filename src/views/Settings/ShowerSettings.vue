@@ -6,7 +6,8 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Label :text="`Default Shower Time: ${showerTime} minutes`"></Label>
+      <Subtitle text="Default Shower Time" class="section-heading" />
+      <Label :text="`${showerTime} minutes`" />
       <Slider
         label="Default Shower Time"
         :value="defaultShowerTime"
@@ -18,6 +19,7 @@
 
 <script>
 import BackButton from '@/components/core/BackButton';
+import Subtitle from '@/components/core/Subtitle';
 import { postUserData } from '@/services/userService';
 import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
@@ -49,9 +51,15 @@ export default {
     ViewHeader,
     ViewContent,
     Slider,
-    Label
+    Label,
+    Subtitle
   }
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.section-heading {
+  font-weight: 600;
+  margin-block-end: 10px !important;
+}
+</style>
