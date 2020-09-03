@@ -77,7 +77,7 @@ export default {
   props: {
     userData: Object
   },
-  setup({ userData }) {
+  setup() {
     const active = ref(false);
     const temperature = ref(0);
     const notifyStartShower = ref(false);

@@ -9,12 +9,10 @@
 
 <script>
 import GoogleSignInButton from '@/components/SignInButtons/GoogleSignInButton';
-import Title from '@/components/core/Title';
 
 export default {
   components: {
-    GoogleSignInButton,
-    Title
+    GoogleSignInButton
   }
 };
 </script>
