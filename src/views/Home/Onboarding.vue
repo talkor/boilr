@@ -1,13 +1,6 @@
 <template>
   <portal to="shower-screen">
     <AppView class="shower">
-      <ViewHeader title="Welcome!">
-        <template v-slot:left>
-          <router-link to="/">
-            <BackButton icon="times" />
-          </router-link>
-        </template>
-      </ViewHeader>
       <ViewContent>
         <b-carousel
           arrow
@@ -102,9 +95,7 @@ import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import CoreButton from '@/components/core/CoreButton';
-import Icon from '@/components/core/Icon';
 import BackButton from '@/components/core/BackButton';
-import Timer from '@/components/Timer';
 import Title from '@/components/core/Title';
 import QRScanner from '@/components/QRScanner/QRScanner';
 import Slider from '@/components/core/Slider';
@@ -147,7 +138,6 @@ export default {
     ViewContent,
     CoreButton,
     BackButton,
-    Timer,
     Title,
     QRScanner,
     Slider

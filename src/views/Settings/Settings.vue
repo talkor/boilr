@@ -25,7 +25,6 @@ export default {
   setup(_, { root }) {
     const router = root.$router;
     const userData = ref(null);
-    const showDeleteAccount = ref(false);
 
     onMounted(async () => {
       userData.value = await getUserData();

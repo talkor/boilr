@@ -43,7 +43,7 @@ export default {
     showerData: Object,
     defaultShowerTime: Number
   },
-  setup({ showerData, defaultShowerTime }) {
+  setup() {
     const playSound = () => {
       var sound = new Howl({
         src: ['pinwheel.mp3']

@@ -26,10 +26,7 @@ export const updateData = ({ collection, doc, data }) => {
 };
 
 export const deleteData = ({ collection, doc }) => {
-  return db()
-    .collection(collection)
-    .doc(doc)
-    .delete();
+  return db().collection(collection).doc(doc).delete();
 };
 
 export const watchData = ({ collection, doc }, callback) => {
