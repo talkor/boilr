@@ -34,6 +34,7 @@ export default {
     margin-block-start: 50px;
     display: flex;
     align-items: center;
+    margin-inline-end: 40px;
   }
 
   .login-image {
@@ -53,7 +54,7 @@ export default {
   }
 
   .login-button {
-    margin-block-end: 50px;
+    margin-block-end: 80px;
     border: gray 1px solid;
   }
 }
