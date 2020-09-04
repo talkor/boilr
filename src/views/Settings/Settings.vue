@@ -18,12 +18,14 @@ import AppView from '@/components/shell/AppView';
 import ViewContent from '@/components/shell/ViewContent';
 import ViewHeader from '@/components/shell/ViewHeader';
 import { ref, onMounted } from '@vue/composition-api';
-import { getUserData } from '@/services/userService';
+import { getUserData, deleteUser } from '@/services/userService';
+import { DialogProgrammatic as Dialog } from 'buefy';
 
 export default {
   setup(_, { root }) {
     const router = root.$router;
     const userData = ref(null);
+    const showDeleteAccount = ref(false);
 
     onMounted(async () => {
       userData.value = await getUserData();
@@ -77,6 +79,11 @@ export default {
           label: 'Account',
           items: [
             {
+              label: 'Delete account',
+              icon: 'user-times',
+              action: () => onDeleteAccount()
+            },
+            {
               label: 'Logout',
               icon: 'sign-out-alt',
               action: () => onLogOut()
@@ -93,6 +100,19 @@ export default {
       } catch (error) {
         throw new Error(error);
       }
+    };
+
+    const onDeleteAccount = async () => {
+      Dialog.confirm({
+        title: 'Delete your account',
+        message: 'Are you sure?',
+        confirmText: 'Delete',
+        type: 'is-danger',
+        onConfirm: async () => {
+          await deleteUser();
+          onLogOut();
+        }
+      });
     };
 
     return {

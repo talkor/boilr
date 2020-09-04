@@ -31,7 +31,7 @@ export default {
             const newUser = await isNewUser(uid);
 
             if (newUser) {
-              return postData({
+              await postData({
                 collection: 'users',
                 doc: uid,
                 data: {
@@ -43,9 +43,11 @@ export default {
                   defaultShowerTime: 15
                 }
               });
+              router.replace({ name: 'Onboarding' });
+            } else {
+              router.replace({ name: 'Home' });
             }
           });
-        router.replace({ name: 'Home' });
       } catch (error) {
         throw new Error(error);
       }

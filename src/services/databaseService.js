@@ -25,6 +25,13 @@ export const updateData = ({ collection, doc, data }) => {
     .update({ ...data });
 };
 
+export const deleteData = ({ collection, doc }) => {
+  return db()
+    .collection(collection)
+    .doc(doc)
+    .delete();
+};
+
 export const watchData = ({ collection, doc }, callback) => {
   return db()
     .collection(collection)
