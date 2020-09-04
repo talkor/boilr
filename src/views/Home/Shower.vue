@@ -10,7 +10,10 @@
         <img class="shower-image" src="../../assets/shower.svg" />
         <Timer
           class="timer"
-          :time="(showerData && parseInt(showerData.duration, 10)) || 0"
+          :time="
+            (showerData && parseInt(showerData.duration, 10)) ||
+            defaultShowerTime
+          "
         />
         <router-link :to="{ name: 'Home', params: {} }">
           <CoreButton
@@ -37,10 +40,10 @@ import { Howl } from 'howler';
 
 export default {
   props: {
-    showerData: Object
+    showerData: Object,
+    defaultShowerTime: Number
   },
-  setup({ showerData }) {
-    console.log(showerData);
+  setup({ showerData, defaultShowerTime }) {
     const playSound = () => {
       var sound = new Howl({
         src: ['pinwheel.mp3']

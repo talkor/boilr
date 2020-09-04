@@ -35,7 +35,12 @@
         </Card>
       </section>
       <section>
-        <router-link :to="{ name: 'Shower', params: { showerData } }">
+        <router-link
+          :to="{
+            name: 'Shower',
+            params: { showerData, defaultShowerTime: user.defaultShowerTime }
+          }"
+        >
           <CoreButton
             class="start-shower"
             icon="shower"
@@ -74,9 +79,6 @@ const MINIMUM_SHOWER_TEMP = 40;
 
 export default {
   name: 'Home',
-  props: {
-    userData: Object
-  },
   setup() {
     const active = ref(false);
     const temperature = ref(0);
@@ -92,13 +94,11 @@ export default {
     watchDevice({}, (data) => {
       active.value = data.active;
       temperature.value = Math.floor(data.temperature);
-
       showerMinutes.value = (temperature.value - MINIMUM_SHOWER_TEMP) / 2;
 
       if (data.showerData?.ready) {
         notifyStartShower.value = true;
         showerData.value = data.showerData;
-        console.log(showerData.value);
         postDeviceData({ showerData: { ...data.showerData, ready: false } });
       }
     });
