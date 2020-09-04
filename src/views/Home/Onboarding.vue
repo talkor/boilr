@@ -92,10 +92,8 @@
 
 <script>
 import AppView from '@/components/shell/AppView';
-import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import CoreButton from '@/components/core/CoreButton';
-import BackButton from '@/components/core/BackButton';
 import Title from '@/components/core/Title';
 import QRScanner from '@/components/QRScanner/QRScanner';
 import Slider from '@/components/core/Slider';
@@ -134,10 +132,8 @@ export default {
   },
   components: {
     AppView,
-    ViewHeader,
     ViewContent,
     CoreButton,
-    BackButton,
     Title,
     QRScanner,
     Slider
