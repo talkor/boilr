@@ -117,7 +117,7 @@ const timeMapper = (schedule) => {
       if (item.repeat) {
         item.days.forEach((day, dayIndex) => {
           if (day) {
-            const startTime = formaStartTime({
+            const startTime = formatStartTime({
               time: item.time,
               duration: item.duration
             });
@@ -131,7 +131,7 @@ const timeMapper = (schedule) => {
           }
         });
       } else {
-        const startTime = formaStartTime({
+        const startTime = formatStartTime({
           time: item.time,
           duration: item.duration
         });
@@ -150,7 +150,7 @@ const timeMapper = (schedule) => {
   return timeMapper;
 };
 
-const formaStartTime = ({ time, duration }) => {
+const formatStartTime = ({ time, duration }) => {
   const deltaTime = Math.floor((40 + duration * 2 - globalTemperature) / 2);
   const boilerStartTime = spacetime()
     .time(time)
