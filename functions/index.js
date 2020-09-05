@@ -112,10 +112,10 @@ const timeMapper = async (schedule) => {
     6: []
   };
 
-  schedule.map((item) => {
+  await schedule.map(async (item) => {
     if (item.active) {
       if (item.repeat) {
-        item.days.forEach((day, dayIndex) => {
+        item.days.forEach(async (day, dayIndex) => {
           if (day) {
             const startTime = await formaStartTime({
               time: item.time,
