@@ -113,36 +113,52 @@ const timeMapper = (schedule) => {
   };
 
   schedule.map((item) => {
-    if (item.repeat) {
-      item.days
-        .filter((day) => !day.active)
-        .forEach((day, dayIndex) => {
+    if (item.active) {
+      if (item.repeat) {
+        item.days.forEach((day, dayIndex) => {
           if (day) {
-            const boilerStartTime = spacetime()
-              .time(item.time)
-              .subtract(item.duration, 'minutes')
-              .format('time-24')
-              .split(':');
-            const paddedHours = `${boilerStartTime[0]}`.padStart(2, 0);
-            const paddedMinutes = `${boilerStartTime[1]}`.padStart(2, 0);
-            const startTime = `${paddedHours}:${paddedMinutes}`;
-
+            const startTime = formaStartTime({
+              time: item.time,
+              duration: item.duration
+            });
             timeMapper[dayIndex].push({ time: startTime, event: 'on' });
             timeMapper[dayIndex].push({
               time: item.time,
               event: 'off',
               uuid: item.uuid,
-              id: item.id,
               duration: item.duration
             });
           }
         });
-    } else {
-      // single schedule
+      } else {
+        const startTime = formaStartTime({
+          time: item.time,
+          duration: item.duration
+        });
+        timeMapper[getCurrentDay()].push({ time: startTime, event: 'on' });
+        timeMapper[getCurrentDay()].push({
+          time: item.time,
+          event: 'off',
+          uuid: item.uuid,
+          id: item.id,
+          duration: item.duration
+        });
+      }
     }
   });
 
   return timeMapper;
+};
+
+const formaStartTime = ({ time, duration }) => {
+  const boilerStartTime = spacetime()
+    .time(time)
+    .subtract(duration, 'minutes')
+    .format('time-24')
+    .split(':');
+  const paddedHours = `${boilerStartTime[0]}`.padStart(2, 0);
+  const paddedMinutes = `${boilerStartTime[1]}`.padStart(2, 0);
+  return `${paddedHours}:${paddedMinutes}`;
 };
 
 const scheduler = async (schedule) => {
@@ -159,6 +175,10 @@ const scheduler = async (schedule) => {
       log({ event });
 
       if (event === 'off') {
+        if (id) {
+          console.log('deactivating ', id);
+          deactivateScheduleTime(id);
+        }
         setShowerReady({ id, uuid, duration });
       }
     }
@@ -175,4 +195,18 @@ const log = async (data) => {
         ...data
       })
     });
+};
+
+const deactivateScheduleTime = async (id) => {
+  let schedule = await fetchSchedule();
+  const requiredScheduleIndex = schedule.findIndex((item) => item.id === id);
+  schedule[requiredScheduleIndex] = {
+    ...schedule[requiredScheduleIndex],
+    active: false
+  };
+
+  return db
+    .collection('devices')
+    .doc(DEVICE_ID)
+    .set({ schedule: [...schedule] }, { merge: true });
 };
