@@ -27,7 +27,7 @@
         </Card>
         <Card
           label="Shower Minutes"
-          :dataLabel="`${showerMinutes > 0 ? showerMinutes : 0} Minutes`"
+          :dataLabel="`${showerMinutes > 0 ? showerMinutes : 0} minutes`"
           icon="tint"
         />
         <Card label="Weather" icon="sun">
@@ -94,7 +94,9 @@ export default {
     watchDevice({}, (data) => {
       active.value = data.active;
       temperature.value = Math.floor(data.temperature);
-      showerMinutes.value = (temperature.value - MINIMUM_SHOWER_TEMP) / 2;
+      showerMinutes.value = Math.floor(
+        (temperature.value - MINIMUM_SHOWER_TEMP) / 2
+      );
 
       if (data.showerData?.ready) {
         notifyStartShower.value = true;
