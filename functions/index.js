@@ -5,7 +5,7 @@ const spacetime = require('spacetime');
 admin.initializeApp();
 
 const db = admin.firestore();
-
+let globalTemperature = 0;
 const DEVICE_ID = 'mhXWbGB4UxIdOPqeoOJz';
 const MAX_TEMP = 99;
 const MIN_TEMP = 25;
@@ -56,7 +56,7 @@ const temperatueSimulation = async () => {
     .then((snapshot) => {
       return { ...snapshot.data() };
     });
-
+  globalTemperature = temperature;
   if (active) {
     if (temperature < MAX_TEMP) {
       setBoilerTemperature(temperature + 2);
@@ -101,7 +101,7 @@ const setShowerReady = async (data) => {
     .set({ showerData: { ...data, ready: true } }, { merge: true });
 };
 
-const timeMapper = async (schedule) => {
+const timeMapper = (schedule) => {
   let timeMapper = {
     0: [],
     1: [],
@@ -112,12 +112,12 @@ const timeMapper = async (schedule) => {
     6: []
   };
 
-  await schedule.map(async (item) => {
+  schedule.map((item) => {
     if (item.active) {
       if (item.repeat) {
-        item.days.forEach(async (day, dayIndex) => {
+        item.days.forEach((day, dayIndex) => {
           if (day) {
-            const startTime = await formaStartTime({
+            const startTime = formaStartTime({
               time: item.time,
               duration: item.duration
             });
@@ -131,7 +131,7 @@ const timeMapper = async (schedule) => {
           }
         });
       } else {
-        const startTime = await formaStartTime({
+        const startTime = formaStartTime({
           time: item.time,
           duration: item.duration
         });
@@ -150,9 +150,8 @@ const timeMapper = async (schedule) => {
   return timeMapper;
 };
 
-const formaStartTime = async ({ time, duration }) => {
-  const currentTemperature = await getBoilerTemperature();
-  const deltaTime = Math.floor((40 + duration * 2 - currentTemperature) / 2);
+const formaStartTime = ({ time, duration }) => {
+  const deltaTime = Math.floor((40 + duration * 2 - globalTemperature) / 2);
   const boilerStartTime = spacetime()
     .time(time)
     .subtract(deltaTime > 0 ? deltaTime : 1, 'minutes')
@@ -166,7 +165,7 @@ const formaStartTime = async ({ time, duration }) => {
 const scheduler = async (schedule) => {
   const currentDay = getCurrentDay();
   const currentTime = getCurrentTime();
-  const timeMap = await timeMapper(schedule);
+  const timeMap = timeMapper(schedule);
   const todaysSchedule = timeMap[currentDay];
 
   todaysSchedule.forEach(({ time, event, id, uuid, duration }) => {
