@@ -75,8 +75,8 @@ const setBoilerActive = async (value) => {
     .set({ active: value }, { merge: true });
 };
 
-const getBoilerActive = async () => {
-  const { active } = await db
+const getBoilerTemperature = async () => {
+  const { temperature } = await db
     .collection('devices')
     .doc(DEVICE_ID)
     .get()
@@ -84,7 +84,7 @@ const getBoilerActive = async () => {
       return { ...snapshot.data() };
     });
 
-  return active;
+  return temperature;
 };
 
 const setBoilerTemperature = async (value) => {
@@ -150,10 +150,12 @@ const timeMapper = (schedule) => {
   return timeMapper;
 };
 
-const formaStartTime = ({ time, duration }) => {
+const formaStartTime = async ({ time, duration }) => {
+  const currentTemperature = await getBoilerTemperature();
+  const deltaTime = Math.floor((40 + duration * 2 - currentTemperature) / 2);
   const boilerStartTime = spacetime()
     .time(time)
-    .subtract(duration, 'minutes')
+    .subtract(deltaTime, 'minutes')
     .format('time-24')
     .split(':');
   const paddedHours = `${boilerStartTime[0]}`.padStart(2, 0);
