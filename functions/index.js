@@ -101,7 +101,7 @@ const setShowerReady = async (data) => {
     .set({ showerData: { ...data, ready: true } }, { merge: true });
 };
 
-const timeMapper = (schedule) => {
+const timeMapper = async (schedule) => {
   let timeMapper = {
     0: [],
     1: [],
@@ -117,7 +117,7 @@ const timeMapper = (schedule) => {
       if (item.repeat) {
         item.days.forEach((day, dayIndex) => {
           if (day) {
-            const startTime = formaStartTime({
+            const startTime = await formaStartTime({
               time: item.time,
               duration: item.duration
             });
@@ -131,7 +131,7 @@ const timeMapper = (schedule) => {
           }
         });
       } else {
-        const startTime = formaStartTime({
+        const startTime = await formaStartTime({
           time: item.time,
           duration: item.duration
         });
@@ -166,7 +166,7 @@ const formaStartTime = async ({ time, duration }) => {
 const scheduler = async (schedule) => {
   const currentDay = getCurrentDay();
   const currentTime = getCurrentTime();
-  const timeMap = timeMapper(schedule);
+  const timeMap = await timeMapper(schedule);
   const todaysSchedule = timeMap[currentDay];
 
   todaysSchedule.forEach(({ time, event, id, uuid, duration }) => {
