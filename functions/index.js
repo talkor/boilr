@@ -155,7 +155,7 @@ const formaStartTime = async ({ time, duration }) => {
   const deltaTime = Math.floor((40 + duration * 2 - currentTemperature) / 2);
   const boilerStartTime = spacetime()
     .time(time)
-    .subtract(deltaTime, 'minutes')
+    .subtract(deltaTime > 0 ? deltaTime : 1, 'minutes')
     .format('time-24')
     .split(':');
   const paddedHours = `${boilerStartTime[0]}`.padStart(2, 0);
