@@ -1,20 +1,24 @@
 <template>
   <div class="weather">
-    <div>{{ curTempDisplay }}°C | {{ city }}</div>
+    <div>{{ curTempDisplay }} | {{ city }}</div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { ref } from '@vue/composition-api';
 
 const CELSIUS = 0;
 export default {
-  setup() {
+  props: {
+    mode: Number
+  },
+  setup({ mode }) {
     const city = 'Retrieving Weather...';
     const latitude = 0.0;
     const longitude = 0.0;
     const curTemp = null;
-    const displayMode = CELSIUS;
+    const displayMode = ref(mode);
     const dataObj = null;
     const weatherMain = 'Fine';
     const weatherDesc = 'Clear day';
@@ -58,9 +62,9 @@ export default {
     curTempDisplay: function () {
       if (this.curTemp != null) {
         if (this.displayMode == CELSIUS) {
-          return (this.curTemp - 273.15).toFixed(1);
+          return (this.curTemp - 273.15).toFixed(1) + '°C';
         } else {
-          return ((this.curTemp * 9) / 5 - 459.67).toFixed(1);
+          return ((this.curTemp * 9) / 5 - 459.67).toFixed(1) + '°F';
         }
       } else {
         return null;

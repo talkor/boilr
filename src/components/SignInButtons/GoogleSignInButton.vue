@@ -40,7 +40,8 @@ export default {
                   uid,
                   device: 'mhXWbGB4UxIdOPqeoOJz',
                   photo: photoURL,
-                  defaultShowerTime: 15
+                  defaultShowerTime: 15,
+                  temperatureMode: 'C'
                 }
               });
               router.replace({ name: 'Onboarding' });

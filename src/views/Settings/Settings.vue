@@ -68,7 +68,7 @@ export default {
               action: () => {
                 router.push({
                   name: 'Preferences',
-                  params: {}
+                  params: { mode: userData.value.temperatureMode }
                 });
               }
             }

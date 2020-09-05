@@ -8,14 +8,18 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Label text="Time to add if your shower time ends" :bold="true" />
+      <Subtitle text="Extra shower time" class="section-heading" />
       <Divider />
-      <div class="beep">
-        <Label text="In-Shower Beep reminders" :bold="true" />
-        <Toggle class="toggleBtn" :active="false" @toggle="onActiveToggle" />
-      </div>
+      <Subtitle text="In-Shower Beep reminders" class="section-heading" />
+      <Toggle class="toggleBtn" :active="false" @toggle="onActiveToggle" />
       <Divider />
-      <Label text="C/F" :bold="true" />
+      <Subtitle text="Temperature mode" class="section-heading" />
+      <RadioButton
+        option1="C"
+        option2="F"
+        :value="temperatureMode"
+        @input="onModeChange"
+      />
       <Divider />
     </ViewContent>
   </AppView>
@@ -24,31 +28,45 @@
 <script>
 import 'firebase/auth';
 import Toggle from '@/components/core/Toggle';
-import Label from '@/components/core/Label';
 import BackButton from '@/components/core/BackButton';
 import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import Divider from '@/components/core/Divider';
+import RadioButton from '@/components/core/RadioButton';
+import { postUserData } from '@/services/userService';
+import { ref } from '@vue/composition-api';
+import Subtitle from '@/components/core/Subtitle';
 
 export default {
-  setup() {
+  props: {
+    mode: String
+  },
+  setup({ mode }) {
+    const temperatureMode = ref(mode);
     const onActiveToggle = (value) => {
-      console.log('sound reminders toggled to ' + value);
+      console.log('toggled ' + value);
+    };
+
+    const onModeChange = (value) => {
+      postUserData({ temperatureMode: value });
     };
 
     return {
-      onActiveToggle
+      onActiveToggle,
+      onModeChange,
+      temperatureMode
     };
   },
   components: {
     Toggle,
     BackButton,
-    Label,
     Divider,
     AppView,
     ViewHeader,
-    ViewContent
+    ViewContent,
+    RadioButton,
+    Subtitle
   }
 };
 </script>
@@ -56,10 +74,14 @@ export default {
 <style scoped lang="scss">
 .beep {
   display: flex;
-  align-items: flex-start;
+  align-items: left;
   padding: 7px;
 }
 .toggleBtn {
-  margin-left: 50px;
+  margin-left: -310px;
+}
+.section-heading {
+  font-weight: 600;
+  margin-block-end: 20px;
 }
 </style>

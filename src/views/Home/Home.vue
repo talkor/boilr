@@ -22,7 +22,7 @@
         <Card label="Water Temperature" icon="thermometer-empty">
           <Label
             :class="{ 'min-hot-temperature': temperature >= 40 }"
-            :text="`${temperature}°C`"
+            :text="`${displayedTemperature}`"
           />
         </Card>
         <Card
@@ -31,7 +31,7 @@
           icon="tint"
         />
         <Card label="Weather" icon="sun">
-          <Weather />
+          <Weather :mode="displayMode" />
         </Card>
       </section>
       <section>
@@ -76,7 +76,6 @@ import { NotificationProgrammatic as Notification } from 'buefy';
 import { getUserData } from '@/services/userService';
 
 const MINIMUM_SHOWER_TEMP = 40;
-
 export default {
   name: 'Home',
   setup() {
@@ -85,6 +84,8 @@ export default {
     const notifyStartShower = ref(false);
     const showerMinutes = ref(0);
     const showerData = ref(null);
+    const displayMode = ref(0);
+    const displayedTemperature = ref(0);
 
     const user = reactive({
       name: '',
@@ -97,7 +98,11 @@ export default {
       showerMinutes.value = Math.floor(
         (temperature.value - MINIMUM_SHOWER_TEMP) / 2
       );
-
+      if (displayMode.value == 0) {
+        displayedTemperature.value = temperature.value + '°C';
+      } else if (displayMode.value == 1) {
+        displayedTemperature.value = (temperature.value * 9) / 5 + 32 + '°F';
+      }
       if (data.showerData?.ready) {
         notifyStartShower.value = true;
         showerData.value = data.showerData;
@@ -110,6 +115,13 @@ export default {
       user.photo = userData.photo;
       user.name = userData.name;
       user.defaultShowerTime = userData.defaultShowerTime;
+      if (userData.temperatureMode) {
+        if (userData.temperatureMode == 'C') {
+          displayMode.value = 0;
+        } else {
+          displayMode.value = 1;
+        }
+      }
     });
 
     watch(notifyStartShower, (oldNotifyStartShower, newNotifyShower) => {
@@ -133,12 +145,14 @@ export default {
 
     return {
       temperature,
+      displayMode,
       active,
       user,
       onStartShower,
       notifyStartShower,
       showerMinutes,
-      showerData
+      showerData,
+      displayedTemperature
     };
   },
   components: {
