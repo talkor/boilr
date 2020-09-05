@@ -169,15 +169,12 @@ const scheduler = async (schedule) => {
   const todaysSchedule = timeMap[currentDay];
 
   todaysSchedule.forEach(({ time, event, id, uuid, duration }) => {
-    console.log('Compare: ', time, currentTime);
     if (time === currentTime) {
-      console.log('OK!');
       setBoilerActive(event === 'on' ? true : false);
       log({ event });
 
       if (event === 'off') {
         if (id) {
-          console.log('deactivating ', id);
           deactivateScheduleTime(id);
         }
         setShowerReady({ id, uuid, duration });
