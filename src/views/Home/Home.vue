@@ -72,7 +72,7 @@ import ViewContent from '@/components/shell/ViewContent';
 import AppView from '@/components/shell/AppView';
 import UserIcon from '@/components/UserIcon';
 import Label from '@/components/core/Label';
-import { ToastProgrammatic } from 'buefy';
+import { NotificationProgrammatic as Notification } from 'buefy';
 import { getUserData } from '@/services/userService';
 
 const MINIMUM_SHOWER_TEMP = 40;
@@ -121,8 +121,8 @@ export default {
     };
 
     const notify = () => {
-      ToastProgrammatic.open({
-        duration: 5000,
+      Notification.open({
+        indefinite: true,
         message: 'Your shower is ready!',
         position: 'is-top',
         type: 'is-success'

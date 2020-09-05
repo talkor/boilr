@@ -7,7 +7,7 @@
       :noPadding="true"
       :rounded="true"
       :text="dayStrings[index]"
-      class="day"
+      :class="{ day: true, unchecked: !days[index] }"
       @click="onDayChange(index)"
     />
   </div>
@@ -46,6 +46,10 @@ export default {
 
   .day {
     min-width: 40px;
+
+    &.unchecked {
+      background: #fbfbfb;
+    }
   }
 }
 </style>
