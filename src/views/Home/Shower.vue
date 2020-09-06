@@ -66,14 +66,16 @@ export default {
       if (minutes * 60 + seconds == 60) {
         playSound('one_minute_left.mp3');
       }
-      if (timeCounter % 60 == 0) {
+      if (timeCounter - (minutes * 60 + seconds) > 0 && timeCounter % 60 == 0) {
         playSound('dont_waste.mp3');
       }
     };
 
     const endShower = () => {
       active_timer.value = false;
-      sound.stop();
+      if (sound != null) {
+        sound.stop();
+      }
     };
 
     const playSound = (inputSound) => {
