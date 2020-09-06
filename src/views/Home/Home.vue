@@ -38,7 +38,7 @@
         <router-link
           :to="{
             name: 'Shower',
-            params: { showerData, defaultShowerTime: user.defaultShowerTime }
+            params: { showerData, defaultShowerTime: user.defaultShowerTime, isSoundEnabled: soundEnabled }
           }"
         >
           <CoreButton
@@ -86,7 +86,7 @@ export default {
     const showerData = ref(null);
     const displayMode = ref(0);
     const displayedTemperature = ref(0);
-
+    const soundEnabled = ref(true);
     const user = reactive({
       name: '',
       photo: ''
@@ -117,6 +117,7 @@ export default {
       user.name = userData.name;
       user.defaultShowerTime = userData.defaultShowerTime;
       showersCounter.value = userData.totalShowersNumber;
+      soundEnabled.value = userData.isSoundEnabled;
       if (userData.temperatureMode) {
         if (userData.temperatureMode == 'C') {
           displayMode.value = 0;
@@ -158,7 +159,8 @@ export default {
       showerMinutes,
       showerData,
       displayedTemperature,
-      showersCounter
+      showersCounter,
+      soundEnabled
     };
   },
   components: {

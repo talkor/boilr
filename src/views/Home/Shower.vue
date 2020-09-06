@@ -44,9 +44,10 @@ import { Howl } from 'howler';
 export default {
   props: {
     showerData: Object,
-    defaultShowerTime: Number
+    defaultShowerTime: Number,
+    isSoundEnabled: Boolean
   },
-  setup() {
+  setup({isSoundEnabled}) {
     var active_timer = ref(true);
     var sound;
 
@@ -79,7 +80,9 @@ export default {
       sound = new Howl({
         src: [inputSound]
       });
-      sound.play();
+      if(isSoundEnabled) {
+        sound.play();
+      }
     };
 
     return {

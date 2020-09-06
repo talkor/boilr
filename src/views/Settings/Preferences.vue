@@ -11,7 +11,7 @@
       <Subtitle text="Extra shower time" class="section-heading" />
       <Divider />
       <Subtitle text="In-Shower Beep reminders" class="section-heading" />
-      <Toggle class="toggleBtn" :active="false" @toggle="onActiveToggle" />
+      <Toggle class="toggleBtn" :active="isSoundEnabled" @toggle="onActiveToggle" />
       <Divider />
       <Subtitle text="Temperature mode" class="section-heading" />
       <RadioButton
@@ -40,12 +40,14 @@ import Subtitle from '@/components/core/Subtitle';
 
 export default {
   props: {
-    mode: String
+    mode: String,
+    isSoundEnabled: Boolean
   },
-  setup({ mode }) {
+  setup({ mode }, {isSoundEnabled}) {
     const temperatureMode = ref(mode);
+    
     const onActiveToggle = (value) => {
-      console.log('toggled ' + value);
+      postUserData({ isSoundEnabled: value });
     };
 
     const onModeChange = (value) => {

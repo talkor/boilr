@@ -43,7 +43,8 @@ export default {
                   defaultShowerTime: 15,
                   temperatureMode: 'C',
                   totalShowersNumber: 0,
-                  totalShowersTime: 0
+                  totalShowersTime: 0,
+                  isSoundEnabled: true
                 }
               });
               router.replace({ name: 'Onboarding' });
