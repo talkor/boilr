@@ -1,11 +1,12 @@
 <template>
   <portal to="shower-screen">
     <AppView class="shower">
-      <ViewHeader title="Shower">
+      <ViewHeader title="Shower" />
+      <!-- <ViewHeader title="Shower">
         <template v-slot:left>
-          <BackButton icon="times" />
-        </template>
-      </ViewHeader>
+          <BackButton icon="times" v-on:click="endShower" />
+        </template> 
+      </ViewHeader> -->
       <ViewContent>
         <img class="shower-image" src="../../assets/shower.svg" />
         <Timer
@@ -14,6 +15,8 @@
             (showerData && parseInt(showerData.duration, 10)) ||
             defaultShowerTime
           "
+          :active="active_timer"
+          @makeSoundIfNeeded="makeSoundIfNeeded"
         />
         <router-link :to="{ name: 'Home', params: {} }">
           <CoreButton
@@ -21,7 +24,7 @@
             size="medium"
             text="End Shower"
             type="danger"
-            @click="playSound"
+            @click="endShower"
           />
         </router-link>
       </ViewContent>
@@ -34,8 +37,8 @@ import AppView from '@/components/shell/AppView';
 import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import CoreButton from '@/components/core/CoreButton';
-import BackButton from '@/components/core/BackButton';
 import Timer from '@/components/Timer';
+import { ref, onMounted } from '@vue/composition-api';
 import { Howl } from 'howler';
 
 export default {
@@ -44,22 +47,58 @@ export default {
     defaultShowerTime: Number
   },
   setup() {
-    const playSound = () => {
+    var active_timer = ref(true);
+
+    onMounted(async () => {
+      active_timer.value = true;
+    });
+
+    const makeSoundIfNeeded = (time, minutes, seconds, timeCounter) => {
+      if (
+        ((time * 60) / 3) * 2 == minutes * 60 + seconds ||
+        (time * 60) / 3 == minutes * 60 + seconds ||
+        (time * 60) / 3 == minutes * 60 + seconds + 1
+      ) {
+        playSound('pinwheel.mp3');
+      }
+      if (minutes * 60 + seconds == 60) {
+        playSound('one_minute_left.mp3');
+      }
+      if (minutes * 60 + seconds == 1) {
+        playSound('time_is_up.mp3');
+      }
+      if (
+        timeCounter - (minutes * 60 + seconds) > 100 &&
+        timeCounter % 60 == 0
+      ) {
+        playSound('please_hurry_up.mp3');
+      }
+    };
+
+    const endShower = () => {
+      active_timer.value = false;
+    };
+
+    const playSound = (inputSound) => {
       var sound = new Howl({
-        src: ['pinwheel.mp3']
+        src: [inputSound]
       });
 
       sound.play();
     };
 
-    return { playSound };
+    return {
+      endShower,
+      playSound,
+      active_timer,
+      makeSoundIfNeeded
+    };
   },
   components: {
     AppView,
     ViewHeader,
     ViewContent,
     CoreButton,
-    BackButton,
     Timer
   }
 };

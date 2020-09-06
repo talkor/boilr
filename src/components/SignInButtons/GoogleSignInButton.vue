@@ -41,7 +41,9 @@ export default {
                   device: 'mhXWbGB4UxIdOPqeoOJz',
                   photo: photoURL,
                   defaultShowerTime: 15,
-                  temperatureMode: 'C'
+                  temperatureMode: 'C',
+                  totalShowersNumber: 0,
+                  totalShowersTime: 0
                 }
               });
               router.replace({ name: 'Onboarding' });

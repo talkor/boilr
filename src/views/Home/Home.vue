@@ -73,7 +73,7 @@ import AppView from '@/components/shell/AppView';
 import UserIcon from '@/components/UserIcon';
 import Label from '@/components/core/Label';
 import { NotificationProgrammatic as Notification } from 'buefy';
-import { getUserData } from '@/services/userService';
+import { getUserData, postUserData } from '@/services/userService';
 
 const MINIMUM_SHOWER_TEMP = 40;
 export default {
@@ -91,6 +91,7 @@ export default {
       name: '',
       photo: ''
     });
+    var showersCounter = ref(0);
 
     watchDevice({}, (data) => {
       active.value = data.active;
@@ -115,6 +116,7 @@ export default {
       user.photo = userData.photo;
       user.name = userData.name;
       user.defaultShowerTime = userData.defaultShowerTime;
+      showersCounter.value = userData.totalShowersNumber;
       if (userData.temperatureMode) {
         if (userData.temperatureMode == 'C') {
           displayMode.value = 0;
@@ -132,6 +134,9 @@ export default {
 
     const onStartShower = () => {
       notifyStartShower.value = false;
+      postUserData({
+        totalShowersNumber: ++showersCounter.value
+      });
     };
 
     const notify = () => {
@@ -152,7 +157,8 @@ export default {
       notifyStartShower,
       showerMinutes,
       showerData,
-      displayedTemperature
+      displayedTemperature,
+      showersCounter
     };
   },
   components: {

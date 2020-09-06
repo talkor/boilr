@@ -13,7 +13,10 @@
             <section class="hero is-medium">
               <div class="hero-body has-text-centered">
                 <Title text="Hot water, low energy" />
-                <img class="onboarding-image" src="../../assets/onboarding-3.svg" />
+                <img
+                  class="onboarding-image"
+                  src="../../assets/onboarding-3.svg"
+                />
                 <p>iBoiler will make sure you have enough hot water on time.</p>
               </div>
             </section>
@@ -22,7 +25,10 @@
             <section class="hero is-medium">
               <div class="hero-body has-text-centered">
                 <Title text="Your shower schedule" />
-                <img class="onboarding-image" src="../../assets/onboarding-2.svg" />
+                <img
+                  class="onboarding-image"
+                  src="../../assets/onboarding-2.svg"
+                />
                 <p>
                   Set up your shower times and iBoiler will turn on and off
                   automatically, providing you with just the right water
@@ -47,9 +53,16 @@
                 <Title text="Your usual shower time" />
                 <div>
                   {{ showerTime }} Minutes
-                  <Slider label="Usual Shower Time" :value="10" @change="onTimeChange" />
+                  <Slider
+                    label="Usual Shower Time"
+                    :value="10"
+                    @change="onTimeChange"
+                  />
                 </div>
-                <img class="onboarding-image" src="../../assets/onboarding-4.svg" />
+                <img
+                  class="onboarding-image"
+                  src="../../assets/onboarding-4.svg"
+                />
                 <p>
                   Choose your average usual shower time. You can change this
                   later
@@ -61,7 +74,10 @@
             <section class="hero is-medium">
               <div class="hero-body has-text-centered">
                 <Title text="All set, let's go" />
-                <img class="onboarding-image" src="../../assets/onboarding-5.svg" />
+                <img
+                  class="onboarding-image"
+                  src="../../assets/onboarding-5.svg"
+                />
                 <router-link to="/">
                   <CoreButton text="Start using the app" type="primary" />
                 </router-link>
