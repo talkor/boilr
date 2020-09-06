@@ -48,6 +48,7 @@ export default {
   },
   setup() {
     var active_timer = ref(true);
+    var sound;
 
     onMounted(async () => {
       active_timer.value = true;
@@ -64,26 +65,23 @@ export default {
       if (minutes * 60 + seconds == 60) {
         playSound('one_minute_left.mp3');
       }
-      if (minutes * 60 + seconds == 1) {
-        playSound('time_is_up.mp3');
-      }
       if (
-        timeCounter - (minutes * 60 + seconds) > 100 &&
-        timeCounter % 60 == 0
+        timeCounter == time * 60 ||
+        (timeCounter - (minutes * 60 + seconds) > 100 && timeCounter % 60 == 0)
       ) {
-        playSound('please_hurry_up.mp3');
+        playSound('dont_waste.mp3');
       }
     };
 
     const endShower = () => {
       active_timer.value = false;
+      sound.stop();
     };
 
     const playSound = (inputSound) => {
-      var sound = new Howl({
+      sound = new Howl({
         src: [inputSound]
       });
-
       sound.play();
     };
 

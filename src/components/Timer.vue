@@ -8,6 +8,7 @@
 <script>
 import { ref, reactive, onMounted } from '@vue/composition-api';
 import { getUserData, postUserData } from '@/services/userService';
+import { NotificationProgrammatic as Notification } from 'buefy';
 
 export default {
   props: {
@@ -23,6 +24,7 @@ export default {
     const totalShowersTime = ref(0);
     var timeCounter = 0;
     var userData;
+    var message;
 
     const runTimer = () => {
       timer.minutes = Math.floor(current.value / 1000 / 60);
@@ -37,6 +39,7 @@ export default {
 
     const countSeconds = () => {
       if (props.active == false) {
+        notify();
         clearTimeout(countSeconds);
         postUserData({
           totalShowersTime: timeCounter + totalShowersTime.value
@@ -54,6 +57,20 @@ export default {
       }
     };
 
+    const notify = () => {
+      if (timeCounter > props.time * 60) {
+        message = 'Nice try... next time you will need to do it faster';
+      } else {
+        message = 'Congratulations, you made it in time!';
+      }
+      Notification.open({
+        indefinite: true,
+        message: message,
+        position: 'is-top',
+        type: 'is-success'
+      });
+    };
+
     onMounted(async () => {
       userData = await getUserData();
       totalShowersTime.value = userData.totalShowersTime;
@@ -64,7 +81,8 @@ export default {
     return {
       countSeconds,
       timeCounter,
-      timer
+      timer,
+      notify
     };
   }
 };
