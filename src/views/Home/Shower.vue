@@ -56,6 +56,9 @@ export default {
     });
 
     const makeSoundIfNeeded = (time, minutes, seconds, timeCounter) => {
+      console.log(timeCounter);
+      console.log('min: ' + minutes);
+      console.log('sec: ' + seconds);
       if (
         ((time * 60) / 3) * 2 == minutes * 60 + seconds ||
         (time * 60) / 3 == minutes * 60 + seconds ||
@@ -66,10 +69,10 @@ export default {
       if (minutes * 60 + seconds == 60) {
         playSound('one_minute_left.mp3');
       }
-      if (
-        timeCounter - (minutes * 60 + seconds) > 30 &&
-        timeCounter % 60 == 0
-      ) {
+      if (minutes == 0 && seconds == 1) {
+        playSound('your_time_is_up.mp3');
+      }
+      if (minutes == 0 && seconds == 0 && timeCounter % 60 == 0) {
         playSound('dont_waste.mp3');
       }
     };
