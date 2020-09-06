@@ -40,7 +40,7 @@ export default {
                   uid,
                   device: 'mhXWbGB4UxIdOPqeoOJz',
                   photo: photoURL,
-                  defaultShowerTime: 15,
+                  defaultShowerTime: 10,
                   temperatureMode: 'C',
                   totalShowersNumber: 0,
                   totalShowersTime: 0,

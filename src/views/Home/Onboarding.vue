@@ -55,7 +55,7 @@
                   {{ showerTime }} Minutes
                   <Slider
                     label="Usual Shower Time"
-                    :value="10"
+                    :value=10
                     @change="onTimeChange"
                   />
                 </div>
@@ -119,7 +119,7 @@ export default {
 
     const onTimeChange = (value) => {
       showerTime.value = value;
-      postUserData({ defaultShowerTime: `"${value}"` });
+      postUserData({ defaultShowerTime: value });
     };
 
     return {
