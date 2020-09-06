@@ -47,9 +47,9 @@ export default {
     mode: String,
     isSoundEnabled: Boolean
   },
-  setup({ mode }, {isSoundEnabled}) {
+  setup({ mode }) {
     const temperatureMode = ref(mode);
-    
+
     const onActiveToggle = (value) => {
       postUserData({ isSoundEnabled: value });
     };
