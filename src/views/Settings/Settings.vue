@@ -68,7 +68,10 @@ export default {
               action: () => {
                 router.push({
                   name: 'Preferences',
-                  params: { mode: userData.value.temperatureMode, isSoundEnabled: userData.value.isSoundEnabled }
+                  params: {
+                    mode: userData.value.temperatureMode,
+                    isSoundEnabled: userData.value.isSoundEnabled
+                  }
                 });
               }
             }

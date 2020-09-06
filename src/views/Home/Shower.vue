@@ -47,7 +47,7 @@ export default {
     defaultShowerTime: Number,
     isSoundEnabled: Boolean
   },
-  setup({isSoundEnabled}) {
+  setup({ isSoundEnabled }) {
     var active_timer = ref(true);
     var sound;
 
@@ -80,7 +80,7 @@ export default {
       sound = new Howl({
         src: [inputSound]
       });
-      if(isSoundEnabled) {
+      if (isSoundEnabled) {
         sound.play();
       }
     };

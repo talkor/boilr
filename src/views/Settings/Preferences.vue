@@ -11,7 +11,11 @@
       <Subtitle text="Extra shower time" class="section-heading" />
       <Divider />
       <Subtitle text="In-Shower Beep reminders" class="section-heading" />
-      <Toggle class="toggleBtn" :active="isSoundEnabled" @toggle="onActiveToggle" />
+      <Toggle
+        class="toggleBtn"
+        :active="isSoundEnabled"
+        @toggle="onActiveToggle"
+      />
       <Divider />
       <Subtitle text="Temperature mode" class="section-heading" />
       <RadioButton

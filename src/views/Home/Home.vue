@@ -38,7 +38,11 @@
         <router-link
           :to="{
             name: 'Shower',
-            params: { showerData, defaultShowerTime: user.defaultShowerTime, isSoundEnabled: soundEnabled }
+            params: {
+              showerData,
+              defaultShowerTime: user.defaultShowerTime,
+              isSoundEnabled: soundEnabled
+            }
           }"
         >
           <CoreButton
