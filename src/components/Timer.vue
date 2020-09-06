@@ -61,7 +61,7 @@ export default {
       if (timeCounter > props.time * 60) {
         message = 'Nice try... next time you will need to do it faster';
       } else {
-        message = 'Congratulations, you made it in time!';
+        message = 'Congratulations, you made it on time!';
       }
       Notification.open({
         indefinite: true,
