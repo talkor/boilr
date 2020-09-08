@@ -8,9 +8,7 @@
       </template>
     </ViewHeader>
     <ViewContent>
-      <Subtitle text="Extra shower time" class="section-heading" />
-      <Divider />
-      <Subtitle text="In-Shower Beep reminders" class="section-heading" />
+      <Subtitle text="In-Shower reminders" class="section-heading" />
       <Toggle
         class="toggleBtn"
         :active="isSoundEnabled"
@@ -78,13 +76,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.beep {
+.toggleBtn {
   display: flex;
   align-items: left;
-  padding: 7px;
-}
-.toggleBtn {
-  margin-left: -310px;
 }
 .section-heading {
   font-weight: 600;
