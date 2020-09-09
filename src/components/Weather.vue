@@ -6,23 +6,32 @@
 
 <script>
 import axios from 'axios';
-import { ref } from '@vue/composition-api';
+import { ref, onMounted } from '@vue/composition-api';
+import { getUserData } from '@/services/userService';
 
 const CELSIUS = 0;
+const FAHRENHEIT = 1;
 export default {
-  props: {
-    mode: Number
-  },
-  setup({ mode }) {
+  setup() {
     const city = 'Retrieving Weather...';
     const latitude = 0.0;
     const longitude = 0.0;
     const curTemp = null;
-    const displayMode = ref(mode);
+    const displayMode = ref(0);
     const dataObj = null;
     const weatherMain = 'Fine';
     const weatherDesc = 'Clear day';
     const errorMsg = '';
+
+    onMounted(async () => {
+      const userData = await getUserData();
+      if (userData.temperatureMode == 'C') {
+        displayMode.value = CELSIUS;
+      } else {
+        displayMode.value = FAHRENHEIT;
+      }
+    });
+
     return {
       city,
       latitude,

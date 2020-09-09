@@ -31,7 +31,7 @@
           icon="tint"
         />
         <Card label="Weather" icon="sun">
-          <Weather :mode="displayMode" />
+          <Weather />
         </Card>
       </section>
       <section>
