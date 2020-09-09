@@ -1,5 +1,10 @@
 import { getUserUid } from '@/services/authService';
-import { getData, postData, deleteData } from '@/services/databaseService';
+import {
+  getData,
+  getAllData,
+  postData,
+  deleteData
+} from '@/services/databaseService';
 
 export const getUserData = async () => {
   const userUid = await getUserUid();
@@ -7,6 +12,11 @@ export const getUserData = async () => {
     return;
   }
   return getData({ collection: 'users', doc: userUid });
+};
+
+export const getUsersData = async () => {
+  const snapshot = await getAllData({ collection: 'users' });
+  return snapshot.docs.map((doc) => doc.data());
 };
 
 export const postUserData = async (data) => {

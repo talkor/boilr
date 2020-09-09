@@ -11,6 +11,10 @@ export const getData = ({ collection, doc }) => {
     });
 };
 
+export const getAllData = ({ collection }) => {
+  return firebase.firestore().collection(collection).get();
+};
+
 export const postData = ({ collection, doc, data, merge = true }) => {
   return db()
     .collection(collection)
