@@ -5,7 +5,7 @@
       <Label center bold text="User" />
       <Label center bold text="Average Shower Time" />
       <Label center bold text="Number Of Showers" />
-      <Label center bold text="Total Shower Time" />
+      <Label center bold text="Total Showers Time" />
     </div>
     <ViewContent>
       <div v-for="(user, index) in users" :key="user.id">
@@ -28,6 +28,7 @@
             <Label center bold :text="`${user.name}`" />
           </div>
           <Label
+            bold
             center
             :text="`${Math.floor(
               user.totalShowersTime / user.totalShowersNumber
