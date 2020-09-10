@@ -22,6 +22,7 @@
     "d3": "3.5.17",
     "firebase": "7.14.2",
     "firebase-admin": "9.0.0",
+    "frappe-charts": "^1.5.2",
     "howler": "^2.2.0",
     "portal-vue": "^2.1.7",
     "register-service-worker": "^1.6.2",
