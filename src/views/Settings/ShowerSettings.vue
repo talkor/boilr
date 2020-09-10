@@ -7,7 +7,7 @@
     </ViewHeader>
     <ViewContent>
       <Subtitle text="Default Shower Time" class="section-heading" />
-      <Label :text="`${showerTime} minutes`" />
+      <Label class="start" :text="`${showerTime} minutes`" />
       <Slider
         label="Default Shower Time"
         :value="defaultShowerTime"

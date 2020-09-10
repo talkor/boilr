@@ -1,17 +1,41 @@
 <template>
   <AppView class="statistics">
     <ViewHeader title="Statistics" />
+    <div class="titles">
+      <Label center bold text="User" />
+      <Label center bold text="Average Shower Time" />
+      <Label center bold text="Number Of Showers" />
+      <Label center bold text="Total Shower Time" />
+    </div>
     <ViewContent>
-      <div class="time" v-for="(user, index) in users" :key="user.id">
-        <UserIcon :image="user.photo" />
-        <Label bold :text="user.name" />
-        <Label
-          :text="
-            Math.floor(
+      <div v-for="(user, index) in users" :key="user.id">
+        <div class="user">
+          <Label class="start bold" :text="index + 1" />
+          <img
+            class="badge"
+            v-if="index == 0"
+            src="../../assets/water_saver_gold.png"
+          />
+          <img
+            class="badge"
+            v-if="index == 1"
+            src="../../assets/water_saver_silver.png"
+          />
+        </div>
+        <div class="lables">
+          <div class="user">
+            <UserIcon :image="user.photo" />
+            <Label center bold :text="`${user.name}`" />
+          </div>
+          <Label
+            center
+            :text="`${Math.floor(
               user.totalShowersTime / user.totalShowersNumber
-            ).toString()
-          "
-        />
+            ).toString()} Min.`"
+          />
+          <Label center :text="`${user.totalShowersNumber.toString()}`" />
+          <Label center :text="`${user.totalShowersTime.toString()} Min.`" />
+        </div>
         <Divider v-if="index !== users.length - 1" />
       </div>
     </ViewContent>
@@ -35,8 +59,8 @@ export default {
     const users = computed(() => {
       return usd.value.sort(
         (a, b) =>
-          b.totalShowersTime / b.totalShowersNumber -
-          a.totalShowersTime / a.totalShowersNumber
+          a.totalShowersTime / a.totalShowersNumber -
+          b.totalShowersTime / b.totalShowersNumber
       );
     });
 
@@ -60,3 +84,21 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.user {
+  display: flex;
+}
+.lables {
+  column-count: 4;
+  border-style: double;
+}
+
+.titles {
+  column-count: 4;
+}
+
+.badge {
+  width: 55px;
+  height: 55px;
+}
+</style>

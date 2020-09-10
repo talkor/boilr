@@ -14,13 +14,14 @@
     </ViewHeader>
     <ViewContent>
       <section class="cards">
-        <Label bold :text="`Hi there, ${user.name}`" class="greeting" />
+        <Label bold :text="`Hi there, ${user.name}`" class="greeting start" />
         <Card icon="power-off" label="Boiler Status">
-          <Label v-if="!!active" class="boiler-active" text="ON" />
-          <Label v-else text="OFF" />
+          <Label v-if="!!active" class="boiler-active start" text="ON" />
+          <Label v-else text="OFF" class="start" />
         </Card>
         <Card label="Water Temperature" icon="thermometer-empty">
           <Label
+            class="start"
             :class="{ 'min-hot-temperature': temperature >= 40 }"
             :text="`${displayedTemperature}`"
           />
