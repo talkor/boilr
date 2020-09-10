@@ -2,6 +2,9 @@
   <AppView class="statistics">
     <ViewHeader title="Statistics" />
     <ViewContent>
+      <div class="title-container">
+        <Subtitle :text="`Top Water Saver: ${topSaver}`" />
+      </div>
       <div id="chart"></div>
     </ViewContent>
   </AppView>
@@ -13,9 +16,9 @@ import ViewHeader from '@/components/shell/ViewHeader';
 import ViewContent from '@/components/shell/ViewContent';
 import { getUsersData } from '@/services/userService';
 import { ref, onMounted } from '@vue/composition-api';
-import { Chart } from 'frappe-charts/dist/frappe-charts.esm.js'
-import 'frappe-charts/dist/frappe-charts.min.css'
-
+import { Chart } from 'frappe-charts/dist/frappe-charts.esm.js';
+import 'frappe-charts/dist/frappe-charts.min.css';
+import Subtitle from '@/components/core/Subtitle';
 
 export default {
   setup() {
@@ -25,19 +28,27 @@ export default {
     const totalShowersNumber = [];
     const totalShowersTime = [];
     const averageShowerTime = [];
+    const topSaver = ref('');
 
     onMounted(async () => {
       usersData = await getUsersData();
       usd.value = [...usersData];
-      usd.value.sort(
-        (a, b) =>
-          (a.totalShowersTime / a.totalShowersNumber) > (b.totalShowersTime / b.totalShowersNumber) ? 1 : -1
+      usd.value.sort((a, b) =>
+        a.totalShowersTime / a.totalShowersNumber >
+        b.totalShowersTime / b.totalShowersNumber
+          ? 1
+          : -1
       );
+      topSaver.value = usd.value[0].name;
       for (let i = 0; i < usd.value.length; i++) {
         userNames.push(usd.value[i].name);
         totalShowersNumber.push(usd.value[i].totalShowersNumber);
         totalShowersTime.push(usd.value[i].totalShowersTime);
-        averageShowerTime.push(Math.floor(usd.value[i].totalShowersTime / usd.value[i].totalShowersNumber));
+        averageShowerTime.push(
+          Math.floor(
+            usd.value[i].totalShowersTime / usd.value[i].totalShowersNumber
+          )
+        );
       }
     });
 
@@ -46,56 +57,60 @@ export default {
       userNames,
       totalShowersNumber,
       totalShowersTime,
-      averageShowerTime
+      averageShowerTime,
+      topSaver
     };
   },
   components: {
     AppView,
     ViewHeader,
-    ViewContent
+    ViewContent,
+    Subtitle
   },
-  data(){
-    return{
-         data : {
-    labels: this.userNames,
-    datasets: [
-        {
-            name: "Avg\n Shower Time",
+  data() {
+    return {
+      data: {
+        labels: this.userNames,
+        datasets: [
+          {
+            name: 'Avg Shower Timen',
             values: this.averageShowerTime
-        },
-        {
-            name: "No. Of Showers",
+          },
+          {
+            name: 'No. Of Showers',
             values: this.totalShowersNumber
-        },
-        {
-            name: "Total Shower time",
+          },
+          {
+            name: 'Total Shower time',
             values: this.totalShowersTime
-        }
-    ]
-},
+          }
+        ]
+      },
 
-chart : null
+      chart: null
+    };
+  },
+  methods: {
+    setChart() {
+      this.chart = new Chart('#chart', {
+        title: '',
+        data: this.data,
+        type: 'bar',
+        truncateLegends: 0,
+        barOptions: {
+          spaceRatio: 0.2
+        },
+        height: 500,
+        // tooltipOptions: {
+        //   formatTooltipX: d => (d)
+        // },
+        colors: ['#7cd6fd', '#743ee2', '#f21901']
+      });
     }
-},
-methods:{
-    setChart(){
-     this.chart=new Chart("#chart", { 
-    title: "Users Statistics",
-    data: this.data,
-    type: 'bar',
-    barOptions: {
-    spaceRatio: 0.2
-    },
-    height: 500,
-    // tooltipOptions: {
-    //   formatTooltipX: d => (d)
-    // },
-    colors: ['#7cd6fd', '#743ee2', '#f21901']
-})
-    }
-},
-mounted(){
+  },
+  mounted() {
     this.setChart();
-}
+  }
 };
 </script>
+<style scoped lang="scss"></style>
