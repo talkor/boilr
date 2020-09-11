@@ -81,7 +81,7 @@ export default {
             values: this.totalShowersNumber
           },
           {
-            name: 'Total Shower time',
+            name: 'Total Shower Time',
             values: this.totalShowersTime
           }
         ]
