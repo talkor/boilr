@@ -73,7 +73,7 @@ export default {
         labels: this.userNames,
         datasets: [
           {
-            name: 'Avg Shower Timen',
+            name: 'Avg. Shower Time',
             values: this.averageShowerTime
           },
           {
